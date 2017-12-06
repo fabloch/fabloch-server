@@ -23,19 +23,28 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "eslint": "4.9.0",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "2.7.0",
+    "jest": "^21.2.1",
+    "jest-cli": "^21.2.1",
     "nodemon": "^1.12.1"
-  },
-  "babel": {
-    "presets": [
-      "env"
-    ]
   },
   "scripts": {
     "start": "nodemon ./src/index.js --exec babel-node"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "./dist"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "html"
+    ]
   },
   "repository": {
     "type": "git",

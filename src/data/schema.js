@@ -43,11 +43,6 @@ const typeDefs = `
     link: Link!
   }
 
-  type SigninPayload {
-      jwt: String
-      user: User
-  }
-
   input AuthProviderSignupData {
       email: AUTH_PROVIDER_EMAIL
   }
@@ -71,7 +66,9 @@ const typeDefs = `
     createLink(url: String!, description: String!): Link
     createVote(linkId: ID!): Vote
     createUser(name: String!, authProvider: AuthProviderSignupData!): User
-    signinUser(email: AUTH_PROVIDER_EMAIL): SigninPayload!
+    signinUser(email: AUTH_PROVIDER_EMAIL): User!
+    updateUser(name: String, email: String, password: String): User!
+    verifyUser(token: String!): User
   }
 `
 

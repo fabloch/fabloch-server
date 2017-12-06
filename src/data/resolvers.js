@@ -43,8 +43,8 @@ const buildFilters = ({ OR = [], description_contains, url_contains }) => {
 
 module.exports = {
   Query: {
-    allLinks: async (root, { filter, first, skip }, { mongo: { Links }, user }) => {
-      console.log(user) // eslint-disable-line no-console
+    allLinks: async (root, { filter, first, skip }, context) => {
+      const { mongo: { Links }, user } = context
       const query = filter ? { $or: buildFilters(filter) } : {}
       const cursor = Links.find(query)
       if (first) {
@@ -58,7 +58,8 @@ module.exports = {
   },
 
   Mutation: {
-    createLink: async (root, data, { mongo: { Links }, user }) => {
+    createLink: async (root, data, context) => {
+      const { mongo: { Links }, user } = context
       assertValidLink(data)
       assertAuthenticated(user)
       const newLink = Object.assign({ postedById: user && user._id }, data)
@@ -68,7 +69,8 @@ module.exports = {
       pubsub.publish('Link', { Link: { mutation: 'CREATED', node: newLink } })
       return newLink
     },
-    createVote: async (root, data, { mongo: { Votes }, user }) => {
+    createVote: async (root, data, context) => {
+      const { mongo: { Votes }, user } = context
       const newVote = {
         userId: user && user._id,
         linkId: new ObjectID(data.linkId),
@@ -76,7 +78,8 @@ module.exports = {
       const response = await Votes.insert(newVote)
       return Object.assign({ id: response.insertedIds[0] }, newVote)
     },
-    createUser: async (root, data, { mongo: { Users } }) => {
+    createUser: async (root, data, context) => {
+      const { mongo: { Users } } = context
       const existingUser = await Users.findOne({
         email: data.authProvider.email.email,
       })
@@ -93,7 +96,8 @@ module.exports = {
       }
       return Error('An account was already created with this email')
     },
-    signinUser: async (root, data, { mongo: { Users } }) => {
+    signinUser: async (root, data, context) => {
+      const { mongo: { Users } } = context
       const user = await Users.findOne({ email: data.email.email })
       if (user) {
         const validatePassword = await bcrypt.compare(data.email.password, user.password)
@@ -109,6 +113,37 @@ module.exports = {
         return Error("Email or password provided don't match")
       }
       return Error('User does not exist')
+    },
+    updateUser: async (root, data, context) => {
+      const { mongo: { Users }, user } = context
+      console.log("user", user)
+      const persistedUser = await Users.findOne({ _id: user._id })
+      console.log('persistedUser', persistedUser)
+      let { version } = persistedUser.version
+      version += 1
+
+      const newUser = {
+        ...user,
+        ...data,
+        version,
+      }
+      if (data.password) {
+        newUser.password = await bcrypt.hash(data.password, 10)
+      }
+      console.log('newUser', newUser)
+
+      const response = await Users.update({ _id: user._id }, newUser)
+      if (response.result.ok) {
+        console.log('ok')
+        const token = await jwt.sign({
+          id: newUser._id,
+          email: newUser.email,
+          version: newUser.version,
+        }, JWT_SECRET)
+        newUser.jwt = token
+        return newUser
+      }
+      return Error('There was a problem with update')
     },
   },
 
@@ -126,7 +161,7 @@ module.exports = {
       Votes.find({ linkId: _id }).toArray(),
   },
   User: {
-    // Convert the "_id" field from MongoDB to "id" from the schema.
+    // Convert the '_id' field from MongoDB to 'id' from the schema.
     id: root => root._id || root.id,
     votes: async ({ _id }, data, { mongo: { Votes } }) =>
       Votes.find({ userId: _id }).toArray(),

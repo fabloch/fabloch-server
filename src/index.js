@@ -52,7 +52,7 @@ const start = async () => {
       { execute, subscribe, schema },
       { server, path: '/subscriptions' },
     )
-    console.log(`Hackernews GraphQL server running on port ${PORT}.`) // eslint-disable-line no-console
+    console.log(`La Fabrique du Loch's GraphQL server running on port ${PORT}.`) // eslint-disable-line no-console
   })
 }
 
