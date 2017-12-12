@@ -6,12 +6,12 @@ import { createServer } from 'http'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import jwt from 'express-jwt'
 
-import { JWT_SECRET } from './config'
-import authenticate from './authenticate'
-import connectMongo from './db/mongo-connector'
-import buildDataLoaders from './data/dataloaders'
-import schema from './data/schema'
-import formatError from './formatError'
+import { JWT_SECRET } from './utils/config'
+import authenticate from './utils/authenticate'
+import formatError from './utils/formatError'
+import connectMongo from './connectors/mongo-connector'
+import buildDataLoaders from './dataloaders'
+import schema from './schema'
 
 const start = async () => {
   const mongo = await connectMongo()
