@@ -1,5 +1,4 @@
-async function getAuthenticatedUser(context) {
-  const user = await context.user
+function getAuthenticatedUser(user) {
   if (!user) {
     throw new Error('Unauthenticated.')
   }

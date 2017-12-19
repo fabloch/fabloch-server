@@ -1,5 +1,5 @@
 import { Logger, MongoClient } from 'mongodb'
-import { admin, userData } from './fixtures'
+import { admin, userData, membershipData } from './fixtures'
 
 const MONGO_URL = 'mongodb://localhost:27017/fabloch-server-test'
 
@@ -17,11 +17,13 @@ export default async function () {
   }
 
   const beforeEach = async () => {
-    await db.collection('users').insert(admin)
+    await db.collection('users').insert({ a: 1 })
+    await db.collection('memberships').insert({ a: 1 })
   }
 
   const afterEach = async () => {
     await db.collection('users').drop()
+    await db.collection('memberships').drop()
   }
 
   const afterAll = () => {
@@ -31,11 +33,15 @@ export default async function () {
   const loadUsers = async () =>
     db.collection('users').insertMany(userData)
 
+  const loadMemberships = async () =>
+    db.collection('memberships').insertMany(membershipData)
+
   return {
     beforeEach,
     afterEach,
     afterAll,
     loadUsers,
+    loadMemberships,
     Users: db.collection('users'),
     Memberships: db.collection('memberships'),
   }

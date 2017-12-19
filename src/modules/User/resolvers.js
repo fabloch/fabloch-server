@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb'
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
-
+import getAuthenticatedUser from '../../validations/getAuthenticatedUser'
 import { JWT_SECRET } from '../../utils/config'
 
 export default {
@@ -52,39 +52,39 @@ export default {
       }
       return Error('User does not exist')
     },
-    // updateUser: async (_, data, context) => {
-    //   const { mongo: { Users }, user } = context
-    //   console.log("user", user)
-    //   const persistedUser = await Users.findOne({ _id: user._id })
-    //   console.log('persistedUser', persistedUser)
-    //   let { version } = persistedUser.version
-    //   version += 1
-    //
-    //   const newUser = {
-    //     ...user,
-    //     ...data,
-    //     version,
-    //   }
-    //   if (data.password) {
-    //     newUser.password = await bcrypt.hash(data.password, 10)
-    //   }
-    //   console.log('newUser', newUser)
-    //
-    //   const response = await Users.update({ _id: user._id }, newUser)
-    //   if (response.result.ok) {
-    //     console.log('ok')
-    //     const token = await jwt.sign({
-    //       id: newUser._id,
-    //       email: newUser.email,
-    //       version: newUser.version,
-    //     }, JWT_SECRET)
-    //     newUser.jwt = token
-    //     return newUser
-    //   }
-    //   return Error('There was a problem with update')
-    // },
+    updateUser: async (_, data, context) => {
+      const { mongo: { Users }, user } = context
+      getAuthenticatedUser(user)
+      let { version } = user
+      version += 1
+
+      const newUser = {
+        ...user,
+        ...data,
+        version,
+      }
+      if (data.password) {
+        newUser.password = await bcrypt.hash(data.password, 10)
+      }
+      const response = await Users.update({ _id: user._id }, newUser)
+      if (response.result.ok) {
+        const token = await jwt.sign({
+          id: newUser._id,
+          email: newUser.email,
+          version: newUser.version,
+        }, JWT_SECRET)
+        newUser.jwt = token
+        return newUser
+      }
+      return Error('There was a problem with update')
+    },
   },
   User: {
     id: user => user._id.toString() || user.id,
+    memberships: async (user, _, context) => {
+      const { mongo: { Memberships } } = context
+      const memberships = await Memberships.find({ owner: user._id }).toArray()
+      return memberships
+    },
   },
 }

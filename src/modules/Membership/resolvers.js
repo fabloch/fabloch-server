@@ -10,9 +10,8 @@ export default {
   },
   Mutation: {
     createMembership: async (_, data, context) => {
-      const { mongo: { Memberships } } = context
-      // check authenticated
-      const user = await getAuthenticatedUser(context)
+      const { mongo: { Memberships }, user } = context
+      getAuthenticatedUser(user)
       // check existing membership for the given user and given dates
       const overlappingMembership = await Memberships.findOne({
         owner: user._id,

@@ -21,7 +21,7 @@ type Query {
 
 type Mutation {
   createUser(name: String!, authProvider: AuthProviderSignupData!): User
-  signinUser(email: AUTH_PROVIDER_EMAIL): User!
-  # updateUser(name: String, email: String, password: String): User!
+  signinUser(email: AUTH_PROVIDER_EMAIL): User
+  updateUser(name: String, email: String, password: String): User
   # verifyUser(token: String!): User
 }
