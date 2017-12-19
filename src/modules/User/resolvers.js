@@ -27,7 +27,10 @@ export default {
           version: 1,
         }
         const response = await Users.insert(newUser)
-        return Object.assign({ id: response.insertedIds[0] }, newUser)
+        return {
+          id: response.insertedIds[0],
+          ...newUser,
+        }
       }
       return Error('An account was already created with this email')
     },
@@ -82,6 +85,6 @@ export default {
     // },
   },
   User: {
-    id: user => user._id || user.id,
+    id: user => user._id.toString() || user.id,
   },
 }

@@ -21,6 +21,7 @@
     "lodash": "^4.17.4",
     "merge-graphql-schemas": "^1.4.0",
     "mongodb": "^2.2.33",
+    "mongo-mock": "^2.8.0",
     "mongoose": "^4.13.2",
     "subscriptions-transport-ws": "^0.9.2"
   },
