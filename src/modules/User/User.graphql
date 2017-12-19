@@ -1,0 +1,27 @@
+type User {
+  id: ID!
+  name: String!
+  email: String
+  jwt: String
+  memberships: [Membership!]
+}
+
+input AuthProviderSignupData {
+    email: AUTH_PROVIDER_EMAIL
+}
+
+input AUTH_PROVIDER_EMAIL {
+    email: String!
+    password: String!
+}
+
+type Query {
+  User(id: String!): User
+}
+
+type Mutation {
+  createUser(name: String!, authProvider: AuthProviderSignupData!): User
+  signinUser(email: AUTH_PROVIDER_EMAIL): User!
+  # updateUser(name: String, email: String, password: String): User!
+  # verifyUser(token: String!): User
+}
