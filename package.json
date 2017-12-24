@@ -9,7 +9,12 @@
   "license": "MIT",
   "dependencies": {
     "apollo-server-express": "^1.2.0",
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.3",
+    "babel-plugin-inline-import": "^2.0.6",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
     "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "casual": "^1.5.17",
@@ -31,11 +36,6 @@
     "subscriptions-transport-ws": "^0.9.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.3",
-    "babel-plugin-inline-import": "^2.0.6",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
     "eslint": "^4.13.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "2.8.0",
