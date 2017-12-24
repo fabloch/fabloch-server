@@ -7,7 +7,7 @@ import { createServer } from 'http'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import jwt from 'express-jwt'
 
-import { JWT_SECRET } from './utils/config'
+import { JWT_SECRET, PORT } from './utils/config'
 import authenticate from './utils/authenticate'
 import formatError from './utils/formatError'
 import connectMongo from './connectors/mongo-connector'
@@ -40,7 +40,6 @@ const start = async () => {
     graphqlExpress(buildOptions),
   )
 
-  const PORT = 3000
   app.use('/graphiql', graphiqlExpress({
     endpointURL: '/graphql',
     // passHeader: "'Authorization': 'bearer token-test.idis@icloud.com'",

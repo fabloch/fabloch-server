@@ -1,9 +1,8 @@
 import { Logger, MongoClient } from 'mongodb'
-
-const MONGO_URL = 'mongodb://localhost:27017/fabloch-server'
+import { MONGODB_URI } from '../utils/config'
 
 export default async function () {
-  const db = await MongoClient.connect(MONGO_URL)
+  const db = await MongoClient.connect(MONGODB_URI)
 
   let logCount = 0
   Logger.setCurrentLogger((msg) => {
