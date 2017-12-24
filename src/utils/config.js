@@ -9,7 +9,7 @@ const defaults = {
 }
 Object.keys(defaults).forEach((key) => {
   if (!process.env[key] || process.env[key] === defaults[key]) {
-    throw new Error(`Please enter a custom ${key} in .env on the root directory`)
+    throw new Error(`Environment variable missing: ${key} (if running on your local environment, add it into a .env file at the root of your project).`)
   }
 })
 export default JWT_SECRET

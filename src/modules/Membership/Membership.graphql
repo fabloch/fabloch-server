@@ -1,11 +1,3 @@
-type Query {
-  Memberships: [Membership!]
-}
-
-type Mutation {
-  createMembership(membership: MembershipInput): Membership
-}
-
 type Membership {
   id: ID!
   owner: User!
@@ -25,4 +17,12 @@ input MembershipInput {
   plan: MembershipPlan
   startDate: Date
   endDate: Date
+}
+
+type Query {
+  Memberships: [Membership!]
+}
+
+type Mutation {
+  createMembership(membership: MembershipInput): Membership
 }
