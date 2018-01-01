@@ -1,5 +1,5 @@
-import { Logger, MongoClient } from 'mongodb'
-import { MONGODB_URI } from '../utils/config'
+import { Logger, MongoClient } from "mongodb"
+import { MONGODB_URI } from "../utils/config"
 
 export default async function () {
   const db = await MongoClient.connect(MONGODB_URI)
@@ -9,11 +9,12 @@ export default async function () {
     // eslint-disable-next-line no-console
     console.log(`MONGO DB REQUEST ${logCount += 1}: ${msg})`)
   })
-  Logger.setLevel('debug')
-  Logger.filter('class', ['Cursor'])
+  Logger.setLevel("debug")
+  Logger.filter("class", ["Cursor"])
 
   return {
-    Users: db.collection('users'),
-    Memberships: db.collection('memberships'),
+    Users: db.collection("users"),
+    Memberships: db.collection("memberships"),
+    Events: db.collection("events"),
   }
 }

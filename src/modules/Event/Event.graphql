@@ -1,0 +1,17 @@
+type Event {
+  id: ID!
+  title: String!
+  owner: User!
+}
+
+input EventInput {
+  title: String
+}
+
+type Query {
+  allEvents: [Event!]
+}
+
+type Mutation {
+  createEvent(event: EventInput): Event
+}

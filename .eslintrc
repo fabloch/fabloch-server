@@ -6,7 +6,11 @@
     "jest/globals": true
   },
   "rules": {
-    "strict": 0,
+    # "strict": 0,
+    "quotes": [
+        "error",
+        "double"
+    ],
     "semi": [
         "error",
         "never"

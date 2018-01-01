@@ -1,4 +1,4 @@
-import { formatError } from 'graphql'
+import { formatError } from "graphql"
 
 export default function (error) {
   const data = formatError(error)

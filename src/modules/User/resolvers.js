@@ -1,17 +1,11 @@
-import { ObjectId } from 'mongodb'
-import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
-import getAuthenticatedUser from '../../validations/getAuthenticatedUser'
-import { JWT_SECRET } from '../../utils/config'
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
+import { JWT_SECRET } from "../../utils/config"
 
 export default {
   Query: {
-    User: async (_, { id }, { mongo: { Users } }) => {
-      const user = await Users.findOne({
-        _id: ObjectId(id),
-      })
-      return user
-    },
+    user: async (_, __, { user }) => user,
   },
   Mutation: {
     createUser: async (_, data, { mongo: { Users } }) => {
@@ -32,13 +26,13 @@ export default {
           ...newUser,
         }
       }
-      return Error('An account was already created with this email')
+      return Error("An account was already created with this email")
     },
     signinUser: async (_, data, context) => {
       const { mongo: { Users } } = context
-      const user = await Users.findOne({ email: data.email.email })
+      const user = await Users.findOne({ email: data.emailAuth.email })
       if (user) {
-        const validatePassword = await bcrypt.compare(data.email.password, user.password)
+        const validatePassword = await bcrypt.compare(data.emailAuth.password, user.password)
         if (validatePassword) {
           const token = await jwt.sign({
             id: user.id,
@@ -50,11 +44,11 @@ export default {
         }
         return Error("Email or password provided don't match")
       }
-      return Error('User does not exist')
+      return Error("User does not exist")
     },
     updateUser: async (_, data, context) => {
       const { mongo: { Users }, user } = context
-      getAuthenticatedUser(user)
+      checkAuthenticatedUser(user)
       let { version } = user
       version += 1
 
@@ -76,14 +70,14 @@ export default {
         newUser.jwt = token
         return newUser
       }
-      return Error('There was a problem with update')
+      return Error("There was a problem with update")
     },
   },
   User: {
     id: user => user._id.toString() || user.id,
     memberships: async (user, _, context) => {
       const { mongo: { Memberships } } = context
-      const memberships = await Memberships.find({ owner: user._id }).toArray()
+      const memberships = await Memberships.find({ ownerId: user._id }).toArray()
       return memberships
     },
   },

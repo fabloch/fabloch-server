@@ -1,4 +1,4 @@
-import DataLoader from 'dataloader'
+import DataLoader from "dataloader"
 
 async function usersById(Users, ids) {
   return Users.find({ _id: { $in: ids } }).toArray()

@@ -1,7 +1,7 @@
-import assertValidLink from './assertValidLink'
-import getAuthenticatedUser from './getAuthenticatedUser'
+import assertValidLink from "./assertValidLink"
+import checkAuthenticatedUser from "./checkAuthenticatedUser"
 
 export default {
   assertValidLink,
-  getAuthenticatedUser,
+  checkAuthenticatedUser,
 }

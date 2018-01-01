@@ -1,29 +1,30 @@
-import ValidationError from '../../validations/validationError'
-import getAuthenticatedUser from '../../validations/getAuthenticatedUser'
+import ValidationError from "../../validations/validationError"
+import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
 
 export default {
   Query: {
-    Memberships: async (_, { userId }, { mongo: { Memberships } }) => {
-      const memberships = await Memberships.find({ owner: userId }).toArray()
+    userMemberships: async (_, __, { mongo: { Memberships }, user }) => {
+      checkAuthenticatedUser(user)
+      const memberships = await Memberships.find({ ownerId: user._id }).toArray()
       return memberships
     },
   },
   Mutation: {
     createMembership: async (_, data, context) => {
       const { mongo: { Memberships }, user } = context
-      getAuthenticatedUser(user)
+      checkAuthenticatedUser(user)
       // check existing membership for the given user and given dates
       const overlappingMembership = await Memberships.findOne({
-        owner: user._id,
+        ownerId: user._id,
         endDate: { $gt: data.membership.startDate },
       })
       if (overlappingMembership) {
-        throw new ValidationError(`A membership already exists at this date (ending ${overlappingMembership.endDate}).`, 'startDate')
+        throw new ValidationError(`Previous membership overlapping (ending ${overlappingMembership.endDate}).`, "startDate")
         // there is an overlapping membership
       }
       const newMembership = {
         ...data.membership,
-        owner: user._id,
+        ownerId: user._id,
       }
       const response = await Memberships.insert(newMembership)
       const [id] = response.insertedIds
@@ -34,6 +35,6 @@ export default {
   Membership: {
     id: membership => membership._id.toString(),
     owner: async (membership, _, { mongo: { Users } }) =>
-      Users.findOne({ _id: membership.owner }),
+      Users.findOne({ _id: membership.ownerId }),
   },
 }

@@ -1,17 +1,19 @@
-import dotenv from 'dotenv'
+import dotenv from "dotenv"
 
 dotenv.config({ silent: true })
 
 export const {
+  CORS_URI,
   JWT_SECRET,
   PORT,
   MONGODB_URI,
 } = process.env
 
 const defaults = {
-  JWT_SECRET: 'change me',
-  PORT: 'change me',
-  MONGODB_URI: 'change_me',
+  CORS_URI: "defined in .env",
+  JWT_SECRET: "defined in .env",
+  PORT: "defined in .env",
+  MONGODB_URI: "defined in .env",
 }
 
 Object.keys(defaults).forEach((key) => {

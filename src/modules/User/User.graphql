@@ -16,12 +16,13 @@ input AUTH_PROVIDER_EMAIL {
 }
 
 type Query {
-  User(id: String!): User
+  # TODO: change for email
+  user: User
 }
 
 type Mutation {
   createUser(name: String!, authProvider: AuthProviderSignupData!): User
-  signinUser(email: AUTH_PROVIDER_EMAIL): User
+  signinUser(emailAuth: AUTH_PROVIDER_EMAIL): User
   updateUser(name: String, email: String, password: String): User
   # verifyUser(token: String!): User
 }

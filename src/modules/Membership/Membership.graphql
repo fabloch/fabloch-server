@@ -20,7 +20,7 @@ input MembershipInput {
 }
 
 type Query {
-  Memberships: [Membership!]
+  userMemberships: [Membership!]
 }
 
 type Mutation {
