@@ -1,5 +1,10 @@
 import { Logger, MongoClient } from "mongodb"
-import { admin, userData, membershipData, eventData } from "./fixtures"
+import {
+  userData,
+  membershipData,
+  eventData,
+  newcomerData,
+} from "./fixtures"
 
 const MONGO_URL = "mongodb://localhost:27017/fabloch-server-test"
 
@@ -13,43 +18,44 @@ export default async function () {
       console.log(`MONGO DB REQUEST ${logCount += 1}: ${msg})`)
     })
     Logger.setLevel("debug")
-    Logger.filter("class", ["Cursor"])
+    Logger.filter("class",
+    ["Cursor"])
   }
 
   const beforeEach = async () => {
     await db.createCollection("users")
     await db.createCollection("memberships")
     await db.createCollection("events")
+    await db.createCollection("newcomers")
   }
 
   const afterEach = async () => {
     await db.collection("users").drop()
     await db.collection("memberships").drop()
     await db.collection("events").drop()
+    await db.collection("newcomers").drop()
   }
 
-  const afterAll = () => {
-    db.close()
+  const afterAll = async () => {
+    await db.close()
   }
 
-  const loadUsers = async () =>
-    db.collection("users").insertMany(userData)
-
-  const loadMemberships = async () =>
-    db.collection("memberships").insertMany(membershipData)
-
-  const loadEvents = async () =>
-    db.collection("events").insertMany(eventData)
+  const loadEvents = async () => db.collection("events").insertMany(eventData)
+  const loadMemberships = async () => db.collection("memberships").insertMany(membershipData)
+  const loadNewcomers = async () => db.collection("newcomers").insertMany(newcomerData)
+  const loadUsers = async () => db.collection("users").insertMany(userData)
 
   return {
     beforeEach,
     afterEach,
     afterAll,
-    loadUsers,
-    loadMemberships,
     loadEvents,
-    Users: db.collection("users"),
-    Memberships: db.collection("memberships"),
+    loadMemberships,
+    loadNewcomers,
+    loadUsers,
     Events: db.collection("events"),
+    Memberships: db.collection("memberships"),
+    Newcomers: db.collection("newcomers"),
+    Users: db.collection("users"),
   }
 }

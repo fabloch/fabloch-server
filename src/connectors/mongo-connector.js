@@ -13,8 +13,9 @@ export default async function () {
   Logger.filter("class", ["Cursor"])
 
   return {
-    Users: db.collection("users"),
-    Memberships: db.collection("memberships"),
     Events: db.collection("events"),
+    Memberships: db.collection("memberships"),
+    Newcomers: db.collection("newcomers"),
+    Users: db.collection("users"),
   }
 }

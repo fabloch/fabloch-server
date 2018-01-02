@@ -25,6 +25,24 @@ describe("Event resolvers", () => {
         expect(response).toEqual(eventData)
       })
     })
+    describe("eventDetail", () => {
+      it("returns the event from the id", async () => {
+        await mongo.loadEvents()
+        const context = { mongo }
+        const response = await resolvers.Query.eventDetail(null, { id: "5a4a5eb6404da6d636078beb" }, context)
+        expect(response).toEqual(eventData[0])
+      })
+    })
+    it("throws an error if no event with that id", async () => {
+      const context = { mongo }
+      try {
+        await resolvers.Query.eventDetail(null, { id: "5a4a5eb6404da6d6360734eb" }, context)
+      } catch (e) {
+        expect(e.message).toEqual("Event does not exist.")
+      }
+    })
+  })
+  describe("Mutation", () => {
     describe("createEvent", () => {
       it("creates an event with the user as owner", async () => {
         await mongo.loadUsers()

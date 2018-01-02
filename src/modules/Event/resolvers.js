@@ -1,9 +1,19 @@
+import { ObjectId } from "mongodb"
 import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
+import DoesNotExistError from "../../validations/DoesNotExistError"
 
 export default {
   Query: {
     allEvents: async (_, __, { mongo: { Events } }) =>
       Events.find({}).toArray(),
+    eventDetail: async (_, data, { mongo: { Events } }) => {
+      const event = await Events.findOne({ _id: ObjectId(data.id) })
+      if (!event) {
+        throw DoesNotExistError("Event")
+      }
+      return event
+    },
+
   },
   Mutation: {
     createEvent: async (_, data, { mongo: { Events }, user }) => {

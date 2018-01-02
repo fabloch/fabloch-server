@@ -1,0 +1,16 @@
+type Newcomer {
+  id: ID!
+  email: String!
+}
+
+input NewcomerInput {
+  email: String!
+}
+
+type Query {
+  newcomer: Newcomer
+}
+
+type Mutation {
+  createNewcomer(newcomer: NewcomerInput): Newcomer
+}
