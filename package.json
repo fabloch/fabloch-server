@@ -4,7 +4,7 @@
   "description": "Maker space graphql express server",
   "main": "./src/index.js",
   "engines": {
-    "node": "v8.9.1"
+    "node": "v8.9.3"
   },
   "license": "MIT",
   "dependencies": {
@@ -29,6 +29,7 @@
     "graphql-tools": "^2.7.2",
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
+    "mailgun-js": "^0.14.1",
     "merge-graphql-schemas": "^1.4.0",
     "mongo-mock": "^2.8.0",
     "mongodb": "^2.2.33",

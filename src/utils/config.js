@@ -3,17 +3,23 @@ import dotenv from "dotenv"
 dotenv.config({ silent: true })
 
 export const {
+  CLIENT_URI,
   CORS_URI,
   JWT_SECRET,
-  PORT,
+  MAILGUN_DOMAIN,
+  MAILGUN_KEY,
   MONGODB_URI,
+  PORT,
 } = process.env
 
 const defaults = {
+  CLIENT_URI: "defined in .env",
   CORS_URI: "defined in .env",
   JWT_SECRET: "defined in .env",
-  PORT: "defined in .env",
+  MAILGUN_DOMAIN: "defined in .env",
+  MAILGUN_KEY: "defined in .env",
   MONGODB_URI: "defined in .env",
+  PORT: "defined in .env",
 }
 
 Object.keys(defaults).forEach((key) => {

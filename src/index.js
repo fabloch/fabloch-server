@@ -12,6 +12,7 @@ import { CORS_URI, JWT_SECRET, PORT } from "./utils/config"
 import authenticate from "./utils/authenticate"
 import formatError from "./utils/formatError"
 import connectMongo from "./connectors/mongo-connector"
+import mailer from "./mailer"
 import buildDataLoaders from "./dataloaders"
 import schema from "./schema"
 
@@ -27,6 +28,7 @@ const start = async () => {
       context: {
         dataloaders: buildDataLoaders(mongo),
         mongo,
+        mailer,
         user,
       },
       formatError,

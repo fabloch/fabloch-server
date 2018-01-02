@@ -1,14 +1,16 @@
 import { mergeResolvers } from "merge-graphql-schemas"
-import userResolvers from "../modules/User/resolvers"
-import membershipResolvers from "../modules/Membership/resolvers"
 import eventResolvers from "../modules/Event/resolvers"
+import membershipResolvers from "../modules/Membership/resolvers"
+import newcomerResolvers from "../modules/Newcomer/resolvers"
 import scalarResolvers from "../modules/Scalars/resolvers"
+import userResolvers from "../modules/User/resolvers"
 
 const resolvers = [
-  userResolvers,
-  membershipResolvers,
   eventResolvers,
+  membershipResolvers,
+  newcomerResolvers,
   scalarResolvers,
+  userResolvers,
 ]
 
 export default mergeResolvers(resolvers)
