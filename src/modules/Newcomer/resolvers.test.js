@@ -2,6 +2,7 @@ import { ObjectId } from "mongodb"
 import resolvers from "./resolvers"
 import connectMongo from "../../testUtils/mongoTest"
 import { newcomerData } from "../../testUtils/fixtures"
+import mailer from "../../testUtils/mockMailer"
 
 let mongo
 
@@ -19,36 +20,34 @@ describe("Newcomer", () => {
   })
   describe("Mutation", () => {
     describe("createNewcomer", () => {
-      it("creates ob with random url & digit", async () => {
-        const context = { mongo }
+      it("creates newcomer with random url & digit", async () => {
+        const context = { mongo, mailer }
         const newcomer = { email: "user1@example.com" }
         const response = await resolvers.Mutation.createNewcomer(null, { newcomer }, context)
         expect(response.email).toEqual("user1@example.com")
         expect(response.digits).toEqual([5, 5, 5, 5, 5, 5])
       })
-      it("raises an error if email already exists in Newcomers", async () => {
-        expect.assertions(1)
+      it("updates newcomer if email already exists", async () => {
         await mongo.loadNewcomers()
-        const context = { mongo }
+        const context = { mongo, mailer }
         const newcomer = { email: "user1@example.com" }
-        try {
-          await resolvers.Mutation.createNewcomer(null, { newcomer }, context)
-        } catch (e) {
-          expect(e.message).toEqual("Email already in newcomers.")
-        }
+        const response = await resolvers.Mutation.createNewcomer(null, { newcomer }, context)
+        expect(response.email).toEqual("user1@example.com")
+        expect(response.digits).toEqual([5, 5, 5, 5, 5, 5])
+        expect(response.resent).toEqual(true)
       })
       it("raises an error if email already exists in Users", async () => {
         expect.assertions(1)
         await mongo.loadUsers()
-        const context = { mongo }
+        const context = { mongo, mailer }
         const newcomer = { email: "user1@example.com" }
         try {
           await resolvers.Mutation.createNewcomer(null, { newcomer }, context)
         } catch (e) {
-          expect(e.message).toEqual("Email already in users.")
+          expect(e.message).toEqual("A user already exists with this email.")
         }
       })
     })
   })
-  describe("checkNewcomerDigits", () => {})
+  describe("newcomerExistsDigits", () => {})
 })
