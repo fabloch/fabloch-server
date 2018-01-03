@@ -1,6 +1,7 @@
 type Newcomer {
   id: ID!
   email: String!
+  digits: String!
 }
 
 input NewcomerInput {

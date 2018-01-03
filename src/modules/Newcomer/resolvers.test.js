@@ -32,6 +32,7 @@ describe("Newcomer", () => {
         const context = { mongo, mailer }
         const newcomer = { email: "user1@example.com" }
         const response = await resolvers.Mutation.createNewcomer(null, { newcomer }, context)
+        expect(response.id).toEqual(newcomerData[0]._id.toString())
         expect(response.email).toEqual("user1@example.com")
         expect(response.digits).toEqual([5, 5, 5, 5, 5, 5])
         expect(response.resent).toEqual(true)
@@ -49,5 +50,18 @@ describe("Newcomer", () => {
       })
     })
   })
-  describe("newcomerExistsDigits", () => {})
+  describe("newcomerExistsDigits", () => {
+    describe("id attribute", () => {
+      it("returns the _id stringified value", () => {
+        const id = resolvers.Newcomer.id(newcomerData[0])
+        expect(id).toEqual("5a4b76d5fdea180e9295743c")
+      })
+    })
+    describe("digits", () => {
+      it("returns an array of numbers", () => {
+        const digits = resolvers.Newcomer.digits(newcomerData[0])
+        expect(digits).toEqual([5, 5, 5, 5, 5, 5])
+      })
+    })
+  })
 })

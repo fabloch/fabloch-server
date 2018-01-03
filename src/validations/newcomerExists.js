@@ -1,13 +1,13 @@
 const newcomerExists = async (newcomer, NewcomerCollection, UserCollection) => {
-  const userFromDb = await UserCollection.find({ email: newcomer.email }).count()
-  if (userFromDb !== 0) {
+  const userFromDb = await UserCollection.findOne({ email: newcomer.email })
+  if (userFromDb) {
     throw new Error("A user already exists with this email.")
   }
-  const newcomerFromDb = await NewcomerCollection.find({ email: newcomer.email }).count()
-  if (newcomerFromDb !== 0) {
-    return true
+  const newcomerFromDb = await NewcomerCollection.findOne({ email: newcomer.email })
+  if (newcomerFromDb) {
+    return newcomerFromDb
   }
-  return false
+  return null
 }
 
 export default newcomerExists
