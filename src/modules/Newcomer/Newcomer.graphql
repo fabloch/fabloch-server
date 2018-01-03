@@ -1,7 +1,7 @@
 type Newcomer {
   id: ID!
   email: String!
-  digits: String!
+  digits: [Int!]!
 }
 
 input NewcomerInput {

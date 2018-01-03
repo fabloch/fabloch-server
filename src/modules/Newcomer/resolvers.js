@@ -12,6 +12,7 @@ export default {
       let response
       if (previousNewcomer) {
         newcomer.resent = true
+        console.log("createNewcomer: ", previousNewcomer._id.toString())
         newcomer.id = previousNewcomer._id.toString()
         response = await Newcomers.updateOne({ ...previousNewcomer }, newcomer)
       } else {
@@ -24,7 +25,10 @@ export default {
     },
   },
   Newcomer: {
-    id: newcomer => newcomer._id.toString(),
+    id: (newcomer) => {
+      console.log("Newcomer: ", newcomer._id || newcomer.id)
+      return (newcomer.id || newcomer._id.toString())
+    },
     digits: newcomer => newcomer.digits,
   },
 }
