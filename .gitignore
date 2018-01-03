@@ -19,6 +19,7 @@ npm-debug.log
 .env*.local
 .env*.lokal
 server/.env
+.env
 
 # SQlite
 *.sqlite

@@ -50,4 +50,5 @@ describe("Newcomer", () => {
       })
     })
   })
+  describe("checkNewcomerDigits", () => {})
 })
