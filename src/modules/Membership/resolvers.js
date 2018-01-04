@@ -27,8 +27,8 @@ export default {
         ownerId: user._id,
       }
       const response = await Memberships.insert(newMembership)
-      const [id] = response.insertedIds
-      newMembership.id = id
+      const [_id] = response.insertedIds
+      newMembership._id = _id
       return newMembership
     },
   },

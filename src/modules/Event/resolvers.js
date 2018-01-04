@@ -21,8 +21,8 @@ export default {
       const newEvent = data.event
       newEvent.ownerId = user._id
       const response = await Events.insert(newEvent)
-      const [id] = response.insertedIds
-      newEvent.id = id
+      const [_id] = response.insertedIds
+      newEvent._id = _id
       return newEvent
     },
   },

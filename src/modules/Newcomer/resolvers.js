@@ -17,18 +17,15 @@ export default {
         response = await Newcomers.updateOne({ ...previousNewcomer }, newcomer)
       } else {
         response = await Newcomers.insert(newcomer)
-        const [id] = response.insertedIds
-        newcomer.id = id
+        const [_id] = response.insertedIds
+        newcomer._id = _id
       }
       await sendNewcomerDigits(newcomer, mailer)
       return newcomer
     },
   },
   Newcomer: {
-    id: (newcomer) => {
-      console.log("Newcomer: ", newcomer._id || newcomer.id)
-      return (newcomer.id || newcomer._id.toString())
-    },
+    id: newcomer => newcomer._id.toString(),
     digits: newcomer => newcomer.digits,
   },
 }

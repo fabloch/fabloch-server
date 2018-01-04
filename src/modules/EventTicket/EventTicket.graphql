@@ -1,0 +1,13 @@
+type EventTicket {
+  id: ID!
+  event: Event!
+  participant: User!
+}
+
+input EventTicketInput {
+  eventId: String!
+}
+
+type Mutation {
+  createEventTicket(eventTicket: EventTicketInput): EventTicket
+}

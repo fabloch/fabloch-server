@@ -48,11 +48,12 @@ describe("Event resolvers", () => {
         await mongo.loadUsers()
         const user = await mongo.Users.findOne({ email: "user1@example.com" })
         const context = { mongo, user }
-        const event = { title: "Awesome Event" }
+        const event = { title: "Awesome Event", seats: 10 }
         const response = await resolvers.Mutation.createEvent(null, { event }, context)
         expect(response).toMatchObject({
           title: "Awesome Event",
           ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+          seats: 10,
         })
       })
       it("raises an error if no user in context", async () => {

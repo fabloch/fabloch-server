@@ -2,10 +2,12 @@ type Event {
   id: ID!
   title: String!
   owner: User!
+  seats: Int
 }
 
 input EventInput {
   title: String
+  seats: Int
 }
 
 type Query {
