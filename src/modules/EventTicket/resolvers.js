@@ -6,7 +6,7 @@ export default {
   Mutation: {
     createEventTicket: async (_, data, { mongo: { Events, EventTickets }, user }) => {
       checkAuthenticatedUser(user)
-      await checkEventForTicket(data.eventTicket.eventId, Events, EventTickets)
+      await checkEventForTicket(data.eventTicket.eventId, user, Events, EventTickets)
       const eventTicket = {
         participantId: user._id,
         eventId: ObjectId(data.eventTicket.eventId),

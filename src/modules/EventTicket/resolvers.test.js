@@ -41,7 +41,7 @@ describe("EventTicket resolvers", () => {
           expect(e.message).toEqual("Event does not exist.")
         }
       })
-      it("doesn't create eventTicket if no more seats", async () => {
+      it("raises error if no more seats", async () => {
         await mongo.loadUsers()
         await mongo.loadEvents()
         await mongo.loadEventTickets()
@@ -57,7 +57,22 @@ describe("EventTicket resolvers", () => {
           expect(e.message).toEqual("No more seats for that event.")
         }
       })
-      // it("doesn't create eventTicket if already an eventTicket with user and event")
+      it("raises error if already an eventTicket for user and event", async () => {
+        await mongo.loadUsers()
+        await mongo.loadEvents()
+        const user = await mongo.Users.findOne({ email: "user1@example.com" })
+        const context = { mongo, user }
+        const eventTicket = {
+          eventId: "5a4a5eb6404da6d636078beb",
+        }
+        await resolvers.Mutation.createEventTicket(null, { eventTicket }, context)
+        expect.assertions(1)
+        try {
+          await resolvers.Mutation.createEventTicket(null, { eventTicket }, context)
+        } catch (e) {
+          expect(e.message).toEqual("User already has a ticket for that event.")
+        }
+      })
       // it("doesn't create eventTicket if now > endDate")
       // it("doesn't create eventTicket if event.pris and no eventTicket.payment")
     })

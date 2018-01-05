@@ -28,6 +28,8 @@ export default {
   },
   Event: {
     id: event => event._id.toString(),
-    owner: async (event, _, { mongo: Users }) => Users.findOne({ _id: event.owner }),
+    owner: async (event, _, { mongo: { Users } }) => Users.findOne({ _id: event.ownerId }),
+    bookings: async (event, _, { mongo: { EventTickets } }) =>
+      EventTickets.find({ eventId: event._id }).count(),
   },
 }
