@@ -9,8 +9,10 @@ type Event {
 }
 
 input EventInput {
-  title: String
+  title: String!
   seats: Int
+  start: DateTime!
+  end: DateTime!
 }
 
 type Query {
@@ -19,5 +21,5 @@ type Query {
 }
 
 type Mutation {
-  createEvent(event: EventInput): Event
+  createEvent(event: EventInput!): Event
 }

@@ -6,3 +6,5 @@ export default makeExecutableSchema({
   typeDefs,
   resolvers,
 })
+
+// TODO: ModelType with createdAt, updatedAt, id

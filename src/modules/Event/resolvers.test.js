@@ -48,24 +48,35 @@ describe("Event resolvers", () => {
         await mongo.loadUsers()
         const user = await mongo.Users.findOne({ email: "user1@example.com" })
         const context = { mongo, user }
-        const event = { title: "Awesome Event", seats: 10 }
+        const event = {
+          title: "Awesome Event",
+          seats: 10,
+          start: "2018-09-16T08:30Z",
+          end: "2018-09-16T13:00Z",
+        }
         const response = await resolvers.Mutation.createEvent(null, { event }, context)
         expect(response).toMatchObject({
           title: "Awesome Event",
           ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
           seats: 10,
+          start: "2018-09-16T08:30Z",
+          end: "2018-09-16T13:00Z",
         })
       })
       it("raises an error if no user in context", async () => {
         const user = null
         const context = { mongo, user }
         const event = { title: "Awesome Event" }
+        expect.assertions(1)
         try {
           await resolvers.Mutation.createEvent(null, { event }, context)
         } catch (e) {
           expect(e.message).toMatch("Unauthenticated.")
         }
       })
+      it("raises an error if no start (should be a schema test, not resolvers)")
+      it("raises an error if no end (should be a schema test, not resolvers)")
+      it("raises an error if start < now")
     })
   })
   describe("Event", () => {
