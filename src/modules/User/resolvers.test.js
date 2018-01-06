@@ -20,7 +20,6 @@ describe("User resolver", () => {
         return resolvers.Query.user(null, null, context).then((results) => {
           expect(results).toEqual({
             _id: ObjectId("5a31b456c5e7b54a9aba3782"),
-            name: "User One",
             email: "user1@example.com",
             password: "$2a$10$Htm2b52NAP2XE5pD8LnK2OP58PTf9kXxaEtKxMmbI28Udappwayy6",
             version: 1,
@@ -43,7 +42,6 @@ describe("User resolver", () => {
       it("if no previous user, persists the user", async () => {
         const context = { mongo }
         const newUser = {
-          name: "New User",
           authProvider: {
             email: {
               email: "user@example.com",
@@ -54,7 +52,6 @@ describe("User resolver", () => {
         const response = await resolvers.Mutation.createUser(null, newUser, context)
         expect(response).toMatchObject({
           email: "user@example.com",
-          name: "New User",
           version: 1,
         })
       })
@@ -74,7 +71,6 @@ describe("User resolver", () => {
         expect(response).toMatchObject({
           _id: ObjectId("5a31b456c5e7b54a9aba3782"),
           email: "user1@example.com",
-          name: "User One",
           version: 1,
         })
       })
@@ -115,12 +111,12 @@ describe("User resolver", () => {
       it("with correct jwt, it updates user", async () => {
         await mongo.loadUsers()
         const [user] = userData
-        const modifiedUser = { name: "New Name" }
+        const modifiedUser = { email: "another@email.com" }
         const context = { mongo, user }
         const response = await resolvers.Mutation.updateUser(null, modifiedUser, context)
         expect(response).toMatchObject({
           ...user,
-          name: "New Name",
+          email: "another@email.com",
           version: 2,
         })
       })
@@ -128,7 +124,7 @@ describe("User resolver", () => {
       it("with no user from jwt, throws error", async () => {
         await mongo.loadUsers()
         const user = null
-        const modifiedUser = { name: "New Name" }
+        const modifiedUser = { email: "another@email.com" }
         const context = { mongo, user }
         try {
           await resolvers.Mutation.updateUser(null, modifiedUser, context)

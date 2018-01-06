@@ -32,7 +32,7 @@ describe("Newcomer", () => {
         const context = { mongo, mailer }
         const newcomer = { email: "user1@example.com" }
         const response = await resolvers.Mutation.createNewcomer(null, { newcomer }, context)
-        expect(response.id).toEqual(newcomerData[0]._id.toString())
+        expect(response._id).toEqual(newcomerData[0]._id)
         expect(response.email).toEqual("user1@example.com")
         expect(response.digits).toEqual([5, 5, 5, 5, 5, 5])
         expect(response.resent).toEqual(true)
@@ -55,7 +55,6 @@ describe("Newcomer", () => {
         const context = { mongo, mailer }
         const newcomer = { id: "5a4b76d5fdea180e9295743c", digits: [5, 5, 5, 5, 5, 5] }
         const response = await resolvers.Mutation.checkDigits(null, { newcomer }, context)
-        console.log(response)
         expect(response.email).toEqual("user1@example.com")
       })
       it("raises error if no newcomer with that id", async () => {

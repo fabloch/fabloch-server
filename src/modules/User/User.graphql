@@ -1,6 +1,5 @@
 type User {
   id: ID!
-  name: String!
   email: String
   jwt: String
   memberships: [Membership!]
@@ -21,8 +20,8 @@ type Query {
 }
 
 type Mutation {
-  createUser(name: String!, authProvider: AuthProviderSignupData!): User
+  createUser(authProvider: AuthProviderSignupData!): User
   signinUser(emailAuth: AUTH_PROVIDER_EMAIL): User
-  updateUser(name: String, email: String, password: String): User
+  updateUser(email: String, password: String): User
   # verifyUser(token: String!): User
 }

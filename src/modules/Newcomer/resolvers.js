@@ -14,7 +14,7 @@ export default {
       if (previousNewcomer) {
         newcomer.resent = true
         console.log("createNewcomer: ", previousNewcomer._id.toString())
-        newcomer.id = previousNewcomer._id.toString()
+        newcomer._id = previousNewcomer._id
         response = await Newcomers.updateOne({ ...previousNewcomer }, newcomer)
       } else {
         response = await Newcomers.insert(newcomer)

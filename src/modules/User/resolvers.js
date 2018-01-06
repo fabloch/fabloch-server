@@ -15,7 +15,6 @@ export default {
       if (!existingUser) {
         const passwordHash = await bcrypt.hash(data.authProvider.email.password, 10)
         const newUser = {
-          name: data.name,
           email: data.authProvider.email.email,
           password: passwordHash,
           version: 1,
