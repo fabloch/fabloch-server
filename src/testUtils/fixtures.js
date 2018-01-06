@@ -1,5 +1,7 @@
 import { ObjectId, MongoClient } from "mongodb"
 
+// TODO: dynamic dates
+
 export const admin = {
   _id: ObjectId("5a383f36d2834c317755ab17"),
   name: "Admin",
@@ -14,12 +16,16 @@ export const eventData = [
     title: "Awesome event",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
+    start: "2019-12-18T17:30:00.000Z",
+    end: "2019-12-18T19:00:00.000Z",
   },
   {
     _id: ObjectId("5a4a5ee36454c9d6369cca5f"),
     title: "Another awesome event",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
+    start: "2019-12-19T10:30:00.000Z",
+    end: "2019-12-19T12:00:00.000Z",
   },
 ]
 export const eventTicketData = [
@@ -38,22 +44,22 @@ export const membershipData = [
   {
     _id: ObjectId("5a383f36d2834c317755ab17"),
     plan: "PERSO",
-    startDate: "2016-12-18T00:00:00.000Z",
-    endDate: "2017-12-17T00:00:00.000Z",
+    start: "2016-12-18T00:00:00.000Z",
+    end: "2017-12-17T00:00:00.000Z",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
   },
   {
     _id: ObjectId("5a383ffe50e6413193171110"),
     plan: "PERSO",
-    startDate: "2017-12-18T00:00:00.000Z",
-    endDate: "2018-12-17T00:00:00.000Z",
+    start: "2017-12-18T00:00:00.000Z",
+    end: "2018-12-17T00:00:00.000Z",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
   },
   {
     _id: ObjectId("5a397f361e1dfa145c622785"),
     plan: "PERSO",
-    startDate: "2017-12-18T00:00:00.000Z",
-    endDate: "2018-12-17T00:00:00.000Z",
+    start: "2017-12-18T00:00:00.000Z",
+    end: "2018-12-17T00:00:00.000Z",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
   },
 ]

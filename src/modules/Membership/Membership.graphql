@@ -2,8 +2,8 @@ type Membership {
   id: ID!
   owner: User!
   plan: MembershipPlan
-  startDate: Date
-  endDate: Date
+  start: Date
+  end: Date
   # invoice: Invoice
 }
 
@@ -15,8 +15,8 @@ enum MembershipPlan {
 
 input MembershipInput {
   plan: MembershipPlan
-  startDate: Date
-  endDate: Date
+  start: Date
+  end: Date
 }
 
 type Query {

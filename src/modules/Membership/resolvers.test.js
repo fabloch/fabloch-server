@@ -31,14 +31,14 @@ describe("Membership resolvers", () => {
         const context = { mongo, user }
         const membership = {
           plan: "PERSO",
-          startDate: "2016-12-18T00:00:00.000Z",
-          endDate: "2017-12-17T00:00:00.000Z",
+          start: "2016-12-18T00:00:00.000Z",
+          end: "2017-12-17T00:00:00.000Z",
         }
         const response = await resolvers.Mutation.createMembership(null, { membership }, context)
         expect(response).toMatchObject({
           plan: "PERSO",
-          startDate: "2016-12-18T00:00:00.000Z",
-          endDate: "2017-12-17T00:00:00.000Z",
+          start: "2016-12-18T00:00:00.000Z",
+          end: "2017-12-17T00:00:00.000Z",
           ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
         })
       })
@@ -48,8 +48,8 @@ describe("Membership resolvers", () => {
         const context = { mongo, user }
         const membership = {
           plan: "PERSO",
-          startDate: "2016-12-18T00:00:00.000Z",
-          endDate: "2017-12-17T00:00:00.000Z",
+          start: "2016-12-18T00:00:00.000Z",
+          end: "2017-12-17T00:00:00.000Z",
         }
         try {
           await resolvers.Mutation.createMembership(null, { membership }, context)
@@ -64,8 +64,8 @@ describe("Membership resolvers", () => {
         const context = { mongo, user }
         const membership = {
           plan: "PERSO",
-          startDate: "2016-12-18T00:00:00.000Z",
-          endDate: "2017-12-17T00:00:00.000Z",
+          start: "2016-12-18T00:00:00.000Z",
+          end: "2017-12-17T00:00:00.000Z",
         }
         try {
           await resolvers.Mutation.createMembership(null, { membership }, context)

@@ -4,6 +4,8 @@ type Event {
   owner: User!
   seats: Int
   bookings: Int!
+  start: DateTime!
+  end: DateTime!
 }
 
 input EventInput {

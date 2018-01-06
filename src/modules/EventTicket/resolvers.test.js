@@ -73,7 +73,7 @@ describe("EventTicket resolvers", () => {
           expect(e.message).toEqual("User already has a ticket for that event.")
         }
       })
-      // it("doesn't create eventTicket if now > endDate")
+      // it("doesn't create eventTicket if now > end")
       // it("doesn't create eventTicket if event.pris and no eventTicket.payment")
     })
   })

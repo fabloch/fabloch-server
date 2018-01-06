@@ -16,10 +16,10 @@ export default {
       // check existing membership for the given user and given dates
       const overlappingMembership = await Memberships.findOne({
         ownerId: user._id,
-        endDate: { $gt: data.membership.startDate },
+        end: { $gt: data.membership.start },
       })
       if (overlappingMembership) {
-        throw new ValidationError(`Previous membership overlapping (ending ${overlappingMembership.endDate}).`, "startDate")
+        throw new ValidationError(`Previous membership overlapping (ending ${overlappingMembership.end}).`, "start")
         // there is an overlapping membership
       }
       const newMembership = {
