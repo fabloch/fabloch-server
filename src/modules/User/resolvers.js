@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
+import checkExistinguser from "../../validations/checkExistinguser"
 import { JWT_SECRET } from "../../utils/config"
 
 export default {
@@ -9,23 +10,22 @@ export default {
   },
   Mutation: {
     createUser: async (_, data, { mongo: { Users } }) => {
-      const existingUser = await Users.findOne({
+      await checkExistinguser(data.authProvider.email.email, Users)
+      const passwordHash = await bcrypt.hash(data.authProvider.email.password, 10)
+      const newUser = {
         email: data.authProvider.email.email,
-      })
-      if (!existingUser) {
-        const passwordHash = await bcrypt.hash(data.authProvider.email.password, 10)
-        const newUser = {
-          email: data.authProvider.email.email,
-          password: passwordHash,
-          version: 1,
-        }
-        const response = await Users.insert(newUser)
-        return {
-          id: response.insertedIds[0],
-          ...newUser,
-        }
+        password: passwordHash,
+        version: 1,
       }
-      return Error("An account was already created with this email")
+      const response = await Users.insert(newUser)
+      const _id = response.insertedIds[0]
+      const token = await jwt.sign({
+        id: _id,
+        email: newUser.email,
+        version: newUser.version,
+      }, JWT_SECRET)
+      newUser.jwt = token
+      return newUser
     },
     signinUser: async (_, data, context) => {
       const { mongo: { Users } } = context
@@ -73,7 +73,7 @@ export default {
     },
   },
   User: {
-    id: user => user._id.toString() || user.id,
+    id: user => user._id.toString(),
     memberships: async (user, _, context) => {
       const { mongo: { Memberships } } = context
       const memberships = await Memberships.find({ ownerId: user._id }).toArray()

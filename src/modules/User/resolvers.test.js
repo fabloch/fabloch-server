@@ -50,10 +50,9 @@ describe("User resolver", () => {
           },
         }
         const response = await resolvers.Mutation.createUser(null, newUser, context)
-        expect(response).toMatchObject({
-          email: "user@example.com",
-          version: 1,
-        })
+        expect(response.email).toEqual("user@example.com")
+        expect(response.version).toEqual(1)
+        expect(response.jwt).toMatch(/ey.+\.ey.+\..+/)
       })
     })
 
@@ -68,11 +67,10 @@ describe("User resolver", () => {
           },
         }
         const response = await resolvers.Mutation.signinUser(null, credentials, context)
-        expect(response).toMatchObject({
-          _id: ObjectId("5a31b456c5e7b54a9aba3782"),
-          email: "user1@example.com",
-          version: 1,
-        })
+        expect(response._id).toMatchObject(ObjectId("5a31b456c5e7b54a9aba3782"))
+        expect(response.jwt).toMatch(/ey.+\.ey.+\..+/)
+        expect(response.email).toEqual("user1@example.com")
+        expect(response.version).toEqual(1)
       })
 
       it("with no user, throws error", async () => {
