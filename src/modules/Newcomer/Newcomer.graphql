@@ -1,11 +1,16 @@
 type Newcomer {
   id: ID!
   email: String!
-  digits: [Int!]!
+  # digits: [Int!]!
 }
 
 input NewcomerInput {
   email: String!
+}
+
+input CheckDigitsInput {
+  id: ID!
+  digits: [Int!]!
 }
 
 type Query {
@@ -14,4 +19,5 @@ type Query {
 
 type Mutation {
   createNewcomer(newcomer: NewcomerInput): Newcomer
+  checkDigits(newcomer: CheckDigitsInput): Newcomer
 }

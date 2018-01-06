@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb"
+import { isEqual } from "lodash"
 import createDigits from "../../utils/createDigits"
 import newcomerExists from "../../validations/newcomerExists"
 import { sendNewcomerDigits } from "./mailer"
@@ -23,9 +24,19 @@ export default {
       await sendNewcomerDigits(newcomer, mailer)
       return newcomer
     },
+    checkDigits: async (_, data, { mongo: { Newcomers } }) => {
+      const newcomer = await Newcomers.findOne({ _id: ObjectId(data.newcomer.id) })
+      if (!newcomer) {
+        throw new Error("Newcomer with that id doesn't exist.")
+      }
+      if (!isEqual(newcomer.digits, data.newcomer.digits)) {
+        throw new Error("Digits don't match.")
+      }
+      return newcomer
+    },
   },
   Newcomer: {
     id: newcomer => newcomer._id.toString(),
-    digits: newcomer => newcomer.digits,
+    // digits: newcomer => newcomer.digits,
   },
 }
