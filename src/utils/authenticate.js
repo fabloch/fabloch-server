@@ -1,6 +1,5 @@
-const authenticate = async (req, Users) => (
-  // TODO: problème d'authentification, il prend le premier avec pas de jwt
-  req.user ? Users.findOne({ jwt: req.user.jwt, version: req.user.version }) : null
-)
+const authenticate = async (req, Users) => {
+  return req.user ? Users.findOne({ email: req.user.email, version: req.user.version }) : null
+}
 
 export default authenticate

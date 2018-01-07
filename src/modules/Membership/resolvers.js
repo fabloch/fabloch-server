@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb"
 import moment from "moment"
 import ValidationError from "../../validations/validationError"
 import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
@@ -6,7 +7,7 @@ export default {
   Query: {
     userMemberships: async (_, __, { mongo: { Memberships }, user }) => {
       checkAuthenticatedUser(user)
-      const memberships = await Memberships.find({ ownerId: user._id }).toArray()
+      const memberships = await Memberships.find({ ownerId: ObjectId(user._id) }).toArray()
       return memberships
     },
   },

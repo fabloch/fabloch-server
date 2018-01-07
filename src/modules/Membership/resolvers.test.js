@@ -19,7 +19,22 @@ describe("Membership resolvers", () => {
         const user = await mongo.Users.findOne({ email: "user1@example.com" })
         const context = { mongo, user }
         const response = await resolvers.Query.userMemberships(null, null, context)
-        expect(response).toEqual(membershipData)
+        expect(response).toMatchObject([
+          {
+            _id: ObjectId("5a383f36d2834c317755ab17"),
+            plan: "PERSO",
+            start: "2016-12-18T00:00:00.000Z",
+            end: "2017-12-17T00:00:00.000Z",
+            ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+          },
+          {
+            _id: ObjectId("5a383ffe50e6413193171110"),
+            plan: "PERSO",
+            start: "2017-12-18T00:00:00.000Z",
+            end: "2018-12-17T00:00:00.000Z",
+            ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+          },
+        ])
       })
     })
   })
