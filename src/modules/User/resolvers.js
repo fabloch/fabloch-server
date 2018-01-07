@@ -1,7 +1,9 @@
+import { ObjectId } from "mongodb"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
-import checkExistinguser from "../../validations/checkExistinguser"
+import checkExistingUser from "../../validations/checkExistingUser"
+import checkPasswordStrength from "../../validations/checkPasswordStrength"
 import { JWT_SECRET } from "../../utils/config"
 
 export default {
@@ -9,11 +11,17 @@ export default {
     user: async (_, __, { user }) => user,
   },
   Mutation: {
-    createUser: async (_, data, { mongo: { Users } }) => {
-      await checkExistinguser(data.authProvider.email.email, Users)
-      const passwordHash = await bcrypt.hash(data.authProvider.email.password, 10)
+    createUser: async (_, data, { mongo: { Users, Newcomers } }) => {
+      const { newcomer } = data.authProvider
+      const newcomerFromDb = await Newcomers.findOne({ _id: ObjectId(newcomer.id) })
+      if (!newcomerFromDb) {
+        throw new Error("No newcomer with that id.")
+      }
+      checkPasswordStrength(newcomer.password)
+      await checkExistingUser(newcomerFromDb.email, Users)
+      const passwordHash = await bcrypt.hash(newcomer.password, 10)
       const newUser = {
-        email: data.authProvider.email.email,
+        email: newcomerFromDb.email,
         password: passwordHash,
         version: 1,
       }

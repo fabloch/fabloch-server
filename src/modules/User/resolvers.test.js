@@ -39,20 +39,74 @@ describe("User resolver", () => {
 
   describe("Mutation", () => {
     describe("createUser", () => {
-      it("if no previous user, persists the user", async () => {
+      it("with newcomerId and password, persists the user", async () => {
+        await mongo.loadNewcomers()
         const context = { mongo }
         const newUser = {
           authProvider: {
-            email: {
-              email: "user@example.com",
-              password: "$2a$10$4gx3tkvkV5uosBHRyjAOVe7y3Za8BPuicCwWIDFAk.hju4IuLip.e",
+            newcomer: {
+              id: "5a4b76d5fdea180e9295743c",
+              password: "Mot2pa$$e.De.Ouf",
             },
           },
         }
         const response = await resolvers.Mutation.createUser(null, newUser, context)
-        expect(response.email).toEqual("user@example.com")
+        expect(response.email).toEqual("user1@example.com")
         expect(response.version).toEqual(1)
         expect(response.jwt).toMatch(/ey.+\.ey.+\..+/)
+      })
+      it("raises error if no newcomer", async () => {
+        expect.assertions(1)
+        const context = { mongo }
+        const newUser = {
+          authProvider: {
+            newcomer: {
+              id: "5a4b76d5fdea180e9295743c",
+              password: "Mot2pa$$e.De.Ouf",
+            },
+          },
+        }
+        try {
+          await resolvers.Mutation.createUser(null, newUser, context)
+        } catch (e) {
+          expect(e.message).toEqual("No newcomer with that id.")
+        }
+      })
+      it("raises error if user already exists", async () => {
+        expect.assertions(1)
+        await mongo.loadNewcomers()
+        await mongo.loadUsers()
+        const context = { mongo }
+        const newUser = {
+          authProvider: {
+            newcomer: {
+              id: "5a4b76d5fdea180e9295743c",
+              password: "Mot2pa$$e.De.Ouf",
+            },
+          },
+        }
+        try {
+          await resolvers.Mutation.createUser(null, newUser, context)
+        } catch (e) {
+          expect(e.message).toEqual("An account was already created with this email.")
+        }
+      })
+      it("raises an error if password too weak", async () => {
+        await mongo.loadNewcomers()
+        const context = { mongo }
+        const newUser = {
+          authProvider: {
+            newcomer: {
+              id: "5a4b76d5fdea180e9295743c",
+              password: "password",
+            },
+          },
+        }
+        try {
+          await resolvers.Mutation.createUser(null, newUser, context)
+        } catch (e) {
+          expect(e.message).toEqual("Password too weak.")
+        }
       })
     })
 
