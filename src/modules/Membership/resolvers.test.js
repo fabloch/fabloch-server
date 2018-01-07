@@ -7,9 +7,9 @@ let mongo
 
 describe("Membership resolvers", () => {
   beforeAll(async () => { mongo = await connectMongo() })
-  beforeEach(async () => { await mongo.beforeEach() })
-  afterEach(() => mongo.afterEach())
-  afterAll(() => { mongo.tearDown() })
+  beforeEach(async () => mongo.beforeEach())
+  afterEach(async () => mongo.afterEach())
+  afterAll(async () => mongo.afterAll())
 
   describe("Query", () => {
     describe("userMemberships", () => {
@@ -80,6 +80,14 @@ describe("Membership resolvers", () => {
       it("returns the id stringified", () => {
         expect(resolvers.Membership.id(membershipData[0])).toEqual("5a383f36d2834c317755ab17")
       })
+    })
+    describe("start, end", () => {
+      it("returns a date string from datetime", () => {
+        expect(resolvers.Membership.start(membershipData[0])).toEqual("2016-12-18")
+        expect(resolvers.Membership.end(membershipData[0])).toEqual("2017-12-17")
+      })
+    })
+    describe("owner", () => {
       it("returns the owner", async () => {
         await mongo.loadUsers()
         const context = { mongo }

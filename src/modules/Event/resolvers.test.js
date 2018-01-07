@@ -7,9 +7,9 @@ let mongo
 
 describe("Event resolvers", () => {
   beforeAll(async () => { mongo = await connectMongo() })
-  beforeEach(async () => { await mongo.beforeEach() })
-  afterEach(() => mongo.afterEach())
-  afterAll(() => { mongo.tearDown() })
+  beforeEach(async () => mongo.beforeEach())
+  afterEach(async () => mongo.afterEach())
+  afterAll(async () => mongo.afterAll())
 
   describe("Query", () => {
     describe("allEvents", () => {

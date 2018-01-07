@@ -59,7 +59,7 @@ export const membershipData = [
     plan: "PERSO",
     start: "2017-12-18T00:00:00.000Z",
     end: "2018-12-17T00:00:00.000Z",
-    ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+    ownerId: ObjectId("5a31b4efedc7474b9addc261"),
   },
 ]
 export const newcomerData = [
