@@ -12,9 +12,9 @@ global.Math = mockMath
 
 describe("Newcomer", () => {
   beforeAll(async () => { mongo = await connectMongo() })
-  beforeEach(async () => mongo.beforeEach())
-  afterEach(async () => mongo.afterEach())
-  afterAll(async () => mongo.afterAll())
+  beforeEach(async () => { await mongo.beforeEach() })
+  afterEach(async () => { await mongo.afterEach() })
+  afterAll(async () => { await mongo.afterAll() })
 
   describe("Query", () => {
   })

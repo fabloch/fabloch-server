@@ -8,8 +8,8 @@ let mongo
 describe("EventTicket resolvers", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })
-  afterEach(() => mongo.afterEach())
-  afterAll(() => { mongo.tearDown() })
+  afterEach(async () => { await mongo.afterEach() })
+  afterAll(async () => { await mongo.afterAll() })
 
   describe("Mutation", () => {
     describe("createEventTicket", () => {
