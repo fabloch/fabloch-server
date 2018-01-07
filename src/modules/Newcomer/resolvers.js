@@ -13,7 +13,6 @@ export default {
       let response
       if (previousNewcomer) {
         newcomer.resent = true
-        console.log("createNewcomer: ", previousNewcomer._id.toString())
         newcomer._id = previousNewcomer._id
         response = await Newcomers.updateOne({ ...previousNewcomer }, newcomer)
       } else {

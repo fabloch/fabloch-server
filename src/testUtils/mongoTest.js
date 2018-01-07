@@ -1,4 +1,4 @@
-import { Logger, MongoClient } from "mongodb"
+import { MongoClient } from "mongodb"
 import {
   eventData,
   eventTicketData,
@@ -7,20 +7,11 @@ import {
   userData,
 } from "./fixtures"
 
-const MONGO_URL = "mongodb://localhost:27017/fabloch-server-test"
+const random = () => Math.floor(Math.random() * 9999)
+const MONGO_TEST_URL = `mongodb://localhost:27017/fabloch-server-test-${random()}`
 
 export default async function () {
-  const db = await MongoClient.connect(MONGO_URL)
-
-  if (process.env.NODE_ENV === "development") {
-    let logCount = 0
-    Logger.setCurrentLogger((msg) => {
-      // eslint-disable-next-line no-console
-      console.log(`MONGO DB REQUEST ${logCount += 1}: ${msg})`)
-    })
-    Logger.setLevel("debug")
-    Logger.filter("class", ["Cursor"])
-  }
+  const db = await MongoClient.connect(MONGO_TEST_URL)
 
   const beforeEach = async () => {
     await db.createCollection("events")

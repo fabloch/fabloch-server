@@ -6,7 +6,6 @@ export default {
   Query: {
     userMemberships: async (_, __, { mongo: { Memberships }, user }) => {
       checkAuthenticatedUser(user)
-      console.log(user)
       const memberships = await Memberships.find({ ownerId: user._id }).toArray()
       return memberships
     },

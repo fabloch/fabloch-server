@@ -7,9 +7,9 @@ let mongo
 
 describe("EventTicket resolvers", () => {
   beforeAll(async () => { mongo = await connectMongo() })
-  beforeEach(async () => { await mongo.beforeEach() })
-  afterEach(async () => { await mongo.afterEach() })
-  afterAll(async () => { await mongo.afterAll() })
+  beforeEach(() => mongo.beforeEach())
+  afterEach(() => mongo.afterEach())
+  afterAll(() => mongo.afterAll())
 
   describe("Mutation", () => {
     describe("createEventTicket", () => {
