@@ -5,8 +5,13 @@ type User {
   memberships: [Membership!]
 }
 
-input AuthProviderSignupData {
-    email: AUTH_PROVIDER_EMAIL
+input AuthProviderNewcomerData {
+    newcomer: AUTH_PROVIDER_NEWCOMER
+}
+
+input AUTH_PROVIDER_NEWCOMER {
+    id: ID!
+    password: String!
 }
 
 input AUTH_PROVIDER_EMAIL {
@@ -20,7 +25,7 @@ type Query {
 }
 
 type Mutation {
-  createUser(authProvider: AuthProviderSignupData!): User
+  createUser(authProvider: AuthProviderNewcomerData!): User
   signinUser(emailAuth: AUTH_PROVIDER_EMAIL): User
   updateUser(email: String, password: String): User
   # verifyUser(token: String!): User
