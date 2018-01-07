@@ -8,7 +8,7 @@ import {
 } from "./fixtures"
 
 const random = () => Math.floor(Math.random() * 9999)
-const MONGO_TEST_URL = `mongodb://localhost:27017/fabloch-server-test-${random()}`
+const MONGO_TEST_URL = `mongodb://localhost:27018/fabloch-server-test-${random()}`
 
 export default async function () {
   const db = await MongoClient.connect(MONGO_TEST_URL)
