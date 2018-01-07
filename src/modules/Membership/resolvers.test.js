@@ -1,7 +1,8 @@
 import { ObjectId } from "mongodb"
+import moment from "moment"
 import resolvers from "./resolvers"
 import connectMongo from "../../testUtils/mongoTest"
-import { userData, membershipData } from "../../testUtils/fixtures"
+import { userData, membershipData, dateUtils } from "../../testUtils/fixtures"
 
 let mongo
 
@@ -12,6 +13,16 @@ describe("Membership resolvers", () => {
   afterAll(async () => { await mongo.afterAll() })
 
   describe("Query", () => {
+    // describe("userMembershipData", () => {
+    //   it("returns the context user's membershipData", async () => {
+    //     await mongo.loadUsers()
+    //     await mongo.loadMemberships()
+    //     const user = await mongo.Users.findOne({ email: "user1@example.com" })
+    //     const context = { mongo, user }
+    //     const response = await resolvers.Query.userMemberships(null, null, context)
+    //     expect(response).toMatchObject([])
+    //   })
+    // })
     describe("userMemberships", () => {
       it("returns the context user's memberships", async () => {
         await mongo.loadUsers()
@@ -23,15 +34,15 @@ describe("Membership resolvers", () => {
           {
             _id: ObjectId("5a383f36d2834c317755ab17"),
             plan: "PERSO",
-            start: "2016-12-18T00:00:00.000Z",
-            end: "2017-12-17T00:00:00.000Z",
+            start: dateUtils.user1membership1Start,
+            end: dateUtils.user1membership1End,
             ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
           },
           {
             _id: ObjectId("5a383ffe50e6413193171110"),
             plan: "PERSO",
-            start: "2017-12-18T00:00:00.000Z",
-            end: "2018-12-17T00:00:00.000Z",
+            start: dateUtils.user1membership2Start,
+            end: dateUtils.user1membership2End,
             ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
           },
         ])
@@ -46,14 +57,14 @@ describe("Membership resolvers", () => {
         const context = { mongo, user }
         const membership = {
           plan: "PERSO",
-          start: "2016-12-18T00:00:00.000Z",
-          end: "2017-12-17T00:00:00.000Z",
+          start: dateUtils.today,
+          end: dateUtils.inAYear,
         }
         const response = await resolvers.Mutation.createMembership(null, { membership }, context)
         expect(response).toMatchObject({
           plan: "PERSO",
-          start: "2016-12-18T00:00:00.000Z",
-          end: "2017-12-17T00:00:00.000Z",
+          start: dateUtils.today,
+          end: dateUtils.inAYear,
           ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
         })
       })
@@ -63,8 +74,8 @@ describe("Membership resolvers", () => {
         const context = { mongo, user }
         const membership = {
           plan: "PERSO",
-          start: "2016-12-18T00:00:00.000Z",
-          end: "2017-12-17T00:00:00.000Z",
+          start: dateUtils.today,
+          end: dateUtils.inAYear,
         }
         try {
           await resolvers.Mutation.createMembership(null, { membership }, context)
@@ -75,17 +86,17 @@ describe("Membership resolvers", () => {
       it("raises error if overlapping membership", async () => {
         await mongo.loadUsers()
         await mongo.loadMemberships()
-        const user = await mongo.Users.findOne({ email: "user1@example.com" })
+        const user = await mongo.Users.findOne({ email: "user2@example.com" })
         const context = { mongo, user }
         const membership = {
           plan: "PERSO",
-          start: "2016-12-18T00:00:00.000Z",
-          end: "2017-12-17T00:00:00.000Z",
+          start: dateUtils.today,
+          end: dateUtils.inAYear,
         }
         try {
           await resolvers.Mutation.createMembership(null, { membership }, context)
         } catch (e) {
-          expect(e.message).toEqual("Previous membership overlapping (ending 2017-12-17T00:00:00.000Z).")
+          expect(e.message).toEqual("Previous membership overlapping (ending in 10 days).")
         }
       })
     })
@@ -98,8 +109,10 @@ describe("Membership resolvers", () => {
     })
     describe("start, end", () => {
       it("returns a date string from datetime", () => {
-        expect(resolvers.Membership.start(membershipData[0])).toEqual("2016-12-18")
-        expect(resolvers.Membership.end(membershipData[0])).toEqual("2017-12-17")
+        expect(resolvers.Membership.start(membershipData[0]))
+          .toEqual(moment(dateUtils.user1membership1Start).format("YYYY-MM-DD"))
+        expect(resolvers.Membership.end(membershipData[0]))
+          .toEqual(moment(dateUtils.user1membership1End).format("YYYY-MM-DD"))
       })
     })
     describe("owner", () => {

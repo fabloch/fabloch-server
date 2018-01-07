@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
 import resolvers from "./resolvers"
 import connectMongo from "../../testUtils/mongoTest"
-import { userData } from "../../testUtils/fixtures"
+import { userData, dateUtils } from "../../testUtils/fixtures"
 
 let mongo
 
@@ -206,15 +206,15 @@ describe("User resolver", () => {
         {
           _id: ObjectId("5a383f36d2834c317755ab17"),
           plan: "PERSO",
-          start: "2016-12-18T00:00:00.000Z",
-          end: "2017-12-17T00:00:00.000Z",
+          start: dateUtils.user1membership1Start,
+          end: dateUtils.user1membership1End,
           ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
         },
         {
           _id: ObjectId("5a383ffe50e6413193171110"),
           plan: "PERSO",
-          start: "2017-12-18T00:00:00.000Z",
-          end: "2018-12-17T00:00:00.000Z",
+          start: dateUtils.user1membership2Start,
+          end: dateUtils.user1membership2End,
           ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
         },
       ])

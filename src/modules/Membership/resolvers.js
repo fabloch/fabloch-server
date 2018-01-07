@@ -21,7 +21,7 @@ export default {
         end: { $gt: data.membership.start },
       })
       if (overlappingMembership) {
-        throw new ValidationError(`Previous membership overlapping (ending ${overlappingMembership.end}).`, "start")
+        throw new ValidationError(`Previous membership overlapping (ending ${moment(overlappingMembership.end).fromNow()}).`, "start")
         // there is an overlapping membership
       }
       const newMembership = {

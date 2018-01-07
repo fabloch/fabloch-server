@@ -1,6 +1,18 @@
 import { ObjectId, MongoClient } from "mongodb"
+import moment from "moment"
 
-// TODO: dynamic dates
+export const dateUtils = {
+  today: moment.utc().format(),
+  inAYear: moment.utc().add(1, "y").subtract(1, "d").format(),
+  user1membership1Start: moment.utc().subtract(2, "y").subtract(9, "d").format(),
+  user1membership1End: moment.utc().subtract(1, "y").subtract(10, "d").format(),
+  user1membership2Start: moment.utc().subtract(1, "y").subtract(9, "d").format(),
+  user1membership2End: moment.utc().subtract(10, "d").format(),
+  user2membership1Start: moment.utc().subtract(2, "y").add(10, "d").format(),
+  user2membership1End: moment.utc().subtract(1, "y").add(10, "d").format(),
+  user2membership2Start: moment.utc().subtract(1, "y").add(10, "d").format(),
+  user2membership2End: moment.utc().add(10, "d").format(),
+}
 
 export const admin = {
   _id: ObjectId("5a383f36d2834c317755ab17"),
@@ -43,22 +55,29 @@ export const membershipData = [
   {
     _id: ObjectId("5a383f36d2834c317755ab17"),
     plan: "PERSO",
-    start: "2016-12-18T00:00:00.000Z",
-    end: "2017-12-17T00:00:00.000Z",
+    start: dateUtils.user1membership1Start,
+    end: dateUtils.user1membership1End,
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
   },
   {
     _id: ObjectId("5a383ffe50e6413193171110"),
     plan: "PERSO",
-    start: "2017-12-18T00:00:00.000Z",
-    end: "2018-12-17T00:00:00.000Z",
+    start: dateUtils.user1membership2Start,
+    end: dateUtils.user1membership2End,
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
   },
   {
     _id: ObjectId("5a397f361e1dfa145c622785"),
     plan: "PERSO",
-    start: "2017-12-18T00:00:00.000Z",
-    end: "2018-12-17T00:00:00.000Z",
+    start: dateUtils.user2membership1Start,
+    end: dateUtils.user2membership1End,
+    ownerId: ObjectId("5a31b4efedc7474b9addc261"),
+  },
+  {
+    _id: ObjectId("5a397f361e1dfa145c622666"),
+    plan: "PERSO",
+    start: dateUtils.user2membership2Start,
+    end: dateUtils.user2membership2End,
     ownerId: ObjectId("5a31b4efedc7474b9addc261"),
   },
 ]
@@ -78,7 +97,7 @@ export const userData = [
   },
   {
     _id: ObjectId("5a31b4efedc7474b9addc261"),
-    email: "user2@xample.com",
+    email: "user2@example.com",
     password: "$2a$10$AyhLbNMCe6bIAKWOI/1PjOs6/wvQPnj6kQBRO4/PzjR8Jbb7bTHey",
     version: 1,
   },

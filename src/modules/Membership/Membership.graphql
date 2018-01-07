@@ -1,3 +1,10 @@
+type UserMembershipData {
+  present: Membership
+  nextStart: Date
+  nextEnd: Date
+  memberships: [Membership!]
+}
+
 type Membership {
   id: ID!
   owner: User!
@@ -20,6 +27,7 @@ input MembershipInput {
 }
 
 type Query {
+  userMembersiphData: UserMembershipData!
   userMemberships: [Membership!]
 }
 
