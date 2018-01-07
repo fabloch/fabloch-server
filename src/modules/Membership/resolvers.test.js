@@ -23,6 +23,9 @@ describe("Membership resolvers", () => {
           const response = await resolvers.Query.userMembershipData(null, null, context)
           expect(response).toMatchObject({
             present: null,
+            isMember: false,
+            wasMember: true,
+            alertLevel: 3,
             nextStart: moment(dateUtils.today).format("YYYY-MM-DD"),
             nextEnd: moment(dateUtils.inAYear).format("YYYY-MM-DD"),
             memberships: [membershipData[1], membershipData[0]],
@@ -38,6 +41,9 @@ describe("Membership resolvers", () => {
           const response = await resolvers.Query.userMembershipData(null, null, context)
           expect(response).toMatchObject({
             present: membershipData[3],
+            isMember: true,
+            wasMember: true,
+            alertLevel: 2,
             nextStart: moment.utc().add(10, "d").format("YYYY-MM-DD"),
             nextEnd: moment.utc().add(1, "y").add(9, "d").format("YYYY-MM-DD"),
             memberships: [membershipData[3], membershipData[2]],
@@ -46,7 +52,7 @@ describe("Membership resolvers", () => {
       })
     })
     describe("userMemberships", () => {
-      xit("returns the context user's memberships", async () => {
+      it("returns the context user's memberships", async () => {
         await mongo.loadUsers()
         await mongo.loadMemberships()
         const user = await mongo.Users.findOne({ email: "user1@example.com" })
@@ -73,7 +79,7 @@ describe("Membership resolvers", () => {
   })
   describe("Mutation", () => {
     describe("createMembership", () => {
-      xit("creates membership when ctx user & no overlapping membership", async () => {
+      it("creates membership when ctx user & no overlapping membership", async () => {
         await mongo.loadUsers()
         const user = await mongo.Users.findOne({ email: "user1@example.com" })
         const context = { mongo, user }
@@ -90,7 +96,7 @@ describe("Membership resolvers", () => {
           ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
         })
       })
-      xit("raises error if no ctx user", async () => {
+      it("raises error if no ctx user", async () => {
         await mongo.loadUsers()
         const user = null
         const context = { mongo, user }
@@ -105,7 +111,7 @@ describe("Membership resolvers", () => {
           expect(e.message).toEqual("Unauthenticated.")
         }
       })
-      xit("raises error if overlapping membership", async () => {
+      it("raises error if overlapping membership", async () => {
         await mongo.loadUsers()
         await mongo.loadMemberships()
         const user = await mongo.Users.findOne({ email: "user2@example.com" })
@@ -125,12 +131,12 @@ describe("Membership resolvers", () => {
   })
   describe("Membership", () => {
     describe("id", () => {
-      xit("returns the id stringified", () => {
+      it("returns the id stringified", () => {
         expect(resolvers.Membership.id(membershipData[0])).toEqual("5a383f36d2834c317755ab17")
       })
     })
     describe("start, end", () => {
-      xit("returns a date string from datetime", () => {
+      it("returns a date string from datetime", () => {
         expect(resolvers.Membership.start(membershipData[0]))
           .toEqual(moment(dateUtils.user1membership1Start).format("YYYY-MM-DD"))
         expect(resolvers.Membership.end(membershipData[0]))
@@ -138,7 +144,7 @@ describe("Membership resolvers", () => {
       })
     })
     describe("owner", () => {
-      xit("returns the owner", async () => {
+      it("returns the owner", async () => {
         await mongo.loadUsers()
         const context = { mongo }
         const response = await resolvers.Membership.owner(membershipData[0], null, context)

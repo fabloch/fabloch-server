@@ -11,12 +11,36 @@ export default {
       data.memberships = await Memberships
         .find({ ownerId: ObjectId(user._id) })
         .sort({ end: -1 }).toArray()
-      if (data.memberships[0] && moment(data.memberships[0].end) > moment().utc()) {
-        data.present = data.memberships[0]
-        data.nextStart = moment(data.memberships[0].end).add(1, "d").format("YYYY-MM-DD")
+      if (data.memberships) {
+        data.wasMember = true
       } else {
-        data.present = null
-        data.nextStart = moment().utc().format("YYYY-MM-DD")
+        data.wasMember = false
+        data.alertLevel = 0
+      }
+      if (data.wasMember) {
+        const lastMemberDayToNow = moment(data.memberships[0].end).diff(moment().utc(), "days")
+        if (lastMemberDayToNow < 0) {
+          // User is no longer member
+          data.alertLevel = 3
+          data.isMember = false
+          data.present = null
+          data.nextStart = moment().utc().format("YYYY-MM-DD")
+        } else {
+          // User is member
+          data.isMember = true
+          data.present = data.memberships[0]
+          data.nextStart = moment(data.memberships[0].end).add(1, "d").format("YYYY-MM-DD")
+          if (lastMemberDayToNow < 30) {
+            // membership ends in less than 30 days
+            data.alertLevel = 2
+          } else if (lastMemberDayToNow < 60) {
+            // membership ends between 30 and 60
+            data.alertLevel = 1
+          } else {
+            // membership ends in more than 60 days
+            data.alertLevel = 0
+          }
+        }
       }
       data.nextEnd = moment(data.nextStart).add(1, "y").subtract(1, "d").format("YYYY-MM-DD")
       return data

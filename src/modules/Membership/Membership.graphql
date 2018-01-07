@@ -1,5 +1,8 @@
 type UserMembershipData {
   present: Membership
+  isMember: Boolean!
+  wasMember: Boolean!
+  alertLevel: Int!
   nextStart: Date
   nextEnd: Date
   memberships: [Membership!]
