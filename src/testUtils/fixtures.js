@@ -9,9 +9,9 @@ export const dateUtils = {
   user1membership2Start: moment.utc().subtract(1, "y").subtract(9, "d").format(),
   user1membership2End: moment.utc().subtract(10, "d").format(),
   user2membership1Start: moment.utc().subtract(2, "y").add(10, "d").format(),
-  user2membership1End: moment.utc().subtract(1, "y").add(10, "d").format(),
+  user2membership1End: moment.utc().subtract(1, "y").add(9, "d").format(),
   user2membership2Start: moment.utc().subtract(1, "y").add(10, "d").format(),
-  user2membership2End: moment.utc().add(10, "d").format(),
+  user2membership2End: moment.utc().add(9, "d").format(),
 }
 
 export const admin = {

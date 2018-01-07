@@ -5,6 +5,22 @@ import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
 
 export default {
   Query: {
+    userMembershipData: async (_, __, { mongo: { Memberships}, user }) => {
+      checkAuthenticatedUser(user)
+      const data = {}
+      data.memberships = await Memberships
+        .find({ ownerId: ObjectId(user._id) })
+        .sort({ end: -1 }).toArray()
+      if (data.memberships[0] && moment(data.memberships[0].end) > moment().utc()) {
+        data.present = data.memberships[0]
+        data.nextStart = moment(data.memberships[0].end).add(1, "d").format("YYYY-MM-DD")
+      } else {
+        data.present = null
+        data.nextStart = moment().utc().format("YYYY-MM-DD")
+      }
+      data.nextEnd = moment(data.nextStart).add(1, "y").subtract(1, "d").format("YYYY-MM-DD")
+      return data
+    },
     userMemberships: async (_, __, { mongo: { Memberships }, user }) => {
       checkAuthenticatedUser(user)
       const memberships = await Memberships.find({ ownerId: ObjectId(user._id) }).toArray()

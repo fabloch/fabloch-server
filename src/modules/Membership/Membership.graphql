@@ -27,7 +27,7 @@ input MembershipInput {
 }
 
 type Query {
-  userMembersiphData: UserMembershipData!
+  userMembershipData: UserMembershipData!
   userMemberships: [Membership!]
 }
 
