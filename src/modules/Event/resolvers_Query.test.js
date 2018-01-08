@@ -12,16 +12,35 @@ describe("Event Query resolvers", () => {
   afterAll(async () => { await mongo.afterAll() })
 
   describe("allEvents", () => {
-    it("returns empty array if no events", async () => {
-      const context = { mongo }
-      const response = await resolvers.Query.allEvents(null, null, context)
-      expect(response).toEqual([])
+    describe("no filters", () => {
+      it("returns empty array if no events", async () => {
+        const context = { mongo }
+        const response = await resolvers.Query.allEvents(null, {}, context)
+        expect(response).toEqual([])
+      })
+      it("returns all events from db", async () => {
+        await mongo.loadEvents()
+        const context = { mongo }
+        const response = await resolvers.Query.allEvents(null, {}, context)
+        expect(response).toEqual(eventData)
+      })
     })
-    it("returns all events from db", async () => {
-      await mongo.loadEvents()
-      const context = { mongo }
-      const response = await resolvers.Query.allEvents(null, null, context)
-      expect(response).toEqual(eventData)
+    describe("with filters", () => {
+      it("filters with the title", async () => {
+        await mongo.loadEvents()
+        const context = { mongo }
+        /* eslint-disable camelcase */
+        const filter = {
+          OR: [
+            { title_contains: "awesome" },
+            { description_contains: "awesome" },
+          ],
+        }
+        /* eslint-enable */
+
+        const response = await resolvers.Query.allEvents(null, { filter }, context)
+        expect(response).toEqual([eventData[1]])
+      })
     })
   })
   describe("eventDetail", () => {

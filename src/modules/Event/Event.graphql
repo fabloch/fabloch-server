@@ -7,7 +7,13 @@ type Event {
   bookings: Int!
   start: DateTime!
   end: DateTime!
-  tickets: [EventTicket!]
+  tickets: [EventTicket!]!
+}
+
+input EventFilter {
+  OR: [EventFilter!]
+  title_contains: String
+  description_contains: String
 }
 
 input EventInput {
@@ -19,7 +25,7 @@ input EventInput {
 }
 
 type Query {
-  allEvents: [Event!]
+  allEvents(filter: EventFilter): [Event!]!
   eventDetail(id: String!): Event!
 }
 
