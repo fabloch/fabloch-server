@@ -5,7 +5,8 @@ import { graphqlExpress, graphiqlExpress } from "apollo-server-express"
 import { execute, subscribe } from "graphql"
 import { createServer } from "http"
 import { SubscriptionServer } from "subscriptions-transport-ws"
-import jwt from "express-jwt"
+import expressJwt from "express-jwt"
+import jwt from "jsonwebtoken"
 import cors from "cors"
 
 import { CORS_URI, JWT_SECRET, PORT } from "./utils/config"
@@ -38,7 +39,7 @@ const start = async () => {
   app.use(
     "/graphql",
     bodyParser.json(),
-    jwt({
+    expressJwt({
       secret: JWT_SECRET,
       credentialsRequired: false,
     }),
@@ -55,7 +56,18 @@ const start = async () => {
   const server = createServer(app)
   server.listen(PORT, () => {
     SubscriptionServer.create(
-      { execute, subscribe, schema },
+      {
+        execute,
+        subscribe,
+        schema,
+        onConnect: async (connectionParams) => {
+          if (connectionParams.authToken) {
+            const payload = jwt.verify(connectionParams.authToken, JWT_SECRET)
+            const wsUser = await mongo.Users.findOne({ email: payload.email })
+            return ({ wsUser })
+          }
+        },
+      },
       { server, path: "/subscriptions" },
     )
     console.log(`La Fabrique du Loch's GraphQL server running on port ${PORT}.`) // eslint-disable-line no-console

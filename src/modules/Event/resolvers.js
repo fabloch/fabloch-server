@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb"
+import pubsub from "../../utils/pubsub"
 import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
 import checkEventDates from "../../validations/checkEventDates"
 import DoesNotExistError from "../../validations/DoesNotExistError"
@@ -47,7 +48,14 @@ export default {
       const response = await Events.insert(newEvent)
       const [_id] = response.insertedIds
       newEvent._id = _id
+      pubsub.publish("Event", { Event: { mutation: "CREATED", node: newEvent } })
       return newEvent
+    },
+  },
+  Subscription: {
+    Event: {
+      // subscribe: (_, __, { wsUser }) => pubsub.asyncIterator("Event"),
+      subscribe: () => pubsub.asyncIterator("Event"),
     },
   },
   Event: {

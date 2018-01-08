@@ -4,18 +4,27 @@ type Event {
   description: String!
   owner: User!
   seats: Int
-  bookings: Int!
+  bookings: Int
   start: DateTime!
   end: DateTime!
   tickets: [EventTicket!]!
 }
 
+
+type Query {
+  allEvents(filter: EventFilter): [Event!]!
+  eventDetail(id: String!): Event!
+}
 input EventFilter {
   OR: [EventFilter!]
   title_contains: String
   description_contains: String
 }
 
+
+type Mutation {
+  createEvent(event: EventInput!): Event
+}
 input EventInput {
   title: String!
   description: String!
@@ -24,11 +33,19 @@ input EventInput {
   end: DateTime!
 }
 
-type Query {
-  allEvents(filter: EventFilter): [Event!]!
-  eventDetail(id: String!): Event!
-}
 
-type Mutation {
-  createEvent(event: EventInput!): Event
+type Subscription {
+  Event(filter: EventSubscriptionFilter): EventSubscriptionPayload
+}
+input EventSubscriptionFilter {
+  mutation_in: [_ModelMutationType!]
+}
+type EventSubscriptionPayload {
+  mutation: _ModelMutationType!
+  node: Event
+}
+enum _ModelMutationType {
+  CREATED
+  UPDATED
+  DELETED
 }

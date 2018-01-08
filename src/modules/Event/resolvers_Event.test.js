@@ -30,6 +30,12 @@ describe("Event Event resolvers", () => {
       const response = await resolvers.Event.bookings(eventData[0], null, context)
       expect(response).toEqual(2)
     })
+    it("returns 0 if no bookings", async () => {
+      await mongo.loadEventTickets()
+      const context = { mongo }
+      const response = await resolvers.Event.bookings(eventData[1], null, context)
+      expect(response).toEqual(0)
+    })
   })
   describe("tickets", () => {
     it("returns the eventTickets for that event", async () => {
