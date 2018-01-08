@@ -7,11 +7,12 @@ type Event {
   bookings: Int!
   start: DateTime!
   end: DateTime!
-  tickets: [eventTickets!]
+  tickets: [EventTicket!]
 }
 
 input EventInput {
   title: String!
+  description: String!
   seats: Int
   start: DateTime!
   end: DateTime!
