@@ -5,7 +5,7 @@ type EventTicket {
 }
 
 input EventTicketInput {
-  eventId: String!
+  eventId: ID!
 }
 
 type Mutation {

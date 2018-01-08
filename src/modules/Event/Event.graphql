@@ -1,11 +1,13 @@
 type Event {
   id: ID!
   title: String!
+  description: String!
   owner: User!
   seats: Int
   bookings: Int!
   start: DateTime!
   end: DateTime!
+  tickets: [eventTickets!]
 }
 
 input EventInput {

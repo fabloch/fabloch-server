@@ -25,6 +25,7 @@ export const eventData = [
   {
     _id: ObjectId("5a4a5eb6404da6d636078beb"),
     title: "Awesome event",
+    description: "Awesome event description.\nAwesome event description",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
     start: "2019-12-18T17:30:00.000Z",
@@ -33,6 +34,7 @@ export const eventData = [
   {
     _id: ObjectId("5a4a5ee36454c9d6369cca5f"),
     title: "Another awesome event",
+    description: "Another awesome event description.\nAnother awesome event description",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
     start: "2019-12-19T10:30:00.000Z",
@@ -118,4 +120,6 @@ const loadFixtures = async () => {
   db.close()
 }
 
-loadFixtures()
+if (process.env.NODE_ENV !== "test") {
+  loadFixtures()
+}

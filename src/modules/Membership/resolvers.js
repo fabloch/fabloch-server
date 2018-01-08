@@ -5,7 +5,7 @@ import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
 
 export default {
   Query: {
-    userMembershipData: async (_, __, { mongo: { Memberships}, user }) => {
+    userMembershipData: async (_, __, { mongo: { Memberships }, user }) => {
       checkAuthenticatedUser(user)
       const data = {}
       data.memberships = await Memberships

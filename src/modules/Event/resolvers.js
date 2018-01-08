@@ -1,5 +1,6 @@
 import { ObjectId } from "mongodb"
 import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
+import checkEventDates from "../../validations/checkEventDates"
 import DoesNotExistError from "../../validations/DoesNotExistError"
 
 export default {
@@ -19,6 +20,7 @@ export default {
     createEvent: async (_, data, { mongo: { Events }, user }) => {
       checkAuthenticatedUser(user)
       const newEvent = data.event
+      checkEventDates(newEvent)
       newEvent.ownerId = user._id
       const response = await Events.insert(newEvent)
       const [_id] = response.insertedIds
