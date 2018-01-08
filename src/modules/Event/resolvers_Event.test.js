@@ -32,7 +32,7 @@ describe("Event Event resolvers", () => {
     })
   })
   describe("tickets", () => {
-    it("returns the eventTickets for the event", async () => {
+    it("returns the eventTickets for that event", async () => {
       await mongo.loadEventTickets()
       const context = { mongo }
       const response = await resolvers.Event.tickets(eventData[0], null, context)
