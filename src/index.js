@@ -60,6 +60,7 @@ const start = async () => {
         execute,
         subscribe,
         schema,
+        onOperation: (message, params) => ({ ...params, context: { mongo } }),
         onConnect: async (connectionParams) => {
           if (connectionParams.authToken) {
             const payload = jwt.verify(connectionParams.authToken, JWT_SECRET)
