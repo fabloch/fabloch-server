@@ -44,8 +44,3 @@ type EventSubscriptionPayload {
   mutation: _ModelMutationType!
   node: Event
 }
-enum _ModelMutationType {
-  CREATED
-  UPDATED
-  DELETED
-}

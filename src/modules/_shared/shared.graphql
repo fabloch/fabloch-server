@@ -1,0 +1,8 @@
+scalar Date
+scalar DateTime
+
+enum _ModelMutationType {
+  CREATED
+  UPDATED
+  DELETED
+}

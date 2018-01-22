@@ -23,6 +23,9 @@ const start = async () => {
 
   app.use(cors({ origin: CORS_URI }))
 
+  // latency simultation middleware
+  app.use((req, res, next) => setTimeout(next, 300))
+
   const buildOptions = async (req) => {
     const user = await authenticate(req, mongo.Users)
     return {
@@ -49,7 +52,7 @@ const start = async () => {
   // TODO Remove from production!!!
   app.use("/graphiql", graphiqlExpress({
     endpointURL: "/graphql",
-    // passHeader: "'Authorization': 'bearer token-test.idis@icloud.com'",
+    passHeader: `'Authorization': 'bearer ${process.env.USER1_JWT}'`,
     subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`,
   }))
 
@@ -67,6 +70,7 @@ const start = async () => {
             const wsUser = await mongo.Users.findOne({ email: payload.email })
             return ({ wsUser })
           }
+          return true
         },
       },
       { server, path: "/subscriptions" },

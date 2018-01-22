@@ -14,10 +14,14 @@ describe("Newcomer Newcomer resolvers", () => {
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("id attribute", () => {
-    it("returns the _id stringified value", () => {
-      const id = resolvers.Newcomer.id(newcomerData[0])
-      expect(id).toEqual("5a4b76d5fdea180e9295743c")
+  describe("valid attribute", () => {
+    it("returns true if true", () => {
+      const valid = resolvers.Newcomer.valid(newcomerData[0])
+      expect(valid).toEqual(true)
+    })
+    it("returns false if no value", () => {
+      const valid = resolvers.Newcomer.valid(newcomerData[1])
+      expect(valid).toEqual(false)
     })
   })
 })

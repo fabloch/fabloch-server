@@ -10,7 +10,8 @@ input AuthProviderNewcomerData {
 }
 
 input AUTH_PROVIDER_NEWCOMER {
-    id: ID!
+    token: String!
+    username: String!
     password: String!
 }
 

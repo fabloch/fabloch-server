@@ -5,15 +5,14 @@ export const sendNewcomerDigits = async (newcomer, mailer) => {
   const commonData = {
     to: newcomer.email,
     from: "sebastien@sifnos.io",
-    CORS_URI: "defined in .env",
   }
   const firstDelivery = {
-    subject: "La FABrique du Loch : voici votre code pour activer votre compte",
-    html: `<p>Votre code est :</p><h1>${newcomer.digits}</h1><p>Pour continuer votre inscription, <a href='${CLIENT_URI}/inscription/${newcomer.id}'>renseignez-le sur cette page</a></p>`,
+    subject: "Wynn: your code to activate your account",
+    html: `<p>Your code is:</p><h1>${newcomer.digits}</h1><p>To continue the signup process, <a href='${CLIENT_URI}/connect/signup/enterdigits'>write this code on this page</a></p>`,
   }
   const nextDeliveries = {
-    subject: "La FABrique du Loch : votre nouveau code pour activer votre compte",
-    html: `<p>Votre nouveau code est :</p><h1>${newcomer.digits}</h1><p>Pour continuer votre inscription, <a href='${CLIENT_URI}/inscription/${newcomer.id}'>renseignez-le sur cette page</a></p><p><em>Ne tenez pas compte des emails précédents</em></p>`,
+    subject: "Wynn: here is another code to activate your account",
+    html: `<p>Your new code is:</p><h1>${newcomer.digits}</h1><p>To continue the signup process, <a href='${CLIENT_URI}/connect/signup/enterdigits'>write this code on this page</a></p>`,
   }
   const data = () => {
     if (newcomer.resent) {
@@ -28,4 +27,16 @@ export const sendNewcomerDigits = async (newcomer, mailer) => {
     }
   }
   await mailer(data())
+}
+
+export const sendNewcomersInvitations = async (sender, newcomers, team, mailer) => {
+  newcomers.map(async (newcomer) => {
+    const data = {
+      to: newcomer.email,
+      from: sender.email,
+      subject: "Wynn: you are invited you to a new team",
+      html: `<h3>${sender.email} invited you to the team <strong>${team.name}</strong>.</h3><p><a href='${CLIENT_URI}/connect/token/${newcomer.token}'>Click here to create your account and join this team</a></p>`,
+    }
+    await mailer(data)
+  })
 }

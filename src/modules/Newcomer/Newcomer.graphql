@@ -1,7 +1,12 @@
 type Newcomer {
-  id: ID!
-  email: String!
-  # digits: [Int!]!
+  token: String!
+  valid: Boolean!
+}
+
+type Mutation {
+  createNewcomer(newcomer: NewcomerInput): Newcomer
+  checkDigits(newcomer: CheckDigitsInput): Newcomer
+  inviteNewcomers(newcomers: InvitationInput): [Newcomer]
 }
 
 input NewcomerInput {
@@ -9,15 +14,13 @@ input NewcomerInput {
 }
 
 input CheckDigitsInput {
-  id: ID!
+  token: String!
   digits: [Int!]!
 }
 
-type Query {
-  newcomer: Newcomer
-}
-
-type Mutation {
-  createNewcomer(newcomer: NewcomerInput): Newcomer
-  checkDigits(newcomer: CheckDigitsInput): Newcomer
+input  InvitationInput {
+  email1: String!
+  email2: String = ""
+  email3: String = ""
+  workspaceId: ID!
 }
