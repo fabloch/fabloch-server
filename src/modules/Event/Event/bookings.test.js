@@ -10,17 +10,18 @@ describe("Event Event resolvers", () => {
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("id", () => {
-    it("returns _id from db", () => {
-      expect(resolvers.Event.id(eventData[0])).toEqual("5a4a5eb6404da6d636078beb")
-    })
-  })
-  describe("owner", () => {
-    it("returns user", async () => {
-      await mongo.loadUsers()
+  describe("bookings", () => {
+    it("returns the number of tickets for the event", async () => {
+      await mongo.loadEventTickets()
       const context = { mongo }
-      const response = await resolvers.Event.owner(eventData[0], null, context)
-      expect(response).toEqual(userData[0])
+      const response = await resolvers.Event.bookings(eventData[0], null, context)
+      expect(response).toEqual(2)
+    })
+    it("returns 0 if no bookings", async () => {
+      await mongo.loadEventTickets()
+      const context = { mongo }
+      const response = await resolvers.Event.bookings(eventData[1], null, context)
+      expect(response).toEqual(0)
     })
   })
   describe("tickets", () => {

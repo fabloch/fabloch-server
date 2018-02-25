@@ -1,0 +1,24 @@
+type Place {
+  id: ID!
+  title: String!
+  street1: String
+  street2: String
+  zipCode: String!
+  city: String!
+  country: String!
+  stateProvince: String!
+}
+
+type Mutation {
+  createPlace(placeInput: CreatePlaceInput): Place!
+}
+
+input CreatePlaceInput {
+  title: String!
+  street1: String
+  street2: String
+  zipCode: String!
+  city: String!
+  country: String!
+  stateProvince: String!
+}
