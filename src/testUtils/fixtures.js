@@ -18,7 +18,7 @@ export const admin = {
   _id: ObjectId("5a383f36d2834c317755ab17"),
   email: "admin@example.com",
   password: "$2a$10$Htm2b52NAP2XE5pD8LnK2OP58PTf9kXxaEtKxMmbI28Udappwayy6",
-  isAdmin: true,
+  roles: ["admin"],
   version: 1,
 }
 export const eventData = [
