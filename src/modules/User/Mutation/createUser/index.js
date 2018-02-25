@@ -1,5 +1,4 @@
-import { ObjectId } from "mongodb"
-import ValidationError from "../../_shared/ValidationError"
+import ValidationError from "../../../_shared/ValidationError"
 import invalidPassword from "./invalidPassword"
 import invalidUsername from "./invalidUsername"
 import createAuthToken from "./createAuthToken"

@@ -3,6 +3,7 @@ type User {
   email: String
   jwt: String
   memberships: [Membership!]
+  isAdmin: Boolean!
 }
 
 input AuthProviderNewcomerData {

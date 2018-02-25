@@ -12,7 +12,7 @@ type Event {
 
 
 type Query {
-  allEvents(filter: EventFilter): [Event!]!
+  eventList(filter: EventFilter): [Event!]!
   eventDetail(id: String!): Event!
 }
 input EventFilter {
@@ -23,9 +23,9 @@ input EventFilter {
 
 
 type Mutation {
-  createEvent(event: EventInput!): Event
+  createEvent(eventInput: CreateEventInput!): Event
 }
-input EventInput {
+input CreateEventInput {
   title: String!
   description: String!
   seats: Int

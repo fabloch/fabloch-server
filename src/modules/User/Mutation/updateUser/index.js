@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
-import ValidationError from "../../_shared/ValidationError"
-import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
-import { JWT_SECRET } from "../../../utils/config"
+import ValidationError from "../../../_shared/ValidationError"
+import checkAuthenticatedUser from "../../../_shared/checkAuthenticatedUser"
+import { JWT_SECRET } from "../../../../utils/config"
 
 const updateUser = async (data, { mongo: { Users }, user }) => {
   checkAuthenticatedUser(user)

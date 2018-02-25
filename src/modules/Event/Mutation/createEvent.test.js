@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
-import resolvers from "./resolvers"
-import connectMongo from "../../testUtils/mongoTest"
-import { eventData, eventTicketData, userData } from "../../testUtils/fixtures"
+import resolvers from "../resolvers"
+import connectMongo from "../../../testUtils/mongoTest"
+import { eventData, eventTicketData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
@@ -16,14 +16,14 @@ describe("Event Mutation resolvers", () => {
       await mongo.loadUsers()
       const user = await mongo.Users.findOne({ email: "user1@example.com" })
       const context = { mongo, user }
-      const event = {
+      const eventInput = {
         title: "Awesome Event",
         description: "This event is awesome and this is its description.\nAnother line.",
         seats: 10,
         start: "2018-09-16T08:30Z",
         end: "2018-09-16T13:00Z",
       }
-      const response = await resolvers.Mutation.createEvent(null, { event }, context)
+      const response = await resolvers.Mutation.createEvent(null, { eventInput }, context)
       expect(response).toMatchObject({
         title: "Awesome Event",
         description: "This event is awesome and this is its description.\nAnother line.",
@@ -36,10 +36,10 @@ describe("Event Mutation resolvers", () => {
     it("raises an error if no user in context", async () => {
       const user = null
       const context = { mongo, user }
-      const event = { title: "Awesome Event" }
+      const eventInput = { title: "Awesome Event" }
       expect.assertions(1)
       try {
-        await resolvers.Mutation.createEvent(null, { event }, context)
+        await resolvers.Mutation.createEvent(null, { eventInput }, context)
       } catch (e) {
         expect(e.message).toMatch("Unauthenticated.")
       }
@@ -49,7 +49,7 @@ describe("Event Mutation resolvers", () => {
       await mongo.loadUsers()
       const user = await mongo.Users.findOne({ email: "user1@example.com" })
       const context = { mongo, user }
-      const event = {
+      const eventInput = {
         title: "Awesome Event",
         description: "This event is awesome and this is its description",
         seats: 10,
@@ -57,7 +57,7 @@ describe("Event Mutation resolvers", () => {
         end: "2018-09-16T08:30Z",
       }
       try {
-        await resolvers.Mutation.createEvent(null, { event }, context)
+        await resolvers.Mutation.createEvent(null, { eventInput }, context)
       } catch (e) {
         expect(e.message).toEqual("Start date is in the past.")
       }
@@ -67,7 +67,7 @@ describe("Event Mutation resolvers", () => {
       await mongo.loadUsers()
       const user = await mongo.Users.findOne({ email: "user1@example.com" })
       const context = { mongo, user }
-      const event = {
+      const eventInput = {
         title: "Awesome Event",
         description: "This event is awesome and this is its description",
         seats: 10,
@@ -75,7 +75,7 @@ describe("Event Mutation resolvers", () => {
         end: "2018-09-16T08:30Z",
       }
       try {
-        await resolvers.Mutation.createEvent(null, { event }, context)
+        await resolvers.Mutation.createEvent(null, { eventInput }, context)
       } catch (e) {
         expect(e.message).toEqual("Start date is after end date.")
       }

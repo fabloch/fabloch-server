@@ -1,6 +1,9 @@
-import createUser from "./createUser"
-import signinUser from "./signinUser"
-import updateUser from "./updateUser"
+import createUser from "./Mutation/createUser"
+import signinUser from "./Mutation/signinUser"
+import updateUser from "./Mutation/updateUser"
+
+import memberships from "./User/memberships"
+import isAdmin from "./User/isAdmin"
 
 export default {
   Query: {
@@ -13,10 +16,7 @@ export default {
   },
   User: {
     id: user => user._id.toString(),
-    memberships: async (user, _, context) => {
-      const { mongo: { Memberships } } = context
-      const memberships = await Memberships.find({ ownerId: user._id }).toArray()
-      return memberships
-    },
+    memberships: async (user, _, context) => memberships(user, context),
+    isAdmin: async (user, _, context) => isAdmin(user, context),
   },
 }

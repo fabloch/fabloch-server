@@ -1,8 +1,8 @@
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
-import ValidationError from "../../_shared/ValidationError"
-import { JWT_SECRET } from "../../../utils/config"
+import ValidationError from "../../../_shared/ValidationError"
+import { JWT_SECRET } from "../../../../utils/config"
 
 const signinUser = async (data, { mongo: { Users } }) => {
   const user = await Users.findOne({ email: data.emailAuth.email })

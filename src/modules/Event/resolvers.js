@@ -1,56 +1,19 @@
-import { ObjectId } from "mongodb"
 import pubsub from "../../utils/pubsub"
-import checkAuthenticatedUser from "../../validations/checkAuthenticatedUser"
-import checkEventDates from "../../validations/checkEventDates"
-import DoesNotExistError from "../../validations/DoesNotExistError"
 
-/* eslint-disable camelcase */
-const buildFilters = ({ OR = [], title_contains, description_contains }) => {
-  const filter = (description_contains || title_contains) ? {} : null
-  if (description_contains) {
-    filter.description = { $regex: `.*${description_contains}.*` }
-  }
-  if (title_contains) {
-    filter.title = { $regex: `.*${title_contains}.*` }
-  }
-
-  let filters = filter ? [filter] : []
-  for (let i = 0; i < OR.length; i += 1) {
-    filters = filters.concat(buildFilters(OR[i]))
-  }
-  return filters
-}
-/* eslint-enable */
-
+import tickets from "./Event/tickets"
+import bookings from "./Event/bookings"
+import eventList from "./Query/eventList"
+import eventDetail from "./Query/eventDetail"
+import createEvent from "./Mutation/createEvent"
 
 export default {
   Query: {
-    allEvents: async (_, { filter }, { mongo: { Events } }) => {
-      const query = filter ? { $or: buildFilters(filter) } : {}
-      const events = await Events.find(query).toArray()
-      return events
-    },
-    eventDetail: async (_, data, { mongo: { Events } }) => {
-      const event = await Events.findOne({ _id: ObjectId(data.id) })
-      if (!event) {
-        throw DoesNotExistError("Event")
-      }
-      return event
-    },
+    eventList: async (_, data, context) => eventList(data, context),
+    eventDetail: async (_, data, context) => eventDetail(data, context),
 
   },
   Mutation: {
-    createEvent: async (_, data, { mongo: { Events }, user }) => {
-      checkAuthenticatedUser(user)
-      const newEvent = data.event
-      checkEventDates(newEvent)
-      newEvent.ownerId = user._id
-      const response = await Events.insert(newEvent)
-      const [_id] = response.insertedIds
-      newEvent._id = _id
-      pubsub.publish("Event", { Event: { mutation: "CREATED", node: newEvent } })
-      return newEvent
-    },
+    createEvent: async (_, data, context) => createEvent(data, context),
   },
   Subscription: {
     Event: {
@@ -61,9 +24,7 @@ export default {
   Event: {
     id: event => event._id.toString(),
     owner: async (event, _, { mongo: { Users } }) => Users.findOne({ _id: event.ownerId }),
-    bookings: async (event, _, { mongo: { EventTickets } }) =>
-      EventTickets.find({ eventId: event._id }).count(),
-    tickets: async (event, _, { mongo: { EventTickets } }) =>
-      EventTickets.find({ eventId: event._id }).toArray(),
+    bookings: async (event, _, context) => bookings(event, context),
+    tickets: async (event, _, context) => tickets(event, context),
   },
 }
