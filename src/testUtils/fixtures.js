@@ -30,6 +30,8 @@ export const eventData = [
     seats: 2,
     start: "2019-12-18T17:30:00.000Z",
     end: "2019-12-18T19:00:00.000Z",
+    published: true,
+    placeId: ObjectId("5a5e17f5b16e8350cd5c036d"),
   },
   {
     _id: ObjectId("5a4a5ee36454c9d6369cca5f"),
@@ -39,6 +41,18 @@ export const eventData = [
     seats: 2,
     start: "2019-12-19T10:30:00.000Z",
     end: "2019-12-19T12:00:00.000Z",
+    published: true,
+    placeId: ObjectId("5a5e17feb16e8350cd5c0372"),
+  },
+  {
+    _id: ObjectId("5a5e2489b16e8350cd5c0d21"),
+    title: "Third event",
+    description: "Another awesome event description.\nAnother awesome event description",
+    ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+    seats: 2,
+    start: "2019-12-20T10:30:00.000Z",
+    end: "2019-12-20T12:00:00.000Z",
+    placeId: ObjectId("5a5e17f5b16e8350cd5c036d"),
   },
 ]
 export const eventTicketData = [
@@ -83,6 +97,7 @@ export const membershipData = [
     ownerId: ObjectId("5a31b4efedc7474b9addc261"),
   },
 ]
+
 export const newcomerData = [
   {
     hint: "Newcomer1",
@@ -100,6 +115,28 @@ export const newcomerData = [
     digits: [5, 5, 5, 5, 5, 5],
   },
 ]
+
+export const placeData = [
+  {
+    _id: ObjectId("5a5e17f5b16e8350cd5c036d"),
+    title: "Salle polyvalente",
+    street1: "16, rue du bout",
+    zipCode: "56400",
+    city: "Auray",
+    country: "France",
+    stateProvince: "Morbihan",
+  },
+  {
+    _id: ObjectId("5a5e17feb16e8350cd5c0372"),
+    title: "Petit théâtre",
+    street1: "2, rue de l'autre bout",
+    zipCode: "56400",
+    city: "Auray",
+    country: "France",
+    stateProvince: "Morbihan",
+  },
+]
+
 export const userData = [
   {
     _id: ObjectId("5a31b456c5e7b54a9aba3782"),

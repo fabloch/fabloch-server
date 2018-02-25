@@ -5,7 +5,7 @@ import {
   eventTicketData,
   membershipData,
   newcomerData,
-  resourceData,
+  placeData,
   userData,
 } from "./fixtures"
 
@@ -20,7 +20,7 @@ export default async function () {
     await db.createCollection("eventTickets")
     await db.createCollection("memberships")
     await db.createCollection("newcomers")
-    await db.createCollection("resources")
+    await db.createCollection("places")
     await db.createCollection("users")
   }
 
@@ -29,7 +29,7 @@ export default async function () {
     await db.collection("eventTickets").drop()
     await db.collection("memberships").drop()
     await db.collection("newcomers").drop()
-    await db.collection("resources").drop()
+    await db.collection("places").drop()
     await db.collection("users").drop()
   }
 
@@ -42,7 +42,7 @@ export default async function () {
   const loadEventTickets = async () => db.collection("eventTickets").insertMany(eventTicketData)
   const loadMemberships = async () => db.collection("memberships").insertMany(membershipData)
   const loadNewcomers = async () => db.collection("newcomers").insertMany(newcomerData)
-  const loadResources = async () => db.collection("resources").insertMany(resourceData)
+  const loadPlaces = async () => db.collection("places").insertMany(placeData)
   const loadUsers = async () => db.collection("users").insertMany(userData)
 
   return {
@@ -54,13 +54,13 @@ export default async function () {
     loadEventTickets,
     loadMemberships,
     loadNewcomers,
-    loadResources,
+    loadPlaces,
     loadUsers,
     Events: db.collection("events"),
     EventTickets: db.collection("eventTickets"),
     Memberships: db.collection("memberships"),
     Newcomers: db.collection("newcomers"),
-    Resources: db.collection("resources"),
+    Places: db.collection("places"),
     Users: db.collection("users"),
   }
 }
