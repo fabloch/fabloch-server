@@ -67,6 +67,27 @@ export const eventTicketData = [
     eventId: ObjectId("5a4a5eb6404da6d636078beb"),
   },
 ]
+
+export const mediaData = [
+  {
+    _id: ObjectId("5a5e2489b16e8350cd5c0d21"),
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/hero-decoupe_laser.jpg",
+    category: "IMAGE",
+  },
+  {
+    _id: ObjectId("5a5e30f2b16e8350cd5c12b9"),
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/robot-servo-arduino.jpg",
+    sourceUrl: "https://youtu.be/dJNH-E1HQd4",
+    category: "YOUTUBE",
+  },
+  {
+    _id: ObjectId("5a5e30f8b16e8350cd5c12bb"),
+    title: "Link to Mediapart",
+    sourceUrl: "http://www.mediapart.fr",
+    category: "LINK",
+  }
+]
+
 export const membershipData = [
   {
     _id: ObjectId("5a383f36d2834c317755ab17"),

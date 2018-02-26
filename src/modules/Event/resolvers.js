@@ -16,12 +16,6 @@ export default {
   Mutation: {
     createEvent: async (_, data, context) => createEvent(data, context),
   },
-  Subscription: {
-    Event: {
-      // subscribe: (_, __, { wsUser }) => pubsub.asyncIterator("Event"),
-      subscribe: () => pubsub.asyncIterator("Event"),
-    },
-  },
   Event: {
     id: event => event._id.toString(),
     owner: async (event, _, { mongo: { Users } }) => Users.findOne({ _id: event.ownerId }),

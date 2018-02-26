@@ -1,5 +1,8 @@
 scalar Date
 scalar DateTime
+scalar Email
+scalar Url
+scalar JSON
 
 enum _ModelMutationType {
   CREATED

@@ -1,0 +1,24 @@
+type Media {
+  id: ID!
+  title: String
+  picUrl: Url
+  sourceUrl: Url
+  category: MediaCategory!
+}
+
+type Mutation {
+  createMedia(placeInput: CreateMediaInput): Media!
+}
+
+input CreateMediaInput {
+  title: String
+  picUrl: Url
+  sourceUrl: Url
+  category: MediaCategory!
+}
+
+enum MediaCategory {
+  IMAGE
+  LINK
+  YOUTUBE
+}

@@ -15,6 +15,7 @@ export default async function () {
   return {
     Events: db.collection("events"),
     EventTickets: db.collection("eventTickets"),
+    Media: db.collection("medias"),
     Memberships: db.collection("memberships"),
     Newcomers: db.collection("newcomers"),
     Places: db.collection("places"),

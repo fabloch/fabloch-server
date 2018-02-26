@@ -1,7 +1,9 @@
 type Event {
   id: ID!
+  mainMedia: Media
   title: String!
   description: String!
+  medias: [Media!]!
   owner: User!
   seats: Int
   bookings: Int
@@ -33,16 +35,6 @@ input CreateEventInput {
   seats: Int
   start: DateTime!
   end: DateTime!
-}
-
-
-type Subscription {
-  Event(filter: EventSubscriptionFilter): EventSubscriptionPayload
-}
-input EventSubscriptionFilter {
-  mutation_in: [_ModelMutationType!]
-}
-type EventSubscriptionPayload {
-  mutation: _ModelMutationType!
-  node: Event
+  place: ID
+  published: Boolean
 }
