@@ -38,3 +38,14 @@ input CreateEventInput {
   place: ID
   published: Boolean
 }
+
+type Subscription {
+  Event(filter: EventSubscriptionFilter): EventSubscriptionPayload
+}
+input EventSubscriptionFilter {
+  mutation_in: [_ModelMutationType!]
+}
+type EventSubscriptionPayload {
+  mutation: _ModelMutationType!
+  node: Event
+}
