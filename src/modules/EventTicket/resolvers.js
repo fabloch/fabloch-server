@@ -4,7 +4,7 @@ import checkEventForTicket from "../../validations/checkEventForTicket"
 
 export default {
   Mutation: {
-    createEventTicket: async (_, data, { mongo: { Events, EventTickets }, user }) => {
+    saveEventTicket: async (_, data, { mongo: { Events, EventTickets }, user }) => {
       checkAuthenticatedUser(user)
       await checkEventForTicket(data.eventTicket.eventId, user, Events, EventTickets)
       const eventTicket = {

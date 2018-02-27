@@ -11,7 +11,7 @@ describe("EventTicket Mutation resolvers", () => {
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("createEventTicket", () => {
+  describe("saveEventTicket", () => {
     it("creates eventTicket", async () => {
       await mongo.loadUsers()
       await mongo.loadEvents()
@@ -20,7 +20,7 @@ describe("EventTicket Mutation resolvers", () => {
       const eventTicket = {
         eventId: "5a4a5eb6404da6d636078beb",
       }
-      const response = await resolvers.Mutation.createEventTicket(null, { eventTicket }, context)
+      const response = await resolvers.Mutation.saveEventTicket(null, { eventTicket }, context)
       expect(response).toMatchObject({
         eventId: ObjectId("5a4a5eb6404da6d636078beb"),
         participantId: ObjectId("5a31b456c5e7b54a9aba3782"),
@@ -35,7 +35,7 @@ describe("EventTicket Mutation resolvers", () => {
       }
       expect.assertions(1)
       try {
-        await resolvers.Mutation.createEventTicket(null, { eventTicket }, context)
+        await resolvers.Mutation.saveEventTicket(null, { eventTicket }, context)
       } catch (e) {
         expect(e.message).toEqual("Event does not exist.")
       }
@@ -51,7 +51,7 @@ describe("EventTicket Mutation resolvers", () => {
       }
       expect.assertions(1)
       try {
-        await resolvers.Mutation.createEventTicket(null, { eventTicket }, context)
+        await resolvers.Mutation.saveEventTicket(null, { eventTicket }, context)
       } catch (e) {
         expect(e.message).toEqual("No more seats for that event.")
       }
@@ -64,10 +64,10 @@ describe("EventTicket Mutation resolvers", () => {
       const eventTicket = {
         eventId: "5a4a5eb6404da6d636078beb",
       }
-      await resolvers.Mutation.createEventTicket(null, { eventTicket }, context)
+      await resolvers.Mutation.saveEventTicket(null, { eventTicket }, context)
       expect.assertions(1)
       try {
-        await resolvers.Mutation.createEventTicket(null, { eventTicket }, context)
+        await resolvers.Mutation.saveEventTicket(null, { eventTicket }, context)
       } catch (e) {
         expect(e.message).toEqual("User already has a ticket for that event.")
       }

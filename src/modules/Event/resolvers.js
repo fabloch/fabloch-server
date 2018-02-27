@@ -5,7 +5,7 @@ import tickets from "./Event/tickets"
 import place from "./Event/place"
 import eventList from "./Query/eventList"
 import eventDetail from "./Query/eventDetail"
-import createEvent from "./Mutation/createEvent"
+import saveEvent from "./Mutation/saveEvent"
 
 export default {
   Query: {
@@ -14,7 +14,7 @@ export default {
 
   },
   Mutation: {
-    createEvent: async (_, data, context) => createEvent(data, context),
+    saveEvent: async (_, data, context) => saveEvent(data, context),
   },
   Subscription: {
     Event: {

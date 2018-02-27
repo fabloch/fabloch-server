@@ -9,5 +9,5 @@ input EventTicketInput {
 }
 
 type Mutation {
-  createEventTicket(eventTicket: EventTicketInput): EventTicket
+  saveEventTicket(eventTicket: EventTicketInput): EventTicket
 }

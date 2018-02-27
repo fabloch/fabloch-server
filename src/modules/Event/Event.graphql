@@ -1,14 +1,14 @@
 type Event {
   id: ID!
   mainMedia: Media
-  title: String!
-  description: String!
+  title: String
+  description: String
   medias: [Media!]!
   owner: User!
   seats: Int
   bookings: Int
-  start: DateTime!
-  end: DateTime!
+  start: DateTime
+  end: DateTime
   tickets: [EventTicket!]!
   published: Boolean
   place: Place
@@ -17,7 +17,7 @@ type Event {
 
 type Query {
   eventList(filter: EventFilter): [Event!]!
-  eventDetail(id: String!): Event!
+  eventDetail(id: String): Event
 }
 input EventFilter {
   OR: [EventFilter!]
@@ -27,14 +27,15 @@ input EventFilter {
 
 
 type Mutation {
-  createEvent(eventInput: CreateEventInput!): Event
+  saveEvent(eventInput: SaveEventInput!): Event
 }
-input CreateEventInput {
-  title: String!
-  description: String!
+input SaveEventInput {
+  id: ID
+  title: String
+  description: String
   seats: Int
-  start: DateTime!
-  end: DateTime!
+  start: DateTime
+  end: DateTime
   place: ID
   published: Boolean
 }

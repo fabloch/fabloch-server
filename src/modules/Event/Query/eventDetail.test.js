@@ -17,13 +17,10 @@ describe("Event Query resolvers", () => {
       const response = await resolvers.Query.eventDetail(null, { id: "5a4a5eb6404da6d636078beb" }, context)
       expect(response).toEqual(eventData[0])
     })
-    it("throws an error if no event with that id", async () => {
+    it("returns null if no event with that id", async () => {
       const context = { mongo }
-      try {
-        await resolvers.Query.eventDetail(null, { id: "5a4a5eb6404da6d6360734eb" }, context)
-      } catch (e) {
-        expect(e.message).toEqual("Event does not exist.")
-      }
+      const response = await resolvers.Query.eventDetail(null, { id: "5a4a5eb6404da6d6360734eb" }, context)
+      expect(response).toEqual(null)
     })
   })
 })
