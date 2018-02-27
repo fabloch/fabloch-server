@@ -2,6 +2,7 @@ import { MongoClient } from "mongodb"
 import {
   admin,
   eventModelData,
+  eventSessionData,
   eventTicketData,
   mediaData,
   membershipData,
@@ -18,6 +19,7 @@ export default async function () {
 
   const beforeEach = async () => {
     await db.createCollection("eventModels")
+    await db.createCollection("eventSessions")
     await db.createCollection("eventTickets")
     await db.createCollection("medias")
     await db.createCollection("memberships")
@@ -28,6 +30,7 @@ export default async function () {
 
   const afterEach = async () => {
     await db.collection("eventModels").drop()
+    await db.collection("eventSessions").drop()
     await db.collection("eventTickets").drop()
     await db.collection("medias").drop()
     await db.collection("memberships").drop()
@@ -42,6 +45,7 @@ export default async function () {
 
   const loadAdmin = async () => db.collection("users").insert(admin)
   const loadEventModels = async () => db.collection("eventModels").insertMany(eventModelData)
+  const loadEventSessions = async () => db.collection("eventSessions").insertMany(eventSessionData)
   const loadEventTickets = async () => db.collection("eventTickets").insertMany(eventTicketData)
   const loadMedias = async () => db.collection("medias").insertMany(mediaData)
   const loadMemberships = async () => db.collection("memberships").insertMany(membershipData)
@@ -55,6 +59,7 @@ export default async function () {
     afterAll,
     loadAdmin,
     loadEventModels,
+    loadEventSessions,
     loadEventTickets,
     loadMedias,
     loadMemberships,
@@ -62,6 +67,7 @@ export default async function () {
     loadPlaces,
     loadUsers,
     EventModels: db.collection("eventModels"),
+    EventSessions: db.collection("eventSessions"),
     EventTickets: db.collection("eventTickets"),
     Medias: db.collection("medias"),
     Memberships: db.collection("memberships"),
