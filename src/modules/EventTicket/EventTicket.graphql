@@ -1,11 +1,11 @@
 type EventTicket {
   id: ID!
-  event: Event!
+  eventModel: EventModel!
   participant: User!
 }
 
 input EventTicketInput {
-  eventId: ID!
+  eventModelId: ID!
 }
 
 type Mutation {

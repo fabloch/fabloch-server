@@ -1,10 +1,10 @@
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { eventData, eventTicketData, userData } from "../../../testUtils/fixtures"
+import { eventModelData, eventTicketData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
-describe("Event Event resolvers", () => {
+describe("EventModel EventModel resolvers", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })
   afterEach(async () => { await mongo.afterEach() })
@@ -12,22 +12,22 @@ describe("Event Event resolvers", () => {
 
   describe("id", () => {
     it("returns _id from db", () => {
-      expect(resolvers.Event.id(eventData[0])).toEqual("5a4a5eb6404da6d636078beb")
+      expect(resolvers.EventModel.id(eventModelData[0])).toEqual("5a4a5eb6404da6d636078beb")
     })
   })
   describe("owner", () => {
     it("returns user", async () => {
       await mongo.loadUsers()
       const context = { mongo }
-      const response = await resolvers.Event.owner(eventData[0], null, context)
+      const response = await resolvers.EventModel.owner(eventModelData[0], null, context)
       expect(response).toEqual(userData[0])
     })
   })
   describe("tickets", () => {
-    it("returns the eventTickets for that event", async () => {
+    it("returns the eventTickets for that eventModel", async () => {
       await mongo.loadEventTickets()
       const context = { mongo }
-      const response = await resolvers.Event.tickets(eventData[0], null, context)
+      const response = await resolvers.EventModel.tickets(eventModelData[0], null, context)
       expect(response).toEqual(eventTicketData)
     })
   })

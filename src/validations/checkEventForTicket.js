@@ -1,21 +1,21 @@
 import { ObjectId } from "mongodb"
 
-export default async (eventId, user, Events, EventTickets) => {
-  const event = await Events.findOne({ _id: ObjectId(eventId) })
-  if (!event) {
-    throw new Error("Event does not exist.")
+export default async (eventModelId, user, EventModels, EventTickets) => {
+  const eventModel = await EventModels.findOne({ _id: ObjectId(eventModelId) })
+  if (!eventModel) {
+    throw new Error("EventModel does not exist.")
   }
 
-  const bookedEventTickets = await EventTickets.find({ eventId: ObjectId(eventId) }).count()
-  if (bookedEventTickets === event.seats) {
-    throw new Error("No more seats for that event.")
+  const bookedEventTickets = await EventTickets.find({ eventModelId: ObjectId(eventModelId) }).count()
+  if (bookedEventTickets === eventModel.seats) {
+    throw new Error("No more seats for that eventModel.")
   }
 
   const userEventTicket = await EventTickets.findOne({
-    eventId: ObjectId(eventId),
+    eventModelId: ObjectId(eventModelId),
     participantId: user._id,
   })
   if (userEventTicket) {
-    throw new Error("User already has a ticket for that event.")
+    throw new Error("User already has a ticket for that eventModel.")
   }
 }

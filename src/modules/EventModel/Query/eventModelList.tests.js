@@ -1,32 +1,32 @@
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { eventData, eventTicketData, userData } from "../../../testUtils/fixtures"
+import { eventModelData, eventTicketData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
-describe("Event Query resolvers", () => {
+describe("EventModel Query resolvers", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("eventList", () => {
+  describe("eventModelList", () => {
     describe("no filters", () => {
-      it("returns empty array if no events", async () => {
+      it("returns empty array if no eventModels", async () => {
         const context = { mongo }
-        const response = await resolvers.Query.eventList(null, {}, context)
+        const response = await resolvers.Query.eventModelList(null, {}, context)
         expect(response).toEqual([])
       })
-      it("returns all events from db", async () => {
-        await mongo.loadEvents()
+      it("returns all eventModels from db", async () => {
+        await mongo.loadEventModels()
         const context = { mongo }
-        const response = await resolvers.Query.eventList(null, {}, context)
-        expect(response).toEqual(eventData)
+        const response = await resolvers.Query.eventModelList(null, {}, context)
+        expect(response).toEqual(eventModelData)
       })
     })
     describe("with filters", () => {
       it("filters with the title", async () => {
-        await mongo.loadEvents()
+        await mongo.loadEventModels()
         const context = { mongo }
         /* eslint-disable camelcase */
         const filter = {
@@ -37,8 +37,8 @@ describe("Event Query resolvers", () => {
         }
         /* eslint-enable */
 
-        const response = await resolvers.Query.eventList(null, { filter }, context)
-        expect(response).toEqual([eventData[1]])
+        const response = await resolvers.Query.eventModelList(null, { filter }, context)
+        expect(response).toEqual([eventModelData[1]])
       })
     })
   })

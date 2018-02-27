@@ -12,12 +12,12 @@ export const dateUtils = {
   user2membership1End: moment.utc().subtract(1, "y").add(9, "d").toDate(),
   user2membership2Start: moment.utc().subtract(1, "y").add(10, "d").toDate(),
   user2membership2End: moment.utc().add(9, "d").toDate(),
-  event0start: moment("2019-12-18T17:30:00.000Z").toDate(),
-  event0end: moment("2019-12-18T19:00:00.000Z").toDate(),
-  event1start: moment("2019-12-19T10:30:00.000Z").toDate(),
-  event1end: moment("2019-12-19T12:00:00.000Z").toDate(),
-  event2start: moment("2019-12-20T10:30:00.000Z").toDate(),
-  event2end: moment("2019-12-20T12:00:00.000Z").toDate(),
+  eventModel0start: moment("2019-12-18T17:30:00.000Z").toDate(),
+  eventModel0end: moment("2019-12-18T19:00:00.000Z").toDate(),
+  eventModel1start: moment("2019-12-19T10:30:00.000Z").toDate(),
+  eventModel1end: moment("2019-12-19T12:00:00.000Z").toDate(),
+  eventModel2start: moment("2019-12-20T10:30:00.000Z").toDate(),
+  eventModel2end: moment("2019-12-20T12:00:00.000Z").toDate(),
 }
 
 export const admin = {
@@ -27,37 +27,37 @@ export const admin = {
   roles: ["admin"],
   version: 1,
 }
-export const eventData = [
+export const eventModelData = [
   {
     _id: ObjectId("5a4a5eb6404da6d636078beb"),
-    title: "Awesome event",
-    description: "Awesome event description.\nAwesome event description",
+    title: "Awesome eventModel",
+    description: "Awesome eventModel description.\nAwesome eventModel description",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
-    start: dateUtils.event0start,
-    end: dateUtils.event0end,
+    start: dateUtils.eventModel0start,
+    end: dateUtils.eventModel0end,
     published: true,
     placeId: ObjectId("5a5e17f5b16e8350cd5c036d"),
   },
   {
     _id: ObjectId("5a4a5ee36454c9d6369cca5f"),
-    title: "Another awesome event",
-    description: "Another awesome event description.\nAnother awesome event description",
+    title: "Another awesome eventModel",
+    description: "Another awesome eventModel description.\nAnother awesome eventModel description",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
-    start: dateUtils.event1start,
-    end: dateUtils.event1end,
+    start: dateUtils.eventModel1start,
+    end: dateUtils.eventModel1end,
     published: true,
     placeId: ObjectId("5a5e17feb16e8350cd5c0372"),
   },
   {
     _id: ObjectId("5a5e2489b16e8350cd5c0d21"),
-    title: "Third event",
-    description: "Another awesome event description.\nAnother awesome event description",
+    title: "Third eventModel",
+    description: "Another awesome eventModel description.\nAnother awesome eventModel description",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
-    start: dateUtils.event2start,
-    end: dateUtils.event2end,
+    start: dateUtils.eventModel2start,
+    end: dateUtils.eventModel2end,
     placeId: ObjectId("5a5e17f5b16e8350cd5c036d"),
   },
 ]
@@ -65,12 +65,12 @@ export const eventTicketData = [
   {
     _id: ObjectId("5a4d56eeb230a538a7efb8e1"),
     participantId: ObjectId("5a31b4efedc7474b9addc261"),
-    eventId: ObjectId("5a4a5eb6404da6d636078beb"),
+    eventModelId: ObjectId("5a4a5eb6404da6d636078beb"),
   },
   {
     _id: ObjectId("5a4d576f269ec838c4c40142"),
     participantId: ObjectId("5a383f36d2834c317755ab17"),
-    eventId: ObjectId("5a4a5eb6404da6d636078beb"),
+    eventModelId: ObjectId("5a4a5eb6404da6d636078beb"),
   },
 ]
 
@@ -187,7 +187,7 @@ const loadFixtures = async () => {
   db.dropDatabase()
 
   await db.collection("users").insert(admin)
-  await db.collection("events").insertMany(eventData)
+  await db.collection("eventModels").insertMany(eventModelData)
   await db.collection("eventTickets").insertMany(eventTicketData)
   await db.collection("memberships").insertMany(membershipData)
   await db.collection("newcomers").insertMany(newcomerData)

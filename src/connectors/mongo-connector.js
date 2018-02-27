@@ -13,7 +13,7 @@ export default async function () {
   // Logger.filter("class", ["Cursor"])
 
   return {
-    Events: db.collection("events"),
+    EventModels: db.collection("eventModels"),
     EventTickets: db.collection("eventTickets"),
     Media: db.collection("medias"),
     Memberships: db.collection("memberships"),

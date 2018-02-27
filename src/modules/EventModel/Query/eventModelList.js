@@ -16,9 +16,9 @@ const buildFilters = ({ OR = [], title_contains, description_contains }) => {
 }
 /* eslint-enable */
 
-const eventList = async ({ filter }, { mongo: { Events } }) => {
+const eventModelList = async ({ filter }, { mongo: { EventModels } }) => {
   const query = filter ? { $or: buildFilters(filter) } : {}
-  return Events.find(query).toArray()
+  return EventModels.find(query).toArray()
 }
 
-export default eventList
+export default eventModelList

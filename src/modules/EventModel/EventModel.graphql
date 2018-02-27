@@ -1,4 +1,4 @@
-type Event {
+type EventModel {
   id: ID!
   mainMedia: Media
   title: String
@@ -16,20 +16,20 @@ type Event {
 
 
 type Query {
-  eventList(filter: EventFilter): [Event!]!
-  eventDetail(id: String): Event
+  eventModelList(filter: EventModelFilter): [EventModel!]!
+  eventModelDetail(id: String): EventModel
 }
-input EventFilter {
-  OR: [EventFilter!]
+input EventModelFilter {
+  OR: [EventModelFilter!]
   title_contains: String
   description_contains: String
 }
 
 
 type Mutation {
-  saveEvent(eventInput: SaveEventInput!): Event
+  saveEventModel(eventModelInput: SaveEventModelInput!): EventModel
 }
-input SaveEventInput {
+input SaveEventModelInput {
   id: ID
   title: String
   description: String
@@ -41,12 +41,12 @@ input SaveEventInput {
 }
 
 type Subscription {
-  Event(filter: EventSubscriptionFilter): EventSubscriptionPayload
+  EventModel(filter: EventModelSubscriptionFilter): EventModelSubscriptionPayload
 }
-input EventSubscriptionFilter {
+input EventModelSubscriptionFilter {
   mutation_in: [_ModelMutationType!]
 }
-type EventSubscriptionPayload {
+type EventModelSubscriptionPayload {
   mutation: _ModelMutationType!
-  node: Event
+  node: EventModel
 }

@@ -1,30 +1,30 @@
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { admin, eventData, userData } from "../../../testUtils/fixtures"
+import { admin, eventModelData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
-describe("Event Mutation saveEvent", () => {
+describe("EventModel Mutation saveEventModel", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
   describe("create", async () => {
-    it("creates an event with the user as owner", async () => {
+    it("creates an eventModel with the user as owner", async () => {
       const user = userData[0]
       const context = { mongo, user }
-      const eventInput = {
-        title: "Awesome Event",
-        description: "This event is awesome and this is its description.\nAnother line.",
+      const eventModelInput = {
+        title: "Awesome EventModel",
+        description: "This eventModel is awesome and this is its description.\nAnother line.",
         seats: 10,
         start: new Date("2018-09-16T08:30Z"),
         end: new Date("2018-09-16T13:00Z"),
       }
-      const response = await resolvers.Mutation.saveEvent(null, { eventInput }, context)
+      const response = await resolvers.Mutation.saveEventModel(null, { eventModelInput }, context)
       expect(response).toMatchObject({
-        title: "Awesome Event",
-        description: "This event is awesome and this is its description.\nAnother line.",
+        title: "Awesome EventModel",
+        description: "This eventModel is awesome and this is its description.\nAnother line.",
         ownerId: user._id,
         seats: 10,
         start: new Date("2018-09-16T08:30Z"),
@@ -33,31 +33,31 @@ describe("Event Mutation saveEvent", () => {
     })
   })
   describe("update", async () => {
-    it("updates an event when user is owner", async () => {
-      await mongo.loadEvents()
+    it("updates an eventModel when user is owner", async () => {
+      await mongo.loadEventModels()
       const user = userData[0]
       const context = { mongo, user }
-      const eventInput = {
-        id: eventData[0]._id.toString(),
+      const eventModelInput = {
+        id: eventModelData[0]._id.toString(),
         title: "Updated title",
       }
-      const response = await resolvers.Mutation.saveEvent(null, { eventInput }, context)
+      const response = await resolvers.Mutation.saveEventModel(null, { eventModelInput }, context)
       expect(response).toMatchObject({
-        ...eventData[0],
+        ...eventModelData[0],
         title: "Updated title",
       })
     })
-    it("updates an event when user is admin", async () => {
-      await mongo.loadEvents()
+    it("updates an eventModel when user is admin", async () => {
+      await mongo.loadEventModels()
       const user = admin
       const context = { mongo, user }
-      const eventInput = {
-        id: eventData[0]._id.toString(),
+      const eventModelInput = {
+        id: eventModelData[0]._id.toString(),
         title: "Updated title",
       }
-      const response = await resolvers.Mutation.saveEvent(null, { eventInput }, context)
+      const response = await resolvers.Mutation.saveEventModel(null, { eventModelInput }, context)
       expect(response).toMatchObject({
-        ...eventData[0],
+        ...eventModelData[0],
         title: "Updated title",
       })
     })
@@ -67,9 +67,9 @@ describe("Event Mutation saveEvent", () => {
       expect.assertions(2)
       const user = null
       const context = { mongo, user }
-      const eventInput = { title: "Awesome Event" }
+      const eventModelInput = { title: "Awesome EventModel" }
       try {
-        await resolvers.Mutation.saveEvent(null, { eventInput }, context)
+        await resolvers.Mutation.saveEventModel(null, { eventModelInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({ main: ["Unauthenticated."] })
@@ -80,12 +80,12 @@ describe("Event Mutation saveEvent", () => {
         expect.assertions(2)
         const user = userData[0]
         const context = { mongo, user }
-        const eventInput = {
+        const eventModelInput = {
           start: new Date("2015-09-16T13:00Z"),
           end: new Date("2018-09-16T08:30Z"),
         }
         try {
-          await resolvers.Mutation.saveEvent(null, { eventInput }, context)
+          await resolvers.Mutation.saveEventModel(null, { eventModelInput }, context)
         } catch (e) {
           expect(e.message).toEqual("The request is invalid.")
           expect(e.state).toEqual({
@@ -97,12 +97,12 @@ describe("Event Mutation saveEvent", () => {
         expect.assertions(2)
         const user = userData[0]
         const context = { mongo, user }
-        const eventInput = {
+        const eventModelInput = {
           start: new Date("2018-09-16T13:00Z"),
           end: new Date("2018-09-16T08:30Z"),
         }
         try {
-          await resolvers.Mutation.saveEvent(null, { eventInput }, context)
+          await resolvers.Mutation.saveEventModel(null, { eventModelInput }, context)
         } catch (e) {
           expect(e.message).toEqual("The request is invalid.")
           expect(e.state).toEqual({ start: ["Start date is after end date."] })
@@ -112,16 +112,16 @@ describe("Event Mutation saveEvent", () => {
     describe("update", () => {
       it("raises an error if start < now", async () => {
         expect.assertions(2)
-        await mongo.loadEvents()
+        await mongo.loadEventModels()
         const user = userData[0]
         const context = { mongo, user }
-        const eventInput = {
-          id: eventData[0]._id.toString(),
+        const eventModelInput = {
+          id: eventModelData[0]._id.toString(),
           start: new Date("2015-09-16T13:00Z"),
           end: new Date("2018-09-16T08:30Z"),
         }
         try {
-          await resolvers.Mutation.saveEvent(null, { eventInput }, context)
+          await resolvers.Mutation.saveEventModel(null, { eventModelInput }, context)
         } catch (e) {
           expect(e.message).toEqual("The request is invalid.")
           expect(e.state).toEqual({
@@ -131,16 +131,16 @@ describe("Event Mutation saveEvent", () => {
       })
       it("raises an error if start < end", async () => {
         expect.assertions(2)
-        await mongo.loadEvents()
+        await mongo.loadEventModels()
         const user = userData[0]
         const context = { mongo, user }
-        const eventInput = {
-          id: eventData[0]._id.toString(),
+        const eventModelInput = {
+          id: eventModelData[0]._id.toString(),
           start: new Date("2018-09-16T13:00Z"),
           end: new Date("2018-09-16T08:30Z"),
         }
         try {
-          await resolvers.Mutation.saveEvent(null, { eventInput }, context)
+          await resolvers.Mutation.saveEventModel(null, { eventModelInput }, context)
         } catch (e) {
           expect(e.message).toEqual("The request is invalid.")
           expect(e.state).toEqual({ start: ["Start date is after end date."] })
