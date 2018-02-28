@@ -1,6 +1,6 @@
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { eventSessionData, eventTicketData, userData } from "../../../testUtils/fixtures"
+import { eventSessionData } from "../../../testUtils/fixtures"
 
 let mongo
 
@@ -15,21 +15,15 @@ describe("EventSession EventSession resolvers", () => {
       await mongo.loadEventTickets()
       const context = { mongo }
       const response = await resolvers.EventSession.ticketCount(eventSessionData[0], null, context)
-      expect(response).toEqual(2)
+      expect(response).toEqual(1)
+      const response2 = await resolvers.EventSession.ticketCount(eventSessionData[1], null, context)
+      expect(response2).toEqual(1)
     })
     it("returns 0 if no ticketCount", async () => {
       await mongo.loadEventTickets()
       const context = { mongo }
-      const response = await resolvers.EventSession.ticketCount(eventSessionData[1], null, context)
+      const response = await resolvers.EventSession.ticketCount(eventSessionData[3], null, context)
       expect(response).toEqual(0)
-    })
-  })
-  describe("tickets", () => {
-    it("returns the eventTickets for that eventSession", async () => {
-      await mongo.loadEventTickets()
-      const context = { mongo }
-      const response = await resolvers.EventSession.tickets(eventSessionData[0], null, context)
-      expect(response).toEqual(eventTicketData)
     })
   })
 })

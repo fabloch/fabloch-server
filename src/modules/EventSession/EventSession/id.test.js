@@ -1,6 +1,6 @@
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { eventSessionData, eventTicketData, userData } from "../../../testUtils/fixtures"
+import { eventSessionData } from "../../../testUtils/fixtures"
 
 let mongo
 

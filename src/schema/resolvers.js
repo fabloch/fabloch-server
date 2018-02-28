@@ -1,5 +1,6 @@
 import { mergeResolvers } from "merge-graphql-schemas"
 import eventModelResolvers from "../modules/EventModel/resolvers"
+import eventSessionResolvers from "../modules/EventSession/resolvers"
 import eventTicketResolvers from "../modules/EventTicket/resolvers"
 import mediaResolvers from "../modules/Media/resolvers"
 import membershipResolvers from "../modules/Membership/resolvers"
@@ -10,6 +11,7 @@ import userResolvers from "../modules/User/resolvers"
 
 const resolvers = [
   eventModelResolvers,
+  eventSessionResolvers,
   eventTicketResolvers,
   mediaResolvers,
   membershipResolvers,

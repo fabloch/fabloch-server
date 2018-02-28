@@ -1,7 +1,7 @@
 type EventTicket {
   id: ID!
   eventModel: EventModel!
-  participant: User!
+  owner: User!
 }
 
 input EventTicketInput {
