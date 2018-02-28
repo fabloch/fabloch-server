@@ -35,7 +35,7 @@ export const eventModelData = [
     title: "This is EventModel 0 title (shows in A, not B)",
     description: "This is EventModel 0 description.\nShould show in A not in B.",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
-    seats: 100,
+    seats: 2,
     placeId: ObjectId("5a5e17f5b16e8350cd5c036d"),
   },
   {
@@ -43,7 +43,7 @@ export const eventModelData = [
     title: "EventModel 1 (1A published, 1B no)",
     description: "This event has two sessions: 1A and 1B\nA is published.",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
-    seats: 111,
+    seats: 2,
     // placeId: ObjectId("5a5e17feb16e8350cd5c0372"),
   },
 ]
@@ -67,7 +67,7 @@ export const eventSessionData = [
     start: dateUtils.eventSession0Bstart,
     end: dateUtils.eventSession0Bend,
     placeId: ObjectId("5a5e17feb16e8350cd5c0372"),
-    seats: 88,
+    seats: 1,
     published: true,
   },
   {
@@ -91,14 +91,16 @@ export const eventSessionData = [
 ]
 export const eventTicketData = [
   {
+    hint: "eventTicket for eventSession0A and user1 (2 seats)",
     _id: ObjectId("5a4d56eeb230a538a7efb8e1"),
-    ownerId: ObjectId("5a31b4efedc7474b9addc261"),
+    ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     eventSessionId: ObjectId("5a95c520c14e2a0ce4eea6f5"),
   },
   {
+    hint: "eventTicket for eventSession0B and user2 (1 seat)",
     _id: ObjectId("5a4d576f269ec838c4c40142"),
-    ownerId: ObjectId("5a383f36d2834c317755ab17"),
-    eventSessionId: ObjectId("5a95c520c14e2a0ce4eea6f5"),
+    ownerId: ObjectId("5a31b4efedc7474b9addc261"),
+    eventSessionId: ObjectId("5a95c526c14e2a0ce4eea6f8"),
   },
 ]
 

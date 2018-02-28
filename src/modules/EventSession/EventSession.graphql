@@ -1,0 +1,60 @@
+type EventSession {
+  id: ID!
+  eventModel: EventModel!
+  title: String
+  description: String
+  owner: User!
+  start: DateTime
+  end: DateTime
+  tickets: [EventTicket!]!
+  ticketCount: Int
+  seats: Int
+  published: Boolean
+  place: Place
+}
+
+
+type Query {
+  eventSessionList(filter: EventSessionFilter): [EventSession!]!
+  eventSessionDetail(id: String): EventSession
+}
+input EventSessionFilter {
+  OR: [EventSessionFilter!]
+  title_contains: String
+  description_contains: String
+}
+
+
+type Mutation {
+  createEventSession(eventSessionInput: CreateEventSessionInput!): EventSession
+  updateEventSession(eventSessionInput: UpdateEventSessionInput!): EventSession
+}
+input CreateEventSessionInput {
+  eventModel: ID!
+  title: String
+  description: String
+  seats: Int
+  start: DateTime
+  end: DateTime
+  place: ID
+}
+input UpdateEventSessionInput {
+  id: ID!
+  title: String
+  description: String
+  seats: Int
+  start: DateTime
+  end: DateTime
+  place: ID
+}
+
+type Subscription {
+  EventSession(filter: EventSessionSubscriptionFilter): EventSessionSubscriptionPayload
+}
+input EventSessionSubscriptionFilter {
+  mutation_in: [_ModelMutationType!]
+}
+type EventSessionSubscriptionPayload {
+  mutation: _ModelMutationType!
+  node: EventSession
+}

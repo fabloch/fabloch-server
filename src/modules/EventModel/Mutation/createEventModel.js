@@ -1,11 +1,7 @@
 import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
 import pubsub from "../../../utils/pubsub"
 
-/*
-  id ? update : create
-*/
-
-const saveEventModel = async ({ eventModelInput }, { mongo: { EventModels }, user }) => {
+const createEventModel = async ({ eventModelInput }, { mongo: { EventModels }, user }) => {
   checkAuthenticatedUser(user)
 
   const eventModel = eventModelInput
@@ -17,4 +13,4 @@ const saveEventModel = async ({ eventModelInput }, { mongo: { EventModels }, use
   return eventModel
 }
 
-export default saveEventModel
+export default createEventModel
