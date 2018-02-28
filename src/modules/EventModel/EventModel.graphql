@@ -6,12 +6,9 @@ type EventModel {
   medias: [Media!]!
   owner: User!
   seats: Int
-  bookings: Int
-  start: DateTime
-  end: DateTime
-  tickets: [EventTicket!]!
-  published: Boolean
+  # tickets: [EventTicket!]!
   place: Place
+  sessions: [EventSession!]!
 }
 
 
@@ -27,9 +24,18 @@ input EventModelFilter {
 
 
 type Mutation {
-  saveEventModel(eventModelInput: SaveEventModelInput!): EventModel
+  createEventModel(eventModelInput: CreateEventModelInput!): EventModel
+  updateEventModel(eventModelInput: UpdateEventModelInput!): EventModel
 }
-input SaveEventModelInput {
+input CreateEventModelInput {
+  title: String
+  description: String
+  seats: Int
+  start: DateTime
+  end: DateTime
+  place: ID
+}
+input UpdateEventModelInput {
   id: ID
   title: String
   description: String
@@ -37,7 +43,6 @@ input SaveEventModelInput {
   start: DateTime
   end: DateTime
   place: ID
-  published: Boolean
 }
 
 type Subscription {

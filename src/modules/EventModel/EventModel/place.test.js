@@ -17,5 +17,11 @@ describe("EventModel EventModel resolvers", () => {
       const response = await resolvers.EventModel.place(eventModelData[0], null, context)
       expect(response).toEqual(placeData[0])
     })
+    it("returns null if no linked place", async () => {
+      await mongo.loadPlaces()
+      const context = { mongo }
+      const response = await resolvers.EventModel.place(eventModelData[0], null, context)
+      expect(response).toEqual(placeData[0])
+    })
   })
 })

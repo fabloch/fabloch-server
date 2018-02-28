@@ -1,11 +1,10 @@
 import pubsub from "../../utils/pubsub"
 
-import bookings from "./EventModel/bookings"
-import tickets from "./EventModel/tickets"
 import place from "./EventModel/place"
 import eventModelList from "./Query/eventModelList"
 import eventModelDetail from "./Query/eventModelDetail"
-import saveEventModel from "./Mutation/saveEventModel"
+import createEventModel from "./Mutation/createEventModel"
+import updateEventModel from "./Mutation/updateEventModel"
 
 export default {
   Query: {
@@ -14,7 +13,8 @@ export default {
 
   },
   Mutation: {
-    saveEventModel: async (_, data, context) => saveEventModel(data, context),
+    createEventModel: async (_, data, context) => createEventModel(data, context),
+    updateEventModel: async (_, data, context) => updateEventModel(data, context),
   },
   Subscription: {
     EventModel: {
@@ -24,9 +24,8 @@ export default {
   },
   EventModel: {
     id: eventModel => eventModel._id.toString(),
-    owner: async (eventModel, _, { mongo: { Users } }) => Users.findOne({ _id: eventModel.ownerId }),
-    bookings: async (eventModel, _, context) => bookings(eventModel, context),
-    tickets: async (eventModel, _, context) => tickets(eventModel, context),
+    owner: async (eventModel, _, { mongo: { Users } }) =>
+      Users.findOne({ _id: eventModel.ownerId }),
     place: async (eventModel, _, context) => place(eventModel, context),
   },
 }
