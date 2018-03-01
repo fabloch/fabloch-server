@@ -1,16 +1,16 @@
-import saveEventTicket from "./Mutation/saveEventTicket"
+import createEventTicket from "./Mutation/createEventTicket"
 
 export default {
   Mutation: {
-    saveEventTicket: async (_, data, context) => saveEventTicket(data, context),
+    createEventTicket: async (_, data, context) => createEventTicket(data, context),
   },
   EventTicket: {
     id: eventTicket => eventTicket._id.toString(),
     owner: async (eventTicket, _, { mongo: { Users } }) => (
       Users.findOne({ _id: eventTicket.ownerId })
     ),
-    eventModel: async (eventTicket, _, { mongo: { EventModels } }) => (
-      EventModels.findOne({ _id: eventTicket.eventModelId })
+    eventSession: async (eventTicket, _, { mongo: { EventSessions } }) => (
+      EventSessions.findOne({ _id: eventTicket.eventSessionId })
     ),
   },
 }

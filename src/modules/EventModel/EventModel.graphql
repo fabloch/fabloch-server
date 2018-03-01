@@ -31,17 +31,13 @@ input CreateEventModelInput {
   title: String
   description: String
   seats: Int
-  start: DateTime
-  end: DateTime
   place: ID
 }
 input UpdateEventModelInput {
-  id: ID
+  id: ID!
   title: String
   description: String
   seats: Int
-  start: DateTime
-  end: DateTime
   place: ID
 }
 

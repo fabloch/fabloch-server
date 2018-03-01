@@ -4,7 +4,7 @@ import { eventSessionData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
-describe("saveEventTicket", () => {
+describe("createEventTicket", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })
   afterEach(async () => { await mongo.afterEach() })
@@ -19,7 +19,7 @@ describe("saveEventTicket", () => {
       const eventTicketInput = {
         eventSessionId: eventSessionData[0]._id.toString(),
       }
-      const response = await resolvers.Mutation.saveEventTicket(null, { eventTicketInput }, context)
+      const response = await resolvers.Mutation.createEventTicket(null, { eventTicketInput }, context)
       expect(response).toMatchObject({
         eventSessionId: eventSessionData[0]._id,
         ownerId: userData[0]._id,
@@ -37,7 +37,7 @@ describe("saveEventTicket", () => {
       }
       expect.assertions(2)
       try {
-        await resolvers.Mutation.saveEventTicket(null, { eventTicketInput }, context)
+        await resolvers.Mutation.createEventTicket(null, { eventTicketInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({ main: ["EventSession does not exist."] })
@@ -55,7 +55,7 @@ describe("saveEventTicket", () => {
         eventSessionId: eventSessionData[1]._id.toString(),
       }
       try {
-        await resolvers.Mutation.saveEventTicket(null, { eventTicketInput }, context)
+        await resolvers.Mutation.createEventTicket(null, { eventTicketInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({ main: ["No more seats for that eventSession."] })
@@ -70,9 +70,9 @@ describe("saveEventTicket", () => {
       const eventTicketInput = {
         eventSessionId: eventSessionData[0]._id.toString(),
       }
-      await resolvers.Mutation.saveEventTicket(null, { eventTicketInput }, context)
+      await resolvers.Mutation.createEventTicket(null, { eventTicketInput }, context)
       try {
-        await resolvers.Mutation.saveEventTicket(null, { eventTicketInput }, context)
+        await resolvers.Mutation.createEventTicket(null, { eventTicketInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({ main: ["User already has a ticket for that eventSession."] })

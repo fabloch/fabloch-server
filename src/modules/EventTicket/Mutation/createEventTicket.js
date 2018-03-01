@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb"
 import checkAuthenticatedUser from "../../../validations/checkAuthenticatedUser"
 import checkEventForTicket from "./checkEventForTicket"
 
-const saveEventTicket = async ({ eventTicketInput }, context) => {
+const createEventTicket = async ({ eventTicketInput }, context) => {
   const { mongo: { EventTickets }, user } = context
   const eventTicket = {
     ownerId: user._id,
@@ -19,4 +19,4 @@ const saveEventTicket = async ({ eventTicketInput }, context) => {
   return eventTicket
 }
 
-export default saveEventTicket
+export default createEventTicket

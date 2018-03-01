@@ -1,13 +1,12 @@
 type EventTicket {
   id: ID!
-  eventModel: EventModel!
+  eventSession: EventSession!
   owner: User!
 }
 
-input EventTicketInput {
-  eventModelId: ID!
-}
-
 type Mutation {
-  saveEventTicket(eventTicket: EventTicketInput): EventTicket
+  createEventTicket(eventTicket: EventTicketInput): EventTicket
+}
+input EventTicketInput {
+  eventSessionId: ID!
 }

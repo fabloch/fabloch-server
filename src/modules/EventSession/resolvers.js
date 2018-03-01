@@ -1,31 +1,30 @@
-// import pubsub from "../../utils/pubsub"
+import pubsub from "../../utils/pubsub"
 
 import description from "./EventSession/description"
 import place from "./EventSession/place"
 import ticketCount from "./EventSession/ticketCount"
 import tickets from "./EventSession/tickets"
 import title from "./EventSession/title"
-// import eventSessionList from "./Query/eventSessionList"
-// import eventSessionDetail from "./Query/eventSessionDetail"
+import eventSessionList from "./Query/eventSessionList"
+import eventSessionDetail from "./Query/eventSessionDetail"
 import createEventSession from "./Mutation/createEventSession"
 import updateEventSession from "./Mutation/updateEventSession"
 
 export default {
-  // Query: {
-  //   eventSessionList: async (_, data, context) => eventSessionList(data, context),
-  //   eventSessionDetail: async (_, data, context) => eventSessionDetail(data, context),
-  //
-  // },
+  Query: {
+    eventSessionList: async (_, data, context) => eventSessionList(data, context),
+    eventSessionDetail: async (_, data, context) => eventSessionDetail(data, context),
+  },
   Mutation: {
     createEventSession: async (_, data, context) => createEventSession(data, context),
     updateEventSession: async (_, data, context) => updateEventSession(data, context),
   },
-  // Subscription: {
-  //   EventSession: {
-  //     // subscribe: (_, __, { wsUser }) => pubsub.asyncIterator("EventSession"),
-  //     subscribe: () => pubsub.asyncIterator("EventSession"),
-  //   },
-  // },
+  Subscription: {
+    EventSession: {
+      // subscribe: (_, __, { wsUser }) => pubsub.asyncIterator("EventSession"),
+      subscribe: () => pubsub.asyncIterator("EventSession"),
+    },
+  },
   EventSession: {
     id: eventSession => eventSession._id.toString(),
     description: async (eventSession, _, context) => description(eventSession, context),
