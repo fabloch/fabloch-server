@@ -11,6 +11,9 @@ type Place {
   stateProvince: String!
 }
 
+type Query {
+  placeList: [Place!]!
+}
 type Mutation {
   createPlace(placeInput: CreatePlaceInput): Place!
 }
