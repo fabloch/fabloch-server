@@ -61,7 +61,7 @@ describe("createEventModel", () => {
       }
       const response = await resolvers.Mutation.createEventModel(null, { eventModelInput }, context)
       expect(response).toMatchObject({
-        placeId: placeData[0]._id.toString(),
+        placeId: placeData[0]._id,
       })
     })
   })

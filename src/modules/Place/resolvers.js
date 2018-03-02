@@ -4,7 +4,7 @@ import placeList from "./Query/placeList"
 
 export default {
   Query: {
-    placeList: async (_, __, context) => placeList(context),
+    placeList: async (_, data, context) => placeList(data, context),
   },
   Mutation: {
     createPlace: async (_, data, context) => createPlace(data, context),

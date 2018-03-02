@@ -6,7 +6,6 @@ type EventModel {
   medias: [Media!]!
   owner: User!
   seats: Int
-  # tickets: [EventTicket!]!
   place: Place
   sessions: [EventSession!]!
 }
@@ -31,14 +30,14 @@ input CreateEventModelInput {
   title: String
   description: String
   seats: Int
-  place: ID
+  placeId: ID
 }
 input UpdateEventModelInput {
   id: ID!
   title: String
   description: String
   seats: Int
-  place: ID
+  placeId: ID
 }
 
 type Subscription {

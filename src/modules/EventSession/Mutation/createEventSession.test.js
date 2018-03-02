@@ -89,7 +89,7 @@ describe("createEventSession", () => {
       const response = await resolvers.Mutation
         .createEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
-        placeId: placeData[0]._id.toString(),
+        placeId: placeData[0]._id,
       })
     })
   })

@@ -1,4 +1,8 @@
-const placeList = async ({ mongo: { Places } }) =>
-  Places.find({ published: true }).toArray()
+const placeList = async (data, { mongo: { Places } }) => {
+  if (data && data.all) {
+    return Places.find({}).toArray()
+  }
+  return Places.find({ published: true }).toArray()
+}
 
 export default placeList

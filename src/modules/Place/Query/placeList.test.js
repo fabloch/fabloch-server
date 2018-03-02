@@ -11,7 +11,13 @@ describe("Place Query resolvers", () => {
   afterAll(async () => { await mongo.afterAll() })
 
   describe("placeList", () => {
-    it("returns all published Places", async () => {
+    it("returns all Places", async () => {
+      await mongo.loadPlaces()
+      const context = { mongo }
+      const response = await resolvers.Query.placeList(null, { all: true }, context)
+      expect(response).toEqual(placeData)
+    })
+    it("returns published Places if published true", async () => {
       await mongo.loadPlaces()
       const context = { mongo }
       const response = await resolvers.Query.placeList(null, null, context)

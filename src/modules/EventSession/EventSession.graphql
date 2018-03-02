@@ -36,7 +36,7 @@ input CreateEventSessionInput {
   seats: Int
   start: DateTime
   end: DateTime
-  place: ID
+  placeId: ID
 }
 input UpdateEventSessionInput {
   id: ID!
@@ -45,7 +45,7 @@ input UpdateEventSessionInput {
   seats: Int
   start: DateTime
   end: DateTime
-  place: ID
+  placeId: ID
 }
 
 type Subscription {

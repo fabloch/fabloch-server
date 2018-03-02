@@ -1,23 +1,23 @@
 type Place {
   id: ID!
-  mainMedia: Media
+  # mainMedia: Media
   title: String!
-  medias: [Media!]!
+  # medias: [Media!]!
   street1: String
   street2: String
   zipCode: String!
   city: String!
   country: String!
-  stateProvince: String!
+  stateProvince: String
 }
 
 type Query {
-  placeList: [Place!]!
+  placeList(all: Boolean = true): [Place!]!
 }
+
 type Mutation {
   createPlace(placeInput: CreatePlaceInput): Place!
 }
-
 input CreatePlaceInput {
   title: String!
   street1: String

@@ -20,6 +20,7 @@ const createEventSession = async (
   const eventSession = eventSessionInput
   eventSession.ownerId = user._id
   eventSession.eventModelId = eventModel._id
+  if (eventSession.placeId) { eventSession.placeId = ObjectId(eventSession.placeId) }
   const response = await EventSessions.insert(eventSession)
   const [_id] = response.insertedIds
   eventSession._id = _id
