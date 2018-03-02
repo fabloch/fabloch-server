@@ -233,6 +233,7 @@ const loadFixtures = async () => {
   await db.collection("eventTickets").insertMany(eventTicketData)
   await db.collection("memberships").insertMany(membershipData)
   await db.collection("newcomers").insertMany(newcomerData)
+  await db.collection("places").insertMany(placeData)
   await db.collection("users").insertMany(userData)
 
   db.close()
