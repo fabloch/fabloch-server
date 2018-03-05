@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { admin, mediaData } from "../../../testUtils/fixtures"
+import { admin, eventSessionData, mediaData } from "../../../testUtils/fixtures"
 
 let mongo
 
@@ -18,10 +18,13 @@ describe("createMedia", () => {
       const context = { mongo, user }
       const mediaInput = {
         category: "IMAGE",
+        parentId: eventSessionData[0]._id.toString(),
+        parentCollection: "EventSessions",
+        rank: 1,
         picUrl: "http://www.url.com/",
       }
       const response = await resolvers.Mutation.createMedia(null, { mediaInput }, context)
-      expect(response).toMatchObject(mediaInput)
+      expect(response).toMatchObject({ ...mediaInput, parentId: eventSessionData[0]._id })
     })
     it("creates an LINK media", async () => {
       await mongo.loadUsers()
@@ -29,6 +32,9 @@ describe("createMedia", () => {
       const context = { mongo, user }
       const mediaInput = {
         category: "LINK",
+        parentId: eventSessionData[0]._id.toString(),
+        parentCollection: "EventSessions",
+        rank: 1,
         sourceUrl: "http://www.url.com/",
       }
       const response = await resolvers.Mutation.createMedia(null, { mediaInput }, context)
@@ -40,7 +46,7 @@ describe("createMedia", () => {
       expect.assertions(2)
       const user = null
       const context = { mongo, user }
-      const mediaInput = { title: "Awesome Media" }
+      const mediaInput = {}
       try {
         await resolvers.Mutation.createMedia(null, { mediaInput }, context)
       } catch (e) {
@@ -52,7 +58,11 @@ describe("createMedia", () => {
       expect.assertions(2)
       const user = admin
       const context = { mongo, user }
-      const mediaInput = {}
+      const mediaInput = {
+        parentId: eventSessionData[0]._id.toString(),
+        parentCollection: "EventSessions",
+        rank: 1,
+      }
       try {
         await resolvers.Mutation.createMedia(null, { mediaInput }, context)
       } catch (e) {
@@ -62,11 +72,52 @@ describe("createMedia", () => {
         })
       }
     })
+    it("raises if no parentId", async () => {
+      expect.assertions(2)
+      const user = admin
+      const context = { mongo, user }
+      const mediaInput = {
+        category: "IMAGE",
+        parentCollection: "EventSessions",
+        rank: 1,
+      }
+      try {
+        await resolvers.Mutation.createMedia(null, { mediaInput }, context)
+      } catch (e) {
+        expect(e.message).toEqual("The request is invalid.")
+        expect(e.state).toEqual({
+          parentId: ["Missing parent id."],
+        })
+      }
+    })
+    it("raises if no parentCollection", async () => {
+      expect.assertions(2)
+      const user = admin
+      const context = { mongo, user }
+      const mediaInput = {
+        category: "IMAGE",
+        parentId: eventSessionData[0]._id.toString(),
+        rank: 1,
+      }
+      try {
+        await resolvers.Mutation.createMedia(null, { mediaInput }, context)
+      } catch (e) {
+        expect(e.message).toEqual("The request is invalid.")
+        expect(e.state).toEqual({
+          parentCollection: ["Missing parent collection."],
+        })
+      }
+    })
     it("raises if IMAGE and no picUrl", async () => {
       expect.assertions(2)
       const user = admin
       const context = { mongo, user }
-      const mediaInput = { category: "IMAGE" }
+      const mediaInput = {
+        category: "IMAGE",
+        parentId: eventSessionData[0]._id.toString(),
+        parentCollection: "EventSessions",
+        rank: 1,
+      }
       try {
         await resolvers.Mutation.createMedia(null, { mediaInput }, context)
       } catch (e) {
@@ -80,7 +131,12 @@ describe("createMedia", () => {
       expect.assertions(2)
       const user = admin
       const context = { mongo, user }
-      const mediaInput = { category: "LINK" }
+      const mediaInput = {
+        category: "LINK",
+        parentId: eventSessionData[0]._id.toString(),
+        parentCollection: "EventSessions",
+        rank: 1,
+      }
       try {
         await resolvers.Mutation.createMedia(null, { mediaInput }, context)
       } catch (e) {

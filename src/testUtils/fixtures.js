@@ -107,14 +107,21 @@ export const eventTicketData = [
 export const mediaData = [
   {
     _id: ObjectId("5a5e2489b16e8350cd5c0d21"),
+    title: "Hero Découpe Laser (eventModel)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/hero-decoupe_laser.jpg",
     category: "IMAGE",
+    parentId: ObjectId("5a4a5eb6404da6d636078beb"),
+    parentCollection: "EventModels",
+    rank: 1,
   },
   {
     _id: ObjectId("5a5e30f2b16e8350cd5c12b9"),
+    title: "robot-servo-arduino (eventSession)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/robot-servo-arduino.jpg",
-    sourceUrl: "https://youtu.be/dJNH-E1HQd4",
-    category: "YOUTUBE",
+    category: "IMAGE",
+    parentId: ObjectId("5a95c526c14e2a0ce4eea6f8"),
+    parentCollection: "EventSessions",
+    rank: 1,
   },
   {
     _id: ObjectId("5a5e30f8b16e8350cd5c12bb"),
@@ -122,6 +129,7 @@ export const mediaData = [
     sourceUrl: "http://www.mediapart.fr",
     category: "LINK",
   },
+
 ]
 
 export const membershipData = [

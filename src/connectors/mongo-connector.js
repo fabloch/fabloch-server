@@ -16,7 +16,7 @@ export default async function () {
     EventModels: db.collection("eventModels"),
     EventSessions: db.collection("eventSessions"),
     EventTickets: db.collection("eventTickets"),
-    Media: db.collection("medias"),
+    Medias: db.collection("medias"),
     Memberships: db.collection("memberships"),
     Newcomers: db.collection("newcomers"),
     Places: db.collection("places"),

@@ -4,10 +4,13 @@ type Media {
   picUrl: Url
   sourceUrl: Url
   category: MediaCategory!
+  parentId: ID!
+  parentCollection: ParentCollection!
+  rank: Int!
 }
 
 type Mutation {
-  createMedia(placeInput: CreateMediaInput): Media!
+  createMedia(mediaInput: CreateMediaInput): Media!
 }
 
 input CreateMediaInput {
@@ -15,10 +18,18 @@ input CreateMediaInput {
   picUrl: Url
   sourceUrl: Url
   category: MediaCategory!
+  parentId: ID!
+  parentCollection: ParentCollection!
+  rank: Int!
 }
 
 enum MediaCategory {
   IMAGE
   LINK
   YOUTUBE
+}
+
+enum ParentCollection {
+  EventModels
+  EventSessions
 }
