@@ -112,24 +112,54 @@ export const mediaData = [
     category: "IMAGE",
     parentId: ObjectId("5a4a5eb6404da6d636078beb"),
     parentCollection: "EventModels",
+    rank: 0,
+  },
+  {
+    _id: ObjectId("5a9d83f4a7ada82940426897"),
+    title: "Vidéo de présentation (eventModel)",
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/youtube1.jpg",
+    sourceUrl: "https://youtu.be/sJPPCtlQQrQ",
+    category: "VIDEO",
+    parentId: ObjectId("5a4a5eb6404da6d636078beb"),
+    parentCollection: "EventModels",
     rank: 1,
   },
   {
-    _id: ObjectId("5a5e30f2b16e8350cd5c12b9"),
-    title: "robot-servo-arduino (eventSession)",
+    _id: ObjectId("5a9d83fea7ada82940426899"),
+    title: "Hero Découpe Laser (eventModel)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/robot-servo-arduino.jpg",
+    category: "IMAGE",
+    parentId: ObjectId("5a4a5eb6404da6d636078beb"),
+    parentCollection: "EventModels",
+    rank: 2,
+  },
+  {
+    _id: ObjectId("5a9d8402a7ada8294042689b"),
+    title: "Test1 (eventModel)",
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/test1.jpg",
+    category: "IMAGE",
+    parentId: ObjectId("5a4a5eb6404da6d636078beb"),
+    parentCollection: "EventModels",
+    rank: 3,
+  },
+  {
+    _id: ObjectId("5a9d8407a7ada8294042689d"),
+    title: "Test2 (eventSession)",
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/test2.jpg",
+    category: "IMAGE",
+    parentId: ObjectId("5a95c526c14e2a0ce4eea6f8"),
+    parentCollection: "EventSessions",
+    rank: 0,
+  },
+  {
+    _id: ObjectId("5a9d840aa7ada8294042689f"),
+    title: "Test3 (eventSession)",
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/test3.jpg",
     category: "IMAGE",
     parentId: ObjectId("5a95c526c14e2a0ce4eea6f8"),
     parentCollection: "EventSessions",
     rank: 1,
   },
-  {
-    _id: ObjectId("5a5e30f8b16e8350cd5c12bb"),
-    title: "Link to Mediapart",
-    sourceUrl: "http://www.mediapart.fr",
-    category: "LINK",
-  },
-
 ]
 
 export const membershipData = [
@@ -239,6 +269,7 @@ const loadFixtures = async () => {
   await db.collection("eventModels").insertMany(eventModelData)
   await db.collection("eventSessions").insertMany(eventSessionData)
   await db.collection("eventTickets").insertMany(eventTicketData)
+  await db.collection("medias").insertMany(mediaData)
   await db.collection("memberships").insertMany(membershipData)
   await db.collection("newcomers").insertMany(newcomerData)
   await db.collection("places").insertMany(placeData)

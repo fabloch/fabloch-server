@@ -10,10 +10,11 @@ type Media {
 }
 
 type Mutation {
-  createMedia(mediaInput: CreateMediaInput): Media!
+  saveMedia(mediaInput: SaveMediaInput): Media!
 }
 
-input CreateMediaInput {
+input SaveMediaInput {
+  id: ID
   title: String
   picUrl: Url
   sourceUrl: Url

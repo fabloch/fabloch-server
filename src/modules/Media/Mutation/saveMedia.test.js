@@ -5,40 +5,62 @@ import { admin, eventSessionData, mediaData } from "../../../testUtils/fixtures"
 
 let mongo
 
-describe("createMedia", () => {
+describe("saveMedia", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("creation", async () => {
+  describe("create", async () => {
     it("creates an IMAGE media", async () => {
-      await mongo.loadUsers()
       const user = admin
       const context = { mongo, user }
       const mediaInput = {
         category: "IMAGE",
         parentId: eventSessionData[0]._id.toString(),
         parentCollection: "EventSessions",
-        rank: 1,
+        rank: 0,
         picUrl: "http://www.url.com/",
       }
-      const response = await resolvers.Mutation.createMedia(null, { mediaInput }, context)
-      expect(response).toMatchObject({ ...mediaInput, parentId: eventSessionData[0]._id })
+      const response = await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
+      expect(response).toMatchObject(mediaInput)
     })
     it("creates an LINK media", async () => {
-      await mongo.loadUsers()
       const user = admin
       const context = { mongo, user }
       const mediaInput = {
         category: "LINK",
         parentId: eventSessionData[0]._id.toString(),
         parentCollection: "EventSessions",
-        rank: 1,
+        rank: 0,
         sourceUrl: "http://www.url.com/",
       }
-      const response = await resolvers.Mutation.createMedia(null, { mediaInput }, context)
+      const response = await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
       expect(response).toMatchObject(mediaInput)
+    })
+  })
+  describe("update", () => {
+    it("updates picUrl", async () => {
+      await mongo.loadMedias()
+      const user = admin
+      const context = { mongo, user }
+      const mediaInput = {
+        id: mediaData[0]._id.toString(),
+        picUrl: "http://www.new-url.com/",
+      }
+      const response = await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
+      expect(response).toMatchObject({ ...mediaInput, title: mediaData[0].title })
+    })
+    it("updates rank", async () => {
+      await mongo.loadMedias()
+      const user = admin
+      const context = { mongo, user }
+      const mediaInput = {
+        id: mediaData[0]._id.toString(),
+        rank: 2,
+      }
+      const response = await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
+      expect(response).toMatchObject({ ...mediaInput, title: mediaData[0].title })
     })
   })
   describe("Errors", () => {
@@ -48,7 +70,7 @@ describe("createMedia", () => {
       const context = { mongo, user }
       const mediaInput = {}
       try {
-        await resolvers.Mutation.createMedia(null, { mediaInput }, context)
+        await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({ main: ["Unauthenticated."] })
@@ -61,10 +83,10 @@ describe("createMedia", () => {
       const mediaInput = {
         parentId: eventSessionData[0]._id.toString(),
         parentCollection: "EventSessions",
-        rank: 1,
+        rank: 0,
       }
       try {
-        await resolvers.Mutation.createMedia(null, { mediaInput }, context)
+        await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({
@@ -79,10 +101,10 @@ describe("createMedia", () => {
       const mediaInput = {
         category: "IMAGE",
         parentCollection: "EventSessions",
-        rank: 1,
+        rank: 0,
       }
       try {
-        await resolvers.Mutation.createMedia(null, { mediaInput }, context)
+        await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({
@@ -97,10 +119,10 @@ describe("createMedia", () => {
       const mediaInput = {
         category: "IMAGE",
         parentId: eventSessionData[0]._id.toString(),
-        rank: 1,
+        rank: 0,
       }
       try {
-        await resolvers.Mutation.createMedia(null, { mediaInput }, context)
+        await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({
@@ -116,10 +138,10 @@ describe("createMedia", () => {
         category: "IMAGE",
         parentId: eventSessionData[0]._id.toString(),
         parentCollection: "EventSessions",
-        rank: 1,
+        rank: 0,
       }
       try {
-        await resolvers.Mutation.createMedia(null, { mediaInput }, context)
+        await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({
@@ -135,10 +157,10 @@ describe("createMedia", () => {
         category: "LINK",
         parentId: eventSessionData[0]._id.toString(),
         parentCollection: "EventSessions",
-        rank: 1,
+        rank: 0,
       }
       try {
-        await resolvers.Mutation.createMedia(null, { mediaInput }, context)
+        await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({

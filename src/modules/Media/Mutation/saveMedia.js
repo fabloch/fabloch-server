@@ -3,8 +3,23 @@ import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
 import checkMissing from "../../_shared/checkMissing"
 import ValidationError from "../../_shared/ValidationError"
 
-const createMedia = async ({ mediaInput }, { mongo: { Medias }, user }) => {
+const updateMedia = async (mediaInput, { mongo: { Medias } }) => {
+  console.log("UPDATING")
+  const mediaFromDb = await Medias.findOne({ _id: ObjectId(mediaInput.id) })
+  if (mediaFromDb) {
+    await Medias.update(mediaFromDb, { $set: { ...mediaInput } })
+    return { ...mediaFromDb, ...mediaInput }
+  }
+  throw new ValidationError([{ key: "main", message: "No media with that ID." }])
+}
+
+const saveMedia = async ({ mediaInput }, context) => {
+  const { mongo: { Medias }, user } = context
   checkAuthenticatedUser(user)
+  if (mediaInput.id) {
+    return updateMedia(mediaInput, context)
+  }
+  console.log("CREATING")
   let errors = []
   errors = checkMissing(
     ["category", "parentId", "parentCollection", "rank"],
@@ -30,4 +45,4 @@ const createMedia = async ({ mediaInput }, { mongo: { Medias }, user }) => {
   return media
 }
 
-export default createMedia
+export default saveMedia
