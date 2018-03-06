@@ -10,15 +10,16 @@ type EventSession {
   end: DateTime
   tickets: [EventTicket!]!
   ticketCount: Int
+  hasTicket: Boolean!
   seats: Int
-  published: Boolean
+  published: Boolean!
   place: Place
 }
 
 
 type Query {
   eventSessionList(filter: EventSessionFilter): [EventSession!]!
-  eventSessionDetail(id: String): EventSession
+  eventSessionDetail(id: ID!): EventSession!
 }
 input EventSessionFilter {
   OR: [EventSessionFilter!]

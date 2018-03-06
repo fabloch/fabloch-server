@@ -117,7 +117,7 @@ export const mediaData = [
     title: "Vidéo de présentation (eventModel)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/youtube1.jpg",
     sourceUrl: "https://youtu.be/sJPPCtlQQrQ",
-    category: "VIDEO",
+    category: "YOUTUBE",
     parentId: ObjectId("5a4a5eb6404da6d636078beb"),
     parentCollection: "EventModels",
     rank: 1,

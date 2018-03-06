@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
 
-const eventSessionDetail = async ({ eventSessionId }, { mongo: { EventSessions } }) => {
-  const eventSession = await EventSessions.findOne({ _id: ObjectId(eventSessionId) })
+const eventSessionDetail = async ({ id }, { mongo: { EventSessions } }) => {
+  const eventSession = await EventSessions.findOne({ _id: ObjectId(id) })
   if (!eventSession) {
     return null
   }

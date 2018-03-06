@@ -14,14 +14,14 @@ describe("EventSession Query resolvers", () => {
     it("returns the eventSession from the id", async () => {
       await mongo.loadEventSessions()
       const context = { mongo }
-      const eventSessionId = eventSessionData[0]._id.toString()
-      const response = await resolvers.Query.eventSessionDetail(null, { eventSessionId }, context)
+      const id = eventSessionData[0]._id.toString()
+      const response = await resolvers.Query.eventSessionDetail(null, { id }, context)
       expect(response).toEqual(eventSessionData[0])
     })
     it("returns null if no eventSession with that id", async () => {
       const context = { mongo }
-      const eventSessionId = "5a4a5eb6404da6d6360734eb"
-      const response = await resolvers.Query.eventSessionDetail(null, { eventSessionId }, context)
+      const id = "5a4a5eb6404da6d6360734eb"
+      const response = await resolvers.Query.eventSessionDetail(null, { id }, context)
       expect(response).toEqual(null)
     })
   })
