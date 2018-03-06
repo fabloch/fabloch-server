@@ -10,6 +10,7 @@ type EventSession {
   end: DateTime
   tickets: [EventTicket!]!
   ticketCount: Int
+  canTicket: Boolean!
   hasTicket: Boolean!
   seats: Int
   published: Boolean!
