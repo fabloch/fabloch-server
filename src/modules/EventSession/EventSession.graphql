@@ -1,6 +1,6 @@
 type EventSession {
   id: ID!
-  eventModel: EventModel!
+  model: EventModel
   title: String
   description: String
   mainMedia: Media
@@ -19,6 +19,7 @@ type EventSession {
 
 
 type Query {
+  eventModelSessionList(eventModelId: ID!): [EventSession!]!
   eventSessionList(filter: EventSessionFilter): [EventSession!]!
   eventSessionDetail(id: ID!): EventSession!
 }
