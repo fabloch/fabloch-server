@@ -10,19 +10,19 @@ describe("EventModel EventModel resolvers", () => {
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("mainMedia", () => {
-    it("returns the mainMedia", async () => {
+  describe("medias", () => {
+    it("returns the linked medias", async () => {
       await mongo.loadMedias()
       const user = userData[0]
       const context = { mongo, user }
-      const response = await resolvers.EventModel.mainMedia(eventModelData[0], null, context)
-      expect(response).toEqual(mediaData[0])
+      const response = await resolvers.EventModel.medias(eventModelData[0], null, context)
+      expect(response).toEqual([mediaData[0], mediaData[1], mediaData[2], mediaData[3]])
     })
     it("returns null if no linked media", async () => {
       const user = userData[0]
       const context = { mongo, user }
-      const response = await resolvers.EventModel.mainMedia(eventModelData[0], null, context)
-      expect(response).toEqual(null)
+      const response = await resolvers.EventModel.medias(eventModelData[0], null, context)
+      expect(response).toEqual([])
     })
   })
 })

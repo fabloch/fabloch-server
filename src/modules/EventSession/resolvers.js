@@ -1,6 +1,8 @@
 import pubsub from "../../utils/pubsub"
 
 import description from "./EventSession/description"
+import mainMedia from "./EventSession/mainMedia"
+import medias from "./EventSession/medias"
 import place from "./EventSession/place"
 import ticketCount from "./EventSession/ticketCount"
 import tickets from "./EventSession/tickets"
@@ -28,6 +30,8 @@ export default {
   EventSession: {
     id: eventSession => eventSession._id.toString(),
     description: async (eventSession, _, context) => description(eventSession, context),
+    mainMedia: async (eventSession, _, context) => mainMedia(eventSession, context),
+    medias: async (eventSession, _, context) => medias(eventSession, context),
     owner: async (eventSession, _, { mongo: { Users } }) =>
       Users.findOne({ _id: eventSession.ownerId }),
     place: async (eventSession, _, context) => place(eventSession, context),

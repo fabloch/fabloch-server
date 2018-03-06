@@ -4,7 +4,6 @@ import checkMissing from "../../_shared/checkMissing"
 import ValidationError from "../../_shared/ValidationError"
 
 const updateMedia = async (mediaInput, { mongo: { Medias } }) => {
-  console.log("UPDATING")
   const mediaFromDb = await Medias.findOne({ _id: ObjectId(mediaInput.id) })
   if (mediaFromDb) {
     await Medias.update(mediaFromDb, { $set: { ...mediaInput } })
@@ -19,7 +18,6 @@ const saveMedia = async ({ mediaInput }, context) => {
   if (mediaInput.id) {
     return updateMedia(mediaInput, context)
   }
-  console.log("CREATING")
   let errors = []
   errors = checkMissing(
     ["category", "parentId", "parentCollection", "rank"],

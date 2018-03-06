@@ -2,6 +2,7 @@ import pubsub from "../../utils/pubsub"
 
 import place from "./EventModel/place"
 import mainMedia from "./EventModel/mainMedia"
+import medias from "./EventModel/medias"
 import eventModelList from "./Query/eventModelList"
 import eventModelDetail from "./Query/eventModelDetail"
 import createEventModel from "./Mutation/createEventModel"
@@ -26,6 +27,7 @@ export default {
   EventModel: {
     id: eventModel => eventModel._id.toString(),
     mainMedia: async (eventModel, _, context) => mainMedia(eventModel, context),
+    medias: async (eventModel, _, context) => medias(eventModel, context),
     owner: async (eventModel, _, { mongo: { Users } }) =>
       Users.findOne({ _id: eventModel.ownerId }),
     place: async (eventModel, _, context) => place(eventModel, context),

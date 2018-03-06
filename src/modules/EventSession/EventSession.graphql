@@ -3,6 +3,8 @@ type EventSession {
   eventModel: EventModel!
   title: String
   description: String
+  mainMedia: Media
+  medias: [Media!]!
   owner: User!
   start: DateTime
   end: DateTime

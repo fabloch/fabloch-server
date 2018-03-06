@@ -1,8 +1,8 @@
 type EventModel {
   id: ID!
-  mainMedia: Media
   title: String
   description: String
+  mainMedia: Media
   medias: [Media!]!
   owner: User!
   seats: Int
