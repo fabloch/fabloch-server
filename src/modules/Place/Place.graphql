@@ -9,6 +9,8 @@ type Place {
   city: String!
   country: String!
   stateProvince: String
+  lat: Float!
+  lng: Float!
 }
 
 type Query {
