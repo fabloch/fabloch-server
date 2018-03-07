@@ -20,6 +20,7 @@ export default async function () {
     Memberships: db.collection("memberships"),
     Newcomers: db.collection("newcomers"),
     Places: db.collection("places"),
+    EventCats: db.collection("eventCats"),
     Users: db.collection("users"),
   }
 }

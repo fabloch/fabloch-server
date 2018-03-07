@@ -1,0 +1,21 @@
+type EventCat {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  eventCatList: [EventCat!]!
+}
+
+type Mutation {
+  createEventCat(eventCatInput: CreateEventCatInput!): EventCat!
+  deleteEventCat(eventCatInput: UpdateEventCatInput!): Boolean
+  updateEventCat(eventCatId: ID!): EventCat!
+}
+input CreateEventCatInput {
+  name: String!
+}
+input UpdateEventCatInput {
+  id: ID!
+  name: String!
+}

@@ -7,6 +7,7 @@ import membershipResolvers from "../modules/Membership/resolvers"
 import newcomerResolvers from "../modules/Newcomer/resolvers"
 import placeResolvers from "../modules/Place/resolvers"
 import sharedResolvers from "../modules/_shared/resolvers"
+import eventCatResolvers from "../modules/EventCat/resolvers"
 import userResolvers from "../modules/User/resolvers"
 
 const resolvers = [
@@ -18,6 +19,7 @@ const resolvers = [
   newcomerResolvers,
   placeResolvers,
   sharedResolvers,
+  eventCatResolvers,
   userResolvers,
 ]
 

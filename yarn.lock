@@ -1628,9 +1628,9 @@ esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
 
-etag@~1.8.1:
+eeventCat@~1.8.1:
   version "1.8.1"
-  resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
+  resolved "https://registry.yarnpkg.com/eeventCat/-/eeventCat-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
 event-stream@~3.3.0:
   version "3.3.4"
@@ -1717,7 +1717,7 @@ express@^4.16.2:
     depd "~1.1.1"
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
-    etag "~1.8.1"
+    eeventCat "~1.8.1"
     finalhandler "1.1.0"
     fresh "0.5.2"
     merge-descriptors "1.0.1"
@@ -4179,7 +4179,7 @@ send@0.16.1:
     destroy "~1.0.4"
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
-    etag "~1.8.1"
+    eeventCat "~1.8.1"
     fresh "0.5.2"
     http-errors "~1.6.2"
     mime "1.4.1"
