@@ -1,6 +1,7 @@
 import { MongoClient } from "mongodb"
 import {
   admin,
+  eventCatData,
   eventModelData,
   eventSessionData,
   eventTicketData,
@@ -18,6 +19,7 @@ export default async function () {
   const db = await MongoClient.connect(MONGO_TEST_URL)
 
   const beforeEach = async () => {
+    await db.createCollection("eventCats")
     await db.createCollection("eventModels")
     await db.createCollection("eventSessions")
     await db.createCollection("eventTickets")
@@ -29,6 +31,7 @@ export default async function () {
   }
 
   const afterEach = async () => {
+    await db.collection("eventCats").drop()
     await db.collection("eventModels").drop()
     await db.collection("eventSessions").drop()
     await db.collection("eventTickets").drop()
@@ -44,6 +47,7 @@ export default async function () {
   }
 
   const loadAdmin = async () => db.collection("users").insert(admin)
+  const loadEventCats = async () => db.collection("eventCats").insertMany(eventCatData)
   const loadEventModels = async () => db.collection("eventModels").insertMany(eventModelData)
   const loadEventSessions = async () => db.collection("eventSessions").insertMany(eventSessionData)
   const loadEventTickets = async () => db.collection("eventTickets").insertMany(eventTicketData)
@@ -58,6 +62,7 @@ export default async function () {
     afterEach,
     afterAll,
     loadAdmin,
+    loadEventCats,
     loadEventModels,
     loadEventSessions,
     loadEventTickets,
@@ -66,6 +71,7 @@ export default async function () {
     loadNewcomers,
     loadPlaces,
     loadUsers,
+    EventCats: db.collection("eventCats"),
     EventModels: db.collection("eventModels"),
     EventSessions: db.collection("eventSessions"),
     EventTickets: db.collection("eventTickets"),

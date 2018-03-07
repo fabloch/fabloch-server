@@ -29,6 +29,30 @@ export const admin = {
   roles: ["admin"],
   version: 1,
 }
+
+export const eventCatData = [
+  {
+    _id: ObjectId("5a9feeac60363661402c1ce4"),
+    name: "3D Printing",
+    description: "3D Printing is really cool to give life to 3D objects",
+  },
+  {
+    _id: ObjectId("5a9feeb060363661402c1ce6"),
+    name: "Lasercut",
+    description: "Lasercutting wood, plexiglas, etc.",
+  },
+  {
+    _id: ObjectId("5a9feeb560363661402c1ce8"),
+    name: "Ecology",
+    description: "Ecology",
+  },
+  {
+    _id: ObjectId("5a9feeb860363661402c1cea"),
+    name: "Maritime",
+    description: "Anything about the sea",
+  },
+]
+
 export const eventModelData = [
   {
     _id: ObjectId("5a4a5eb6404da6d636078beb"),
@@ -37,12 +61,24 @@ export const eventModelData = [
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
     placeId: ObjectId("5a5e17f5b16e8350cd5c036d"),
+    eventCats: [
+      {
+        id: ObjectId("5a9feeac60363661402c1ce4"),
+        name: "3D Printing",
+      },
+    ],
   },
   {
     _id: ObjectId("5a4a5ee36454c9d6369cca5f"),
     title: "EventModel 1 (1A published, 1B no)",
     description: "This event has two sessions: 1A and 1B\nA is published.",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+    eventCats: [
+      {
+        _id: ObjectId("5a9feeb060363661402c1ce6"),
+        name: "Lasercut",
+      },
+    ],
   },
 ]
 export const eventSessionData = [
@@ -54,6 +90,12 @@ export const eventSessionData = [
     start: dateUtils.eventSession0Astart,
     end: dateUtils.eventSession0Aend,
     published: true,
+    eventCats: [
+      {
+        id: ObjectId("5a9feeb560363661402c1ce8"),
+        name: "Ecology",
+      },
+    ],
   },
   {
     hint: "Session 0B for EventModel 0",
@@ -76,6 +118,12 @@ export const eventSessionData = [
     start: dateUtils.eventSession1Astart,
     end: dateUtils.eventSession1Aend,
     published: true,
+    eventCats: [
+      {
+        id: ObjectId("5a9feeb560363661402c1ce8"),
+        name: "Ecology",
+      },
+    ],
   },
   {
     hint: "Session 1B for EventModel 1",
@@ -270,6 +318,7 @@ const loadFixtures = async () => {
   db.dropDatabase()
 
   await db.collection("users").insert(admin)
+  await db.collection("eventCats").insertMany(eventCatData)
   await db.collection("eventModels").insertMany(eventModelData)
   await db.collection("eventSessions").insertMany(eventSessionData)
   await db.collection("eventTickets").insertMany(eventTicketData)
