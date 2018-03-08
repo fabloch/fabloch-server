@@ -19,6 +19,8 @@ type Query {
 
 type Mutation {
   createPlace(placeInput: CreatePlaceInput): Place!
+  deletePlace(placeInputId: ID!): Boolean
+  updatePlace(placeInput: UpdatePlaceInput): Place!
 }
 input CreatePlaceInput {
   title: String!
@@ -28,4 +30,18 @@ input CreatePlaceInput {
   city: String!
   country: String!
   stateProvince: String!
+  lat: Float
+  lng: Float
+}
+input UpdatePlaceInput {
+  id: ID!
+  title: String
+  street1: String
+  street2: String
+  zipCode: String
+  city: String
+  country: String
+  stateProvince: String
+  lat: Float
+  lng: Float
 }

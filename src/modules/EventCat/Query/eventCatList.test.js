@@ -11,11 +11,11 @@ describe("EventCat Query resolvers", () => {
   afterAll(async () => { await mongo.afterAll() })
 
   describe("eventCatList", () => {
-    it("returns all EventCats", async () => {
+    it("returns all EventCats in alphabetical order", async () => {
       await mongo.loadEventCats()
       const context = { mongo }
       const response = await resolvers.Query.eventCatList(null, null, context)
-      expect(response).toEqual(eventCatData)
+      expect(response).toEqual([eventCatData[0], eventCatData[2], eventCatData[1], eventCatData[3]])
     })
     it("returns null if no EventCats", async () => {
       const context = { mongo }

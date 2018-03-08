@@ -9,8 +9,8 @@ type Query {
 
 type Mutation {
   createEventCat(eventCatInput: CreateEventCatInput!): EventCat!
-  deleteEventCat(eventCatInput: UpdateEventCatInput!): Boolean
-  updateEventCat(eventCatId: ID!): EventCat!
+  deleteEventCat(eventCatId: ID!): Boolean
+  updateEventCat(eventCatInput: UpdateEventCatInput!): EventCat!
 }
 input CreateEventCatInput {
   name: String!

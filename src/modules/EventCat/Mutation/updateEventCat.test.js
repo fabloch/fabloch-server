@@ -1,6 +1,6 @@
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { admin, eventCatData } from "../../../testUtils/fixtures"
+import { admin, eventCatData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
@@ -67,6 +67,21 @@ describe("EventCat Mutation resolvers", () => {
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({ main: ["Unauthenticated."] })
+      }
+    })
+    it("raises an error if not admin", async () => {
+      expect.assertions(2)
+      const user = userData[0]
+      const context = { mongo, user }
+      const eventCatInput = {
+        id: eventCatData[0]._id.toString(),
+        name: "Awesome EventCat",
+      }
+      try {
+        await resolvers.Mutation.updateEventCat(null, { eventCatInput }, context)
+      } catch (e) {
+        expect(e.message).toEqual("The request is invalid.")
+        expect(e.state).toEqual({ main: ["Not allowed."] })
       }
     })
     it("raises if no name", async () => {
