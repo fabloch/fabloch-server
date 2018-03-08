@@ -3,12 +3,13 @@ import medias from "./Place/medias"
 import createPlace from "./Mutation/createPlace"
 import updatePlace from "./Mutation/updatePlace"
 import deletePlace from "./Mutation/deletePlace"
-
 import placeList from "./Query/placeList"
+import placeDetail from "./Query/placeDetail"
 
 export default {
   Query: {
     placeList: async (_, data, context) => placeList(data, context),
+    placeDetail: async (_, data, context) => placeDetail(data, context),
   },
   Mutation: {
     createPlace: async (_, data, context) => createPlace(data, context),

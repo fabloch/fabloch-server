@@ -1,8 +1,8 @@
 type Place {
   id: ID!
-  # mainMedia: Media
+  mainMedia: Media
   title: String!
-  # medias: [Media!]!
+  medias: [Media!]!
   street1: String
   street2: String
   zipCode: String!
@@ -16,6 +16,7 @@ type Place {
 
 type Query {
   placeList(all: Boolean): [Place!]!
+  placeDetail(id: ID!): Place!
 }
 
 type Mutation {
