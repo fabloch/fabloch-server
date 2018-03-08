@@ -21,6 +21,8 @@ describe("Place Mutation resolvers", () => {
         street1: "street1",
         zipCode: "zipCode",
         city: "city",
+        country: "france",
+        published: true,
         lat: "1.1",
         lng: "1.1",
       }
@@ -37,10 +39,11 @@ describe("Place Mutation resolvers", () => {
         street1: "street1",
         zipCode: "zipCode",
         city: "city",
-        country: undefined,
+        country: "france",
+        stateProvince: null,
+        published: true,
         lat: "1.1",
         lng: "1.1",
-        stateProvince: null,
       }
       const response = await resolvers.Mutation.updatePlace(null, { placeInput }, context)
       expect(response.title).toEqual(placeInput.title)
@@ -61,6 +64,8 @@ describe("Place Mutation resolvers", () => {
           street1: ["Missing street1."],
           zipCode: ["Missing zip code."],
           city: ["Missing city."],
+          country: ["Missing country."],
+          published: ["Missing published."],
           lat: ["Missing lat."],
           lng: ["Missing lng."],
         })
@@ -76,6 +81,8 @@ describe("Place Mutation resolvers", () => {
         street1: "street1",
         zipCode: "zipCode",
         city: "city",
+        country: "france",
+        published: true,
         lat: "1.1",
         lng: "1.1",
       }
@@ -96,6 +103,8 @@ describe("Place Mutation resolvers", () => {
         street1: "street1",
         zipCode: "zipCode",
         city: "city",
+        country: "france",
+        published: true,
         lat: "1.1",
         lng: "1.1",
       }

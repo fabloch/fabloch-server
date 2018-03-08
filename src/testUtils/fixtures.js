@@ -75,7 +75,7 @@ export const eventModelData = [
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     eventCats: [
       {
-        _id: ObjectId("5a9feeb060363661402c1ce6"),
+        id: ObjectId("5a9feeb060363661402c1ce6"),
         name: "Lasercut",
       },
     ],
@@ -152,6 +152,7 @@ export const eventTicketData = [
 
 export const mediaData = [
   {
+    hint: "Main image for event 0",
     _id: ObjectId("5a5e2489b16e8350cd5c0d21"),
     title: "Hero Découpe Laser (eventModel)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/hero-decoupe_laser.jpg",
@@ -161,6 +162,7 @@ export const mediaData = [
     rank: 0,
   },
   {
+    hint: "image 1 for event 0",
     _id: ObjectId("5a9d83f4a7ada82940426897"),
     title: "Vidéo de présentation (eventModel)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/youtube1.jpg",
@@ -171,6 +173,7 @@ export const mediaData = [
     rank: 1,
   },
   {
+    hint: "image 2 for event 0",
     _id: ObjectId("5a9d83fea7ada82940426899"),
     title: "Hero Découpe Laser (eventModel)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/robot-servo-arduino.jpg",
@@ -180,6 +183,7 @@ export const mediaData = [
     rank: 2,
   },
   {
+    hint: "image 3 for event 0",
     _id: ObjectId("5a9d8402a7ada8294042689b"),
     title: "Test1 (eventModel)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/test1.jpg",
@@ -189,6 +193,7 @@ export const mediaData = [
     rank: 3,
   },
   {
+    hint: "main image for event Session 0B",
     _id: ObjectId("5a9d8407a7ada8294042689d"),
     title: "Test2 (eventSession)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/test2.jpg",
@@ -198,6 +203,7 @@ export const mediaData = [
     rank: 0,
   },
   {
+    hint: "image 1 for event Session 0B",
     _id: ObjectId("5a9d840aa7ada8294042689f"),
     title: "Test3 (eventSession)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/test3.jpg",
@@ -206,6 +212,38 @@ export const mediaData = [
     parentCollection: "EventSessions",
     rank: 1,
   },
+  {
+    hint: "main image for Place 0",
+    _id: ObjectId("5aa14a2bcf9f840b7c9d3ad7"),
+    title: "Hero Découpe Laser (eventModel)",
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/hero-decoupe_laser.jpg",
+    category: "IMAGE",
+    parentId: ObjectId("5a5e17f5b16e8350cd5c036d"),
+    parentCollection: "Places",
+    rank: 0,
+  },
+  {
+    hint: "image 1 for Place 0",
+    _id: ObjectId("5aa14a2bcf9f840b7c9d3ad8"),
+    title: "Vidéo de présentation (place)",
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/youtube1.jpg",
+    sourceUrl: "https://youtu.be/sJPPCtlQQrQ",
+    category: "YOUTUBE",
+    parentId: ObjectId("5a5e17f5b16e8350cd5c036d"),
+    parentCollection: "Places",
+    rank: 1,
+  },
+  {
+    hint: "image 2 for Place 0",
+    _id: ObjectId("5aa14a2bcf9f840b7c9d3ad9"),
+    title: "Hero Découpe Laser (place)",
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/robot-servo-arduino.jpg",
+    category: "IMAGE",
+    parentId: ObjectId("5a4a5eb6404da6d636078beb"),
+    parentCollection: "Places",
+    rank: 2,
+  },
+
 ]
 
 export const membershipData = [
@@ -312,6 +350,19 @@ export const userData = [
   },
 ]
 
+const idGenerator = [
+  { a: true },
+  { a: true },
+  { a: true },
+  { a: true },
+  { a: true },
+  { a: true },
+  { a: true },
+  { a: true },
+  { a: true },
+  { a: true },
+]
+
 const loadFixtures = async () => {
   const db = await MongoClient.connect("mongodb://localhost:27017/fabloch-server")
 
@@ -327,6 +378,7 @@ const loadFixtures = async () => {
   await db.collection("newcomers").insertMany(newcomerData)
   await db.collection("places").insertMany(placeData)
   await db.collection("users").insertMany(userData)
+  await db.collection("randomIds").insertMany(idGenerator)
 
   db.close()
 }

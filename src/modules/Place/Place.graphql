@@ -9,39 +9,42 @@ type Place {
   city: String!
   country: String!
   stateProvince: String
+  published: Boolean
   lat: Float!
   lng: Float!
 }
 
 type Query {
-  placeList(all: Boolean = true): [Place!]!
+  placeList(all: Boolean): [Place!]!
 }
 
 type Mutation {
   createPlace(placeInput: CreatePlaceInput): Place!
-  deletePlace(placeInputId: ID!): Boolean
+  deletePlace(placeId: ID!): Boolean
   updatePlace(placeInput: UpdatePlaceInput): Place!
 }
 input CreatePlaceInput {
   title: String!
-  street1: String
+  street1: String!
   street2: String
   zipCode: String!
   city: String!
   country: String!
-  stateProvince: String!
-  lat: Float
-  lng: Float
+  stateProvince: String
+  published: Boolean!
+  lat: Float!
+  lng: Float!
 }
 input UpdatePlaceInput {
   id: ID!
-  title: String
-  street1: String
+  title: String!
+  street1: String!
   street2: String
-  zipCode: String
-  city: String
-  country: String
+  zipCode: String!
+  city: String!
+  country: String!
   stateProvince: String
-  lat: Float
-  lng: Float
+  published: Boolean!
+  lat: Float!
+  lng: Float!
 }

@@ -15,21 +15,28 @@ const updatePlace = async (
 
   let errors = []
   errors = checkMissing([
+    "id",
     "title",
+    "published",
     "street1",
     "zipCode",
     "city",
+    "country",
     "lat",
     "lng"], placeInput, errors)
   if (errors.length) throw new ValidationError(errors)
 
   const _id = ObjectId(placeInput.id)
+  const place = placeInput
+  delete place.id
+  place._id = _id
+
   await Places.update({ _id }, placeInput)
 
   await EventModels.updateMany({ "places.id": _id }, { $set: { "places.$.name": placeInput.name } })
   await EventSessions.updateMany({ "places.id": _id }, { $set: { "places.$.name": placeInput.name } })
 
-  return placeInput
+  return place
 }
 
 export default updatePlace
