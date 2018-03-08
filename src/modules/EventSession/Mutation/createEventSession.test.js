@@ -37,13 +37,14 @@ describe("createEventSession", () => {
         eventModelId: eventModelData[0]._id,
       })
     })
-    it("returns title, description, seats", async () => {
+    it("returns title, intro, description, seats", async () => {
       await mongo.loadEventModels()
       const user = userData[0]
       const context = { mongo, user }
       const eventSessionInput = {
         eventModelId: eventModelData[0]._id.toString(),
         title: "A title",
+        intro: "Introduction",
         description: "A description",
         seat: 10,
       }
@@ -53,6 +54,7 @@ describe("createEventSession", () => {
         eventModelId: eventModelData[0]._id,
         ownerId: user._id,
         title: "A title",
+        intro: "Introduction",
         description: "A description",
         seat: 10,
       })
@@ -64,6 +66,7 @@ describe("createEventSession", () => {
       const eventSessionInput = {
         eventModelId: eventModelData[0]._id.toString(),
         title: "A title",
+        intro: "Introduction",
         description: "A description",
         seat: 10,
       }
@@ -74,6 +77,7 @@ describe("createEventSession", () => {
         eventModelId: eventModelData[0]._id,
         ownerId: user._id,
         title: "A title",
+        intro: "Introduction",
         description: "A description",
         seat: 10,
       })

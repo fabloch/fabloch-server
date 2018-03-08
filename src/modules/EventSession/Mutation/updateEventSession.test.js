@@ -11,13 +11,14 @@ describe("updateEventSession", () => {
   afterAll(async () => { await mongo.afterAll() })
 
   describe("valid", async () => {
-    it("returns with updated title, description and seats", async () => {
+    it("returns with updated title, intro, description and seats", async () => {
       await mongo.loadEventSessions()
       const user = userData[0]
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
         title: "Updated title",
+        intro: "Updated introduction",
         description: "Updated description",
         seat: "12345",
       }
@@ -26,6 +27,7 @@ describe("updateEventSession", () => {
       expect(response).toMatchObject({
         ...eventSessionData[0],
         title: "Updated title",
+        intro: "Updated introduction",
         description: "Updated description",
         seat: "12345",
       })
@@ -37,6 +39,7 @@ describe("updateEventSession", () => {
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
         title: "Updated title",
+        intro: "Updated introduction",
         description: "Updated description",
         seat: "12345",
       }
@@ -45,6 +48,7 @@ describe("updateEventSession", () => {
       expect(eventSession).toMatchObject({
         ...eventSessionData[0],
         title: "Updated title",
+        intro: "Updated introduction",
         description: "Updated description",
         seat: "12345",
       })

@@ -11,13 +11,14 @@ describe("updateEventModel", () => {
   afterAll(async () => { await mongo.afterAll() })
 
   describe("valid", async () => {
-    it("returns with updated title, description and seats", async () => {
+    it("returns with updated title, intro, description and seats", async () => {
       await mongo.loadEventModels()
       const user = userData[0]
       const context = { mongo, user }
       const eventModelInput = {
         id: eventModelData[0]._id.toString(),
         title: "Updated title",
+        intro: "Updated intro",
         description: "Updated description",
         seat: "12345",
       }
@@ -25,17 +26,19 @@ describe("updateEventModel", () => {
       expect(response).toMatchObject({
         ...eventModelData[0],
         title: "Updated title",
+        intro: "Updated intro",
         description: "Updated description",
         seat: "12345",
       })
     })
-    it("stores updated title, description and seats", async () => {
+    it("stores updated title, intro, description and seats", async () => {
       await mongo.loadEventModels()
       const user = userData[0]
       const context = { mongo, user }
       const eventModelInput = {
         id: eventModelData[0]._id.toString(),
         title: "Updated title",
+        intro: "Updated intro",
         description: "Updated description",
         seat: "12345",
       }
@@ -44,6 +47,7 @@ describe("updateEventModel", () => {
       expect(eventModel).toMatchObject({
         ...eventModelData[0],
         title: "Updated title",
+        intro: "Updated intro",
         description: "Updated description",
         seat: "12345",
       })

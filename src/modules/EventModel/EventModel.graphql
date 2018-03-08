@@ -1,6 +1,7 @@
 type EventModel {
   id: ID!
   title: String
+  intro: String
   description: String
   mainMedia: Media
   medias: [Media!]!
@@ -18,6 +19,7 @@ type Query {
 input EventModelFilter {
   OR: [EventModelFilter!]
   title_contains: String
+  intro_contains: String
   description_contains: String
 }
 
@@ -28,6 +30,7 @@ type Mutation {
 }
 input CreateEventModelInput {
   title: String
+  intro: String
   description: String
   seats: Int
   placeId: ID
@@ -35,6 +38,7 @@ input CreateEventModelInput {
 input UpdateEventModelInput {
   id: ID!
   title: String
+  intro: String
   description: String
   seats: Int
   placeId: ID

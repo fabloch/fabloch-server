@@ -32,6 +32,7 @@ describe("EventModel Query resolvers", () => {
         const filter = {
           OR: [
             { title_contains: "awesome" },
+            { intro_contains: "awesome" },
             { description_contains: "awesome" },
           ],
         }

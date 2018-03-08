@@ -57,6 +57,7 @@ export const eventModelData = [
   {
     _id: ObjectId("5a4a5eb6404da6d636078beb"),
     title: "This is EventModel 0 title (shows in A, not B)",
+    intro: "This is EventModel 0 intro",
     description: "This is EventModel 0 description.\nShould show in A not in B.",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
@@ -71,6 +72,7 @@ export const eventModelData = [
   {
     _id: ObjectId("5a4a5ee36454c9d6369cca5f"),
     title: "EventModel 1 (1A published, 1B no)",
+    intro: "Intro 1 (1A published, 1B no)",
     description: "This event has two sessions: 1A and 1B\nA is published.",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     eventCats: [
@@ -103,6 +105,7 @@ export const eventSessionData = [
     eventModelId: ObjectId("5a4a5eb6404da6d636078beb"),
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     title: "Session B title (override)",
+    intro: "Session B intro (override)",
     description: "Session B description (override).\nIs also overriding place and seats",
     start: dateUtils.eventSession0Bstart,
     end: dateUtils.eventSession0Bend,

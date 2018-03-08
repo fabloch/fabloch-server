@@ -2,6 +2,7 @@ type EventSession {
   id: ID!
   model: EventModel
   title: String
+  intro: String
   description: String
   mainMedia: Media
   medias: [Media!]!
@@ -26,6 +27,7 @@ type Query {
 input EventSessionFilter {
   OR: [EventSessionFilter!]
   title_contains: String
+  intro_contains: String
   description_contains: String
 }
 
@@ -37,6 +39,7 @@ type Mutation {
 input CreateEventSessionInput {
   eventModel: ID!
   title: String
+  intro: String
   description: String
   seats: Int
   start: DateTime
@@ -46,6 +49,7 @@ input CreateEventSessionInput {
 input UpdateEventSessionInput {
   id: ID!
   title: String
+  intro: String
   description: String
   seats: Int
   start: DateTime

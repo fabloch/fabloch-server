@@ -20,11 +20,12 @@ describe("createEventModel", () => {
         ownerId: user._id,
       })
     })
-    it("returns title, description, seats", async () => {
+    it("returns title, intro, description, seats", async () => {
       const user = userData[0]
       const context = { mongo, user }
       const eventModelInput = {
         title: "A title",
+        intro: "An intro",
         description: "A description",
         seat: 10,
       }
@@ -32,6 +33,7 @@ describe("createEventModel", () => {
       expect(response).toMatchObject({
         ownerId: user._id,
         title: "A title",
+        intro: "An intro",
         description: "A description",
         seat: 10,
       })
@@ -41,6 +43,7 @@ describe("createEventModel", () => {
       const context = { mongo, user }
       const eventModelInput = {
         title: "A title",
+        intro: "An intro",
         description: "A description",
         seat: 10,
       }
@@ -49,6 +52,7 @@ describe("createEventModel", () => {
       expect(eventModel).toMatchObject({
         ownerId: user._id,
         title: "A title",
+        intro: "An intro",
         description: "A description",
         seat: 10,
       })
