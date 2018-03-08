@@ -33,4 +33,5 @@ enum MediaCategory {
 enum ParentCollection {
   EventModels
   EventSessions
+  Places
 }

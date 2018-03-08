@@ -1,3 +1,5 @@
+import mainMedia from "./Place/mainMedia"
+import medias from "./Place/medias"
 import createPlace from "./Mutation/createPlace"
 import updatePlace from "./Mutation/updatePlace"
 import deletePlace from "./Mutation/deletePlace"
@@ -15,5 +17,7 @@ export default {
   },
   Place: {
     id: place => place._id.toString(),
+    mainMedia: async (eventModel, _, context) => mainMedia(eventModel, context),
+    medias: async (eventModel, _, context) => medias(eventModel, context),
   },
 }

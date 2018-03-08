@@ -239,7 +239,7 @@ export const mediaData = [
     title: "Hero Découpe Laser (place)",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/robot-servo-arduino.jpg",
     category: "IMAGE",
-    parentId: ObjectId("5a4a5eb6404da6d636078beb"),
+    parentId: ObjectId("5a5e17f5b16e8350cd5c036d"),
     parentCollection: "Places",
     rank: 2,
   },
