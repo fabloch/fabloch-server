@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { admin, eventSessionData, mediaData } from "../../../testUtils/fixtures"
+import { admin, eventModelData, eventSessionData, mediaData } from "../../../testUtils/fixtures"
 
 let mongo
 
@@ -23,7 +23,7 @@ describe("saveMedia", () => {
         picUrl: "http://www.url.com/",
       }
       const response = await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
-      expect(response).toMatchObject(mediaInput)
+      expect(response).toMatchObject({ ...mediaInput, parentId: eventSessionData[0]._id })
     })
     it("creates an LINK media", async () => {
       const user = admin
@@ -36,7 +36,7 @@ describe("saveMedia", () => {
         sourceUrl: "http://www.url.com/",
       }
       const response = await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
-      expect(response).toMatchObject(mediaInput)
+      expect(response).toMatchObject({ ...mediaInput, parentId: eventSessionData[0]._id })
     })
   })
   describe("update", () => {
@@ -49,7 +49,10 @@ describe("saveMedia", () => {
         picUrl: "http://www.new-url.com/",
       }
       const response = await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
-      expect(response).toMatchObject({ ...mediaInput, title: mediaData[0].title })
+      expect(response).toMatchObject({
+        parentId: eventModelData[0]._id,
+        picUrl: "http://www.new-url.com/",
+      })
     })
     it("updates rank", async () => {
       await mongo.loadMedias()
@@ -60,7 +63,11 @@ describe("saveMedia", () => {
         rank: 2,
       }
       const response = await resolvers.Mutation.saveMedia(null, { mediaInput }, context)
-      expect(response).toMatchObject({ ...mediaInput, title: mediaData[0].title })
+      expect(response).toMatchObject({
+        rank: 2,
+        parentId: eventModelData[0]._id,
+        title: mediaData[0].title,
+      })
     })
   })
   describe("Errors", () => {
