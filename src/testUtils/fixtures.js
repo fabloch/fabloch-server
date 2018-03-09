@@ -35,21 +35,25 @@ export const eventCatData = [
     _id: ObjectId("5a9feeac60363661402c1ce4"),
     name: "3D Printing",
     description: "3D Printing is really cool to give life to 3D objects",
+    color: "blue",
   },
   {
     _id: ObjectId("5a9feeb060363661402c1ce6"),
     name: "Lasercut",
     description: "Lasercutting wood, plexiglas, etc.",
+    color: "green",
   },
   {
     _id: ObjectId("5a9feeb560363661402c1ce8"),
     name: "Ecology",
     description: "Ecology",
+    color: "orange",
   },
   {
     _id: ObjectId("5a9feeb860363661402c1cea"),
     name: "Maritime",
     description: "Anything about the sea",
+    color: "yellow",
   },
 ]
 
@@ -66,6 +70,7 @@ export const eventModelData = [
       {
         id: ObjectId("5a9feeac60363661402c1ce4"),
         name: "3D Printing",
+        color: "blue",
       },
     ],
   },
@@ -79,6 +84,7 @@ export const eventModelData = [
       {
         id: ObjectId("5a9feeb060363661402c1ce6"),
         name: "Lasercut",
+        color: "green",
       },
     ],
   },
@@ -92,10 +98,11 @@ export const eventSessionData = [
     start: dateUtils.eventSession0Astart,
     end: dateUtils.eventSession0Aend,
     published: true,
-    eventCats: [
+    eventCatsSuper: [
       {
         id: ObjectId("5a9feeb560363661402c1ce8"),
         name: "Ecology",
+        color: "orange",
       },
     ],
   },
@@ -104,13 +111,13 @@ export const eventSessionData = [
     _id: ObjectId("5a95c526c14e2a0ce4eea6f8"),
     eventModelId: ObjectId("5a4a5eb6404da6d636078beb"),
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
-    title: "Session B title (override)",
-    intro: "Session B intro (override)",
-    description: "Session B description (override).\nIs also overriding place and seats",
+    titleSuper: "Session B title (override)",
+    introSuper: "Session B intro (override)",
+    descriptionSuper: "Session B description (override).\nIs also overriding place and seats",
     start: dateUtils.eventSession0Bstart,
     end: dateUtils.eventSession0Bend,
-    placeId: ObjectId("5a5e17feb16e8350cd5c0372"),
-    seats: 1,
+    placeSuperId: ObjectId("5a5e17feb16e8350cd5c0372"),
+    seatsSuper: 1,
     published: true,
   },
   {
@@ -121,10 +128,11 @@ export const eventSessionData = [
     start: dateUtils.eventSession1Astart,
     end: dateUtils.eventSession1Aend,
     published: true,
-    eventCats: [
+    eventCatsSuper: [
       {
         id: ObjectId("5a9feeb560363661402c1ce8"),
         name: "Ecology",
+        color: "orange",
       },
     ],
   },

@@ -19,11 +19,21 @@ const updateEventCat = async (
 
   const _id = ObjectId(eventCatInput.id)
   const eventCatFromDb = await EventCats.findOne({ _id })
-  const updatedEventCat = { ...eventCatFromDb, name: eventCatInput.name }
+  const updatedEventCat = {
+    ...eventCatFromDb,
+    name: eventCatInput.name,
+    color: eventCatInput.color,
+  }
   await EventCats.update(eventCatFromDb, updatedEventCat)
 
-  await EventModels.updateMany({ "eventCats.id": _id }, { $set: { "eventCats.$.name": eventCatInput.name } })
-  await EventSessions.updateMany({ "eventCats.id": _id }, { $set: { "eventCats.$.name": eventCatInput.name } })
+  await EventModels.updateMany(
+    { "eventCats.id": _id },
+    { $set: { "eventCats.$.name": eventCatInput.name, "eventCats.$.color": eventCatInput.color } },
+  )
+  await EventSessions.updateMany(
+    { "eventCats.id": _id },
+    { $set: { "eventCats.$.name": eventCatInput.name, "eventCats.$.color": eventCatInput.color } },
+  )
 
   return updatedEventCat
 }

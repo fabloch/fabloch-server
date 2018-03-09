@@ -17,6 +17,7 @@ describe("EventCat Mutation resolvers", () => {
       const context = { mongo, user }
       const eventCatInput = {
         name: "Awesome EventCat",
+        color: "red",
       }
       const response = await resolvers.Mutation.createEventCat(null, { eventCatInput }, context)
       expect(response).toMatchObject(eventCatInput)
