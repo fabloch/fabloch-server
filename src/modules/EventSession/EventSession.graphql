@@ -16,6 +16,7 @@ type EventSession {
   seats: Int
   published: Boolean!
   place: Place
+  eventCats: [EventCat!]!
 }
 
 
