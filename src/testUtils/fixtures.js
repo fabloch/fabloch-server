@@ -35,21 +35,25 @@ export const eventCatData = [
     _id: ObjectId("5a9feeac60363661402c1ce4"),
     name: "3D Printing",
     description: "3D Printing is really cool to give life to 3D objects",
+    color: "blue",
   },
   {
     _id: ObjectId("5a9feeb060363661402c1ce6"),
     name: "Lasercut",
     description: "Lasercutting wood, plexiglas, etc.",
+    color: "green",
   },
   {
     _id: ObjectId("5a9feeb560363661402c1ce8"),
     name: "Ecology",
     description: "Ecology",
+    color: "orange",
   },
   {
     _id: ObjectId("5a9feeb860363661402c1cea"),
     name: "Maritime",
     description: "Anything about the sea",
+    color: "yellow",
   },
 ]
 
@@ -66,6 +70,7 @@ export const eventModelData = [
       {
         id: ObjectId("5a9feeac60363661402c1ce4"),
         name: "3D Printing",
+        color: "blue",
       },
     ],
   },
@@ -79,6 +84,7 @@ export const eventModelData = [
       {
         id: ObjectId("5a9feeb060363661402c1ce6"),
         name: "Lasercut",
+        color: "green",
       },
     ],
   },
@@ -96,6 +102,7 @@ export const eventSessionData = [
       {
         id: ObjectId("5a9feeb560363661402c1ce8"),
         name: "Ecology",
+        color: "orange",
       },
     ],
   },
@@ -125,6 +132,7 @@ export const eventSessionData = [
       {
         id: ObjectId("5a9feeb560363661402c1ce8"),
         name: "Ecology",
+        color: "orange",
       },
     ],
   },
