@@ -64,7 +64,7 @@ export const eventModelData = [
     placeId: ObjectId("5a5e17f5b16e8350cd5c036d"),
     eventCats: [
       {
-        _id: ObjectId("5a9feeac60363661402c1ce4"),
+        id: ObjectId("5a9feeac60363661402c1ce4"),
         name: "3D Printing",
       },
     ],
@@ -77,7 +77,7 @@ export const eventModelData = [
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     eventCats: [
       {
-        _id: ObjectId("5a9feeb060363661402c1ce6"),
+        id: ObjectId("5a9feeb060363661402c1ce6"),
         name: "Lasercut",
       },
     ],
@@ -94,7 +94,7 @@ export const eventSessionData = [
     published: true,
     eventCats: [
       {
-        _id: ObjectId("5a9feeb560363661402c1ce8"),
+        id: ObjectId("5a9feeb560363661402c1ce8"),
         name: "Ecology",
       },
     ],
@@ -123,7 +123,7 @@ export const eventSessionData = [
     published: true,
     eventCats: [
       {
-        _id: ObjectId("5a9feeb560363661402c1ce8"),
+        id: ObjectId("5a9feeb560363661402c1ce8"),
         name: "Ecology",
       },
     ],

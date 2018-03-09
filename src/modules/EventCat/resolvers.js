@@ -13,6 +13,9 @@ export default {
     updateEventCat: async (_, data, context) => updateEventCat(data, context),
   },
   EventCat: {
-    id: eventCat => eventCat._id.toString(),
+    id: (eventCat) => {
+      if (eventCat._id) { return eventCat._id.toString() }
+      return eventCat.id
+    },
   },
 }
