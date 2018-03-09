@@ -1,6 +1,7 @@
 const checkForbidden = (fields, object, errors) => {
+  console.log("object", object)
   fields.map((field) => {
-    if (object.hasOwnProperty(field)) {
+    if (field in object) {
       const stringifiedField = field.replace(/([A-Z])/, " $1").toLowerCase()
       errors.push({
         key: field,

@@ -22,7 +22,7 @@ type EventSession {
   place: Place
   placeSuper: Place
   eventCats: [EventCat!]!
-  eventCatsSuper: [EventCat!]!
+  eventCatsSuper: [EventCat!]
 }
 
 
@@ -45,23 +45,23 @@ type Mutation {
 }
 input CreateEventSessionInput {
   eventModel: ID!
-  title: String
-  intro: String
-  description: String
-  seats: Int
+  titleSuper: String
+  introSuper: String
+  descriptionSuper: String
+  seatsSuper: Int
   start: DateTime
   end: DateTime
-  placeId: ID
+  placeSuperId: ID
 }
 input UpdateEventSessionInput {
   id: ID!
-  title: String
-  intro: String
-  description: String
-  seats: Int
+  titleSuper: String
+  introSuper: String
+  descriptionSuper: String
+  seatsSuper: Int
   start: DateTime
   end: DateTime
-  placeId: ID
+  placeSuperId: ID
 }
 
 type Subscription {
