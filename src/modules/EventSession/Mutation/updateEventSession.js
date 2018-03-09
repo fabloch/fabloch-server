@@ -4,6 +4,7 @@ import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
 import isOwnerOrAdmin from "../../_shared/isOwnerOrAdmin"
 import ValidationError from "../../_shared/ValidationError"
 import checkEventDates from "./checkEventDates"
+import checkForbidden from "../../_shared/checkForbidden"
 
 const updateEventSession = async ({ eventSessionInput }, { mongo: { EventSessions }, user }) => {
   if (!eventSessionInput.id) throw new ValidationError([{ key: "main", message: "No id provided." }])
@@ -14,6 +15,11 @@ const updateEventSession = async ({ eventSessionInput }, { mongo: { EventSession
   }
   let errors = []
   errors = checkEventDates(eventSessionInput, errors)
+  checkForbidden(
+    ["title", "intro", "description", "seats", "placeId", "eventCats"],
+    eventSessionInput,
+    errors,
+  )
   if (errors.length) throw new ValidationError(errors)
 
   const eventSession = eventSessionInput
@@ -23,8 +29,8 @@ const updateEventSession = async ({ eventSessionInput }, { mongo: { EventSession
   if (eventSession.ownerId) {
     eventSession.ownerId = ObjectId(eventSession.ownerId)
   }
-  if (eventSession.placeId) {
-    eventSession.placeId = ObjectId(eventSession.placeId)
+  if (eventSession.placeSuperId) {
+    eventSession.placeSuperId = ObjectId(eventSession.placeSuperId)
   }
   await EventSessions.update(
     { _id: eventSessionFromDb._id },

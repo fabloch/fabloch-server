@@ -1,5 +1,5 @@
 const place = async (eventSession, { mongo: { Places, EventModels } }) => {
-  const eventSessionPlace = await Places.findOne({ _id: eventSession.placeId })
+  const eventSessionPlace = await Places.findOne({ _id: eventSession.placeSuperId })
   if (eventSessionPlace) {
     return eventSessionPlace
   }

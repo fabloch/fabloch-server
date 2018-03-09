@@ -3,6 +3,7 @@ import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
 import checkEventDates from "./checkEventDates"
 import pubsub from "../../../utils/pubsub"
 import ValidationError from "../../_shared/ValidationError"
+import checkForbidden from "../../_shared/checkForbidden"
 
 const createEventSession = async (
   { eventSessionInput },
@@ -14,13 +15,18 @@ const createEventSession = async (
   if (!eventModel) throw new ValidationError([{ key: "main", message: "Parent eventModel does not exist." }])
 
   let errors = []
+  checkForbidden(
+    ["title", "intro", "description", "seats", "placeId", "eventCats"],
+    eventSessionInput,
+    errors,
+  )
   errors = checkEventDates(eventSessionInput, errors)
   if (errors.length) throw new ValidationError(errors)
 
   const eventSession = eventSessionInput
   eventSession.ownerId = user._id
   eventSession.eventModelId = eventModel._id
-  if (eventSession.placeId) { eventSession.placeId = ObjectId(eventSession.placeId) }
+  if (eventSession.placeSuperId) { eventSession.placeSuperId = ObjectId(eventSession.placeSuperId) }
   const response = await EventSessions.insert(eventSession)
   const [_id] = response.insertedIds
   eventSession._id = _id

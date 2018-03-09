@@ -2,8 +2,11 @@ type EventSession {
   id: ID!
   model: EventModel
   title: String
+  titleSuper: String
   intro: String
+  introSuper: String
   description: String
+  descriptionSuper: String
   mainMedia: Media
   medias: [Media!]!
   owner: User!
@@ -14,9 +17,12 @@ type EventSession {
   canTicket: Boolean!
   hasTicket: Boolean!
   seats: Int
+  seatsSuper: Int
   published: Boolean!
   place: Place
+  placeSuper: Place
   eventCats: [EventCat!]!
+  eventCatsSuper: [EventCat!]!
 }
 
 

@@ -17,19 +17,19 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        title: "Updated title",
-        intro: "Updated introduction",
-        description: "Updated description",
-        seat: "12345",
+        titleSuper: "Updated title",
+        introSuper: "Updated introduction",
+        descriptionSuper: "Updated description",
+        seatsSuper: "12345",
       }
       const response = await resolvers.Mutation
         .updateEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
         ...eventSessionData[0],
-        title: "Updated title",
-        intro: "Updated introduction",
-        description: "Updated description",
-        seat: "12345",
+        titleSuper: "Updated title",
+        introSuper: "Updated introduction",
+        descriptionSuper: "Updated description",
+        seatsSuper: "12345",
       })
     })
     it("stores updated title, description and seats", async () => {
@@ -38,19 +38,19 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        title: "Updated title",
-        intro: "Updated introduction",
-        description: "Updated description",
-        seat: "12345",
+        titleSuper: "Updated title",
+        introSuper: "Updated introduction",
+        descriptionSuper: "Updated description",
+        seatsSuper: "12345",
       }
       await resolvers.Mutation.updateEventSession(null, { eventSessionInput }, context)
       const eventSession = await mongo.EventSessions.findOne({ _id: eventSessionData[0]._id })
       expect(eventSession).toMatchObject({
         ...eventSessionData[0],
-        title: "Updated title",
-        intro: "Updated introduction",
-        description: "Updated description",
-        seat: "12345",
+        titleSuper: "Updated title",
+        introSuper: "Updated introduction",
+        descriptionSuper: "Updated description",
+        seatsSuper: "12345",
       })
     })
     it("updates any eventSession when user is admin", async () => {
@@ -59,13 +59,13 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        title: "Updated title",
+        titleSuper: "Updated title",
       }
       const response = await resolvers.Mutation
         .updateEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
         ...eventSessionData[0],
-        title: "Updated title",
+        titleSuper: "Updated title",
       })
     })
     it("updates start and end", async () => {
@@ -108,13 +108,13 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        placeId: placeData[1]._id.toString(),
+        placeSuperId: placeData[1]._id.toString(),
       }
       const response = await resolvers.Mutation
         .updateEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
         ...eventSessionData[0],
-        placeId: placeData[1]._id,
+        placeSuperId: placeData[1]._id,
       })
     })
     it("updates owner", async () => {
@@ -153,7 +153,7 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        title: "Awesome EventSession",
+        titleSuper: "Awesome EventSession",
       }
       try {
         await resolvers.Mutation.updateEventSession(null, { eventSessionInput }, context)
@@ -168,7 +168,7 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        title: "Updated title",
+        titleSuper: "Updated title",
       }
       try {
         await resolvers.Mutation.updateEventSession(null, { eventSessionInput }, context)

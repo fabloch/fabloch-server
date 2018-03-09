@@ -1,6 +1,6 @@
 const intro = async (eventSession, { mongo: { EventModels } }) => {
-  if (eventSession.intro) {
-    return eventSession.intro
+  if (eventSession.introSuper) {
+    return eventSession.introSuper
   }
   const eventModel = await EventModels.findOne({ _id: eventSession.eventModelId })
   if (eventModel.intro) {

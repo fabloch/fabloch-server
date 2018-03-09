@@ -4,6 +4,7 @@ import { eventModelData, eventSessionData } from "../../../testUtils/fixtures"
 
 let mongo
 
+
 describe("EventSession EventSession resolvers", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })
@@ -23,7 +24,7 @@ describe("EventSession EventSession resolvers", () => {
       await mongo.loadPlaces()
       const context = { mongo }
       const response = await resolvers.EventSession.title(eventSessionData[1], null, context)
-      expect(response).toEqual(eventSessionData[1].title)
+      expect(response).toEqual(eventSessionData[1].titleSuper)
     })
   })
 })

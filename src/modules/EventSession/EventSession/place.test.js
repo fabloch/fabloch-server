@@ -4,6 +4,7 @@ import { eventSessionData, placeData } from "../../../testUtils/fixtures"
 
 let mongo
 
+
 describe("EventSession EventSession resolvers", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })

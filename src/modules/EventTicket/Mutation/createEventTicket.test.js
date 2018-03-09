@@ -4,6 +4,7 @@ import { eventSessionData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
+
 describe("createEventTicket", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })

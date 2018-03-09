@@ -23,7 +23,7 @@ describe("EventSession EventSession resolvers", () => {
       const user = userData[0]
       const context = { mongo, user }
       const response = await resolvers.EventSession.eventCats(eventSessionData[0], null, context)
-      expect(response).toEqual([...eventModelData[0].eventCats, ...eventSessionData[0].eventCats])
+      expect(response).toEqual([...eventModelData[0].eventCats, ...eventSessionData[0].eventCatsSuper])
     })
   })
 })

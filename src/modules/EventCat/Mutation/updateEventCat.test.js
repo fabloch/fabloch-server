@@ -56,10 +56,10 @@ describe("EventCat Mutation resolvers", () => {
         color: "red",
       }
       await resolvers.Mutation.updateEventCat(null, { eventCatInput }, context)
-      const eventSessions = await mongo.EventSessions.find({ "eventCats.id": eventCatData[2]._id }).toArray()
+      const eventSessions = await mongo.EventSessions.find({ "eventCatsSuper.id": eventCatData[2]._id }).toArray()
       expect(eventSessions).toHaveLength(2)
       const eventCatList = eventSessions.map(es =>
-        es.eventCats.filter(ec => ec.id.toString() === eventCatData[2]._id.toString())[0])
+        es.eventCatsSuper.filter(ec => ec.id.toString() === eventCatData[2]._id.toString())[0])
       eventCatList.map((ec) => {
         expect(ec.name).toEqual("Changed name")
         expect(ec.color).toEqual("red")

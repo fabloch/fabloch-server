@@ -4,6 +4,7 @@ import { eventSessionData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
+
 describe("EventSession EventSession resolvers", () => {
   beforeAll(async () => { mongo = await connectMongo() })
   beforeEach(async () => { await mongo.beforeEach() })
@@ -12,6 +13,7 @@ describe("EventSession EventSession resolvers", () => {
 
   describe("canTicket", () => {
     it("returns false if user has ticket", async () => {
+      await mongo.loadEventModels()
       await mongo.loadEventSessions()
       await mongo.loadEventTickets()
       const user = userData[0]
@@ -20,6 +22,7 @@ describe("EventSession EventSession resolvers", () => {
       expect(response).toBeFalsy()
     })
     it("returns false if event full", async () => {
+      await mongo.loadEventModels()
       await mongo.loadEventSessions()
       await mongo.loadEventTickets()
       const user = userData[0]
@@ -28,6 +31,7 @@ describe("EventSession EventSession resolvers", () => {
       expect(response).toBeFalsy()
     })
     it("returns true if seats available", async () => {
+      await mongo.loadEventModels()
       await mongo.loadEventSessions()
       await mongo.loadEventTickets()
       const user = userData[1]
@@ -36,6 +40,7 @@ describe("EventSession EventSession resolvers", () => {
       expect(response).toBeTruthy()
     })
     it("returns true if no seats limit", async () => {
+      await mongo.loadEventModels()
       await mongo.loadEventSessions()
       await mongo.loadEventTickets()
       const user = userData[0]

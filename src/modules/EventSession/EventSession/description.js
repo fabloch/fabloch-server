@@ -1,6 +1,6 @@
 const description = async (eventSession, { mongo: { EventModels } }) => {
-  if (eventSession.description) {
-    return eventSession.description
+  if (eventSession.descriptionSuper) {
+    return eventSession.descriptionSuper
   }
   const eventModel = await EventModels.findOne({ _id: eventSession.eventModelId })
   if (eventModel.description) {
