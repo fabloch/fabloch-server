@@ -1,6 +1,6 @@
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { eventModelData, placeData, userData } from "../../../testUtils/fixtures"
+import { eventCatData, eventModelData, placeData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
@@ -82,7 +82,7 @@ describe("createEventSession", () => {
         seatsSuper: 10,
       })
     })
-    it("links the place id", async () => {
+    it("links the super place id", async () => {
       await mongo.loadEventModels()
       const user = userData[0]
       const context = { mongo, user }
@@ -95,6 +95,25 @@ describe("createEventSession", () => {
       expect(response).toMatchObject({
         placeSuperId: placeData[0]._id,
       })
+    })
+    it("links the eventCats", async () => {
+      await mongo.loadEventModels()
+      await mongo.loadEventCats()
+      const user = userData[0]
+      const context = { mongo, user }
+      const eventSessionInput = {
+        eventModelId: eventModelData[0]._id.toString(),
+        eventCatsSuperIds: [
+          eventCatData[0]._id.toString(),
+          eventCatData[1]._id.toString(),
+        ],
+      }
+      const response = await resolvers.Mutation
+        .createEventSession(null, { eventSessionInput }, context)
+      expect(response.eventCatsSuper).toMatchObject([
+        { id: eventCatData[0]._id, name: eventCatData[0].name, color: eventCatData[0].color },
+        { id: eventCatData[1]._id, name: eventCatData[1].name, color: eventCatData[1].color },
+      ])
     })
   })
   describe("invalid", async () => {

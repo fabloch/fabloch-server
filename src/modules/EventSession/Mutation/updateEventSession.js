@@ -6,7 +6,10 @@ import ValidationError from "../../_shared/ValidationError"
 import checkEventDates from "./checkEventDates"
 import checkForbidden from "../../_shared/checkForbidden"
 
-const updateEventSession = async ({ eventSessionInput }, { mongo: { EventSessions }, user }) => {
+const updateEventSession = async (
+  { eventSessionInput },
+  { mongo: { EventCats, EventSessions }, user },
+) => {
   if (!eventSessionInput.id) throw new ValidationError([{ key: "main", message: "No id provided." }])
   checkAuthenticatedUser(user)
   const eventSessionFromDb = await EventSessions.findOne({ _id: ObjectId(eventSessionInput.id) })
@@ -31,6 +34,16 @@ const updateEventSession = async ({ eventSessionInput }, { mongo: { EventSession
   }
   if (eventSession.placeSuperId) {
     eventSession.placeSuperId = ObjectId(eventSession.placeSuperId)
+  }
+  if (eventSession.eventCatsSuperIds) {
+    const ids = eventSession.eventCatsSuperIds.map(id => ObjectId(id))
+    const ecList = await EventCats.find({ _id: { $in: ids } }).toArray()
+    const eventCatsSuper = ecList.map(ec => ({
+      id: ec._id,
+      name: ec.name,
+      color: ec.color,
+    }))
+    eventSession.eventCatsSuper = eventCatsSuper
   }
   await EventSessions.update(
     { _id: eventSessionFromDb._id },

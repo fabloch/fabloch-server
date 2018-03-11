@@ -7,7 +7,7 @@ import checkForbidden from "../../_shared/checkForbidden"
 
 const createEventSession = async (
   { eventSessionInput },
-  { mongo: { EventModels, EventSessions }, user },
+  { mongo: { EventCats, EventModels, EventSessions }, user },
 ) => {
   checkAuthenticatedUser(user)
   if (!eventSessionInput.eventModelId) throw new ValidationError([{ key: "main", message: "eventModelId missing." }])
@@ -26,7 +26,22 @@ const createEventSession = async (
   const eventSession = eventSessionInput
   eventSession.ownerId = user._id
   eventSession.eventModelId = eventModel._id
+
+  // placeSuperId
   if (eventSession.placeSuperId) { eventSession.placeSuperId = ObjectId(eventSession.placeSuperId) }
+
+  // eventCatsSuperIds
+  if (eventSession.eventCatsSuperIds) {
+    const ids = eventSession.eventCatsSuperIds.map(id => ObjectId(id))
+    const ecList = await EventCats.find({ _id: { $in: ids } }).toArray()
+    const eventCatsSuper = ecList.map(ec => ({
+      id: ec._id,
+      name: ec.name,
+      color: ec.color,
+    }))
+    eventSession.eventCatsSuper = eventCatsSuper
+  }
+
   const response = await EventSessions.insert(eventSession)
   const [_id] = response.insertedIds
   eventSession._id = _id

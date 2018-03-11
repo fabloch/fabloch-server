@@ -9,6 +9,7 @@ type EventModel {
   seats: Int
   place: Place
   sessions: [EventSession!]!
+  eventCats: [EventCat!]!
 }
 
 
