@@ -48,5 +48,14 @@ describe("EventSession EventSession resolvers", () => {
       const response = await resolvers.EventSession.canTicket(eventSessionData[2], null, context)
       expect(response).toBeTruthy()
     })
+    it("returns false if no user", async () => {
+      await mongo.loadEventModels()
+      await mongo.loadEventSessions()
+      await mongo.loadEventTickets()
+      const user = null
+      const context = { mongo, user }
+      const response = await resolvers.EventSession.canTicket(eventSessionData[0], null, context)
+      expect(response).toBeFalsy()
+    })
   })
 })

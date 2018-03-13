@@ -25,7 +25,7 @@ const canTicket = async (
     }
     return false
   }
-  throw new Error()
+  return false
 }
 
 export default canTicket
