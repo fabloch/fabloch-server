@@ -5,18 +5,20 @@ import ValidationError from "../../../_shared/ValidationError"
 import checkAuthenticatedUser from "../../../_shared/checkAuthenticatedUser"
 import { JWT_SECRET } from "../../../../utils/config"
 
-const updateUser = async (data, { mongo: { Users }, user }) => {
+const updateUser = async ({ userInput }, { mongo: { Users }, user }) => {
   checkAuthenticatedUser(user)
   let { version } = user
-  version += 1
+  if (userInput.email || userInput.username || userInput.password) {
+    version += 1
+  }
 
   const newUser = {
     ...user,
-    ...data,
+    ...userInput,
     version,
   }
-  if (data.password) {
-    newUser.password = await bcrypt.hash(data.password, 10)
+  if (userInput.password) {
+    newUser.password = await bcrypt.hash(userInput.password, 10)
   }
   const response = await Users.update({ _id: user._id }, newUser)
   if (response.result.ok) {

@@ -4,6 +4,12 @@ type User {
   jwt: String
   memberships: [Membership!]
   isAdmin: Boolean!
+  profile: Profile
+}
+
+type Profile {
+  picUrl: Url,
+  intro: String
 }
 
 input AuthProviderNewcomerData {
@@ -29,6 +35,18 @@ type Query {
 type Mutation {
   createUser(authProvider: AuthProviderNewcomerData!): User
   signinUser(emailAuth: AUTH_PROVIDER_EMAIL): User
-  updateUser(email: String, password: String): User
+  updateUser(userInput: UserInput!): User
   # verifyUser(token: String!): User
+}
+
+input UserInput {
+  username: String
+  email: Email
+  password: String
+  profile: ProfileInput
+}
+
+input ProfileInput {
+  picUrl: Url
+  intro: String
 }
