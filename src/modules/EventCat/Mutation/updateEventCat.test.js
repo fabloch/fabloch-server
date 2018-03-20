@@ -57,7 +57,7 @@ describe("EventCat Mutation resolvers", () => {
       }
       await resolvers.Mutation.updateEventCat(null, { eventCatInput }, context)
       const eventSessions = await mongo.EventSessions.find({ "eventCatsSuper.id": eventCatData[2]._id }).toArray()
-      expect(eventSessions).toHaveLength(2)
+      expect(eventSessions).toHaveLength(3)
       const eventCatList = eventSessions.map(es =>
         es.eventCatsSuper.filter(ec => ec.id.toString() === eventCatData[2]._id.toString())[0])
       eventCatList.map((ec) => {

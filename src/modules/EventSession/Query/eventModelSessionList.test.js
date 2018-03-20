@@ -18,7 +18,7 @@ describe("EventSession Query resolvers", () => {
         const eventModelId = eventModelData[0]._id.toString()
         const response = await resolvers.Query
           .eventModelSessionList(null, { eventModelId }, context)
-        expect(response).toEqual([eventSessionData[0], eventSessionData[1]])
+        expect(response).toEqual([eventSessionData[0], eventSessionData[1], eventSessionData[4]])
       })
     })
   })

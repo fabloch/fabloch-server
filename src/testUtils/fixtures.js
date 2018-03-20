@@ -20,6 +20,10 @@ export const dateUtils = {
   eventSession1Aend: moment("2019-12-20T12:00:00.000Z").toDate(),
   eventSession1Bstart: moment("2019-12-21T10:30:00.000Z").toDate(),
   eventSession1Bend: moment("2019-12-21T12:00:00.000Z").toDate(),
+  overlapping1start: moment("2019-12-18T15:30:00.000Z").toDate(),
+  overlapping1end: moment("2019-12-18T17:16:00.000Z").toDate(),
+  overlapping2start: moment("2019-12-18T19:14:00.000Z").toDate(),
+  overlapping2end: moment("2019-12-18T20:30:00.000Z").toDate(),
 }
 
 export const admin = {
@@ -91,7 +95,7 @@ export const eventModelData = [
 ]
 export const eventSessionData = [
   {
-    hint: "Session 0A for EventModel 0",
+    hint: "0 Session 0A for EventModel 0",
     _id: ObjectId("5a95c520c14e2a0ce4eea6f5"),
     eventModelId: ObjectId("5a4a5eb6404da6d636078beb"),
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
@@ -107,7 +111,7 @@ export const eventSessionData = [
     ],
   },
   {
-    hint: "Session 0B for EventModel 0",
+    hint: "1 Session 0B for EventModel 0",
     _id: ObjectId("5a95c526c14e2a0ce4eea6f8"),
     eventModelId: ObjectId("5a4a5eb6404da6d636078beb"),
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
@@ -121,7 +125,7 @@ export const eventSessionData = [
     published: true,
   },
   {
-    hint: "Session 1A for EventModel 1",
+    hint: "2 Session 1A for EventModel 1",
     _id: ObjectId("5a95c52bc14e2a0ce4eea6fd"),
     eventModelId: ObjectId("5a4a5ee36454c9d6369cca5f"),
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
@@ -137,13 +141,38 @@ export const eventSessionData = [
     ],
   },
   {
-    hint: "Session 1B for EventModel 1",
+    hint: "3 Session 1B for EventModel 1",
     _id: ObjectId("5a95c53cc14e2a0ce4eea705"),
     eventModelId: ObjectId("5a4a5ee36454c9d6369cca5f"),
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     start: dateUtils.eventSession1Bstart,
     end: dateUtils.eventSession1Bend,
     published: false,
+  },
+  {
+    hint: "4 Overlapping with start of Session 0A for EventModel 1",
+    _id: ObjectId("5aa5402c606a47401ad19746"),
+    eventModelId: ObjectId("5a4a5eb6404da6d636078beb"),
+    ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+    start: dateUtils.overlapping1start,
+    end: dateUtils.overlapping1end,
+    published: true,
+    eventCatsSuper: [
+      {
+        id: ObjectId("5a9feeb560363661402c1ce8"),
+        name: "Ecology",
+        color: "orange",
+      },
+    ],
+  },
+  {
+    hint: "5 Overlapping with end of Session 0A for EventModel 1",
+    _id: ObjectId("5aa5402c606a47401ad19745"),
+    eventModelId: ObjectId("5a4a5ee36454c9d6369cca5f"),
+    ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+    start: dateUtils.overlapping2start,
+    end: dateUtils.overlapping2end,
+    published: true,
   },
 ]
 export const eventTicketData = [
