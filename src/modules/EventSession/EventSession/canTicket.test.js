@@ -19,7 +19,7 @@ describe("EventSession EventSession resolvers", () => {
       const user = userData[0]
       const context = { mongo, user }
       const response = await resolvers.EventSession.canTicket(eventSessionData[0], null, context)
-      expect(response).toBeFalsy()
+      expect(response).toEqual({ value: false, info: "hasTicket" })
     })
     it("returns false if event full", async () => {
       await mongo.loadEventModels()
@@ -28,7 +28,7 @@ describe("EventSession EventSession resolvers", () => {
       const user = userData[0]
       const context = { mongo, user }
       const response = await resolvers.EventSession.canTicket(eventSessionData[1], null, context)
-      expect(response).toBeFalsy()
+      expect(response).toEqual({ value: false, info: "full" })
     })
     it("returns true if seats available", async () => {
       await mongo.loadEventModels()
@@ -37,7 +37,7 @@ describe("EventSession EventSession resolvers", () => {
       const user = userData[1]
       const context = { mongo, user }
       const response = await resolvers.EventSession.canTicket(eventSessionData[0], null, context)
-      expect(response).toBeTruthy()
+      expect(response).toEqual({ value: true, info: "seatsLeft" })
     })
     it("returns true if no seats limit", async () => {
       await mongo.loadEventModels()
@@ -46,7 +46,7 @@ describe("EventSession EventSession resolvers", () => {
       const user = userData[0]
       const context = { mongo, user }
       const response = await resolvers.EventSession.canTicket(eventSessionData[2], null, context)
-      expect(response).toBeTruthy()
+      expect(response).toEqual({ value: true, info: "noLimit" })
     })
     it("returns false if no user", async () => {
       await mongo.loadEventModels()
@@ -55,7 +55,37 @@ describe("EventSession EventSession resolvers", () => {
       const user = null
       const context = { mongo, user }
       const response = await resolvers.EventSession.canTicket(eventSessionData[0], null, context)
-      expect(response).toBeFalsy()
+      expect(response).toEqual({ value: false, info: "noUser" })
+    })
+    describe("overlapping", () => {
+      it("returns false if overlapping event (start - 15)", async () => {
+        await mongo.loadEventModels()
+        await mongo.loadEventSessions()
+        await mongo.loadEventTickets()
+        const user = userData[0]
+        const context = { mongo, user }
+        const response = await resolvers.EventSession
+          .canTicket(eventSessionData[4], null, context)
+        expect(response).toEqual({
+          value: false,
+          info: "overlap",
+          eventSession: eventSessionData[0],
+        })
+      })
+      it("returns false if overlapping event (end + 15)", async () => {
+        await mongo.loadEventModels()
+        await mongo.loadEventSessions()
+        await mongo.loadEventTickets()
+        const user = userData[0]
+        const context = { mongo, user }
+        const response = await resolvers.EventSession
+          .canTicket(eventSessionData[5], null, context)
+        expect(response).toEqual({
+          value: false,
+          info: "overlap",
+          eventSession: eventSessionData[0],
+        })
+      })
     })
   })
 })

@@ -26,6 +26,7 @@ type EventSession {
 type CanTicket {
   value: Boolean!
   info: String!
+  eventSession: EventSession
 }
 
 type Query {
