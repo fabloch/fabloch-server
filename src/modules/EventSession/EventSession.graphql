@@ -14,8 +14,7 @@ type EventSession {
   end: DateTime
   tickets: [EventTicket!]!
   ticketCount: Int
-  canTicket: Boolean!
-  hasTicket: Boolean!
+  canTicket: CanTicket!
   seats: Int
   seatsSuper: Int
   published: Boolean
@@ -24,7 +23,10 @@ type EventSession {
   eventCats: [EventCat!]!
   eventCatsSuper: [EventCat!]
 }
-
+type CanTicket {
+  value: Boolean!
+  info: String!
+}
 
 type Query {
   eventModelSessionList(eventModelId: ID!): [EventSession!]!

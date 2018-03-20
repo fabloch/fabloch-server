@@ -3,7 +3,6 @@ import pubsub from "../../utils/pubsub"
 import canTicket from "./EventSession/canTicket"
 import intro from "./EventSession/intro"
 import description from "./EventSession/description"
-import hasTicket from "./EventSession/hasTicket"
 import mainMedia from "./EventSession/mainMedia"
 import medias from "./EventSession/medias"
 import model from "./EventSession/model"
@@ -40,7 +39,6 @@ export default {
     canTicket: async (eventSession, _, context) => canTicket(eventSession, context),
     intro: async (eventSession, _, context) => intro(eventSession, context),
     description: async (eventSession, _, context) => description(eventSession, context),
-    hasTicket: async (eventSession, _, context) => hasTicket(eventSession, context),
     mainMedia: async (eventSession, _, context) => mainMedia(eventSession, context),
     medias: async (eventSession, _, context) => medias(eventSession, context),
     model: async (eventSession, _, context) => model(eventSession, context),
