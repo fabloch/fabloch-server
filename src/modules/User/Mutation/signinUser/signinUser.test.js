@@ -1,4 +1,5 @@
 import { ObjectId } from "mongodb"
+import jwt from "jsonwebtoken"
 import resolvers from "../../resolvers"
 import connectMongo from "../../../../testUtils/mongoTest"
 
@@ -14,18 +15,30 @@ describe("User Mutation resolvers", () => {
     it("if user exists, it returns the user", async () => {
       await mongo.loadUsers()
       const context = { mongo }
-      const credentials = {
-        emailAuth: {
-          email: "user1@example.com",
-          password: "motdepasse",
-        },
+      const emailAuth = {
+        email: "user1@example.com",
+        password: "motdepasse",
       }
-      const response = await resolvers.Mutation.signinUser(null, credentials, context)
+      const response = await resolvers.Mutation.signinUser(null, { emailAuth }, context)
       expect(response._id).toMatchObject(ObjectId("5a31b456c5e7b54a9aba3782"))
       expect(response.jwt).toMatch(/ey.+\.ey.+\..+/)
       expect(response.email).toEqual("user1@example.com")
       expect(response.version).toEqual(1)
     })
+
+    it("returns roles in jwt if user has roles", async () => {
+      await mongo.loadAdmin()
+      const context = { mongo }
+      const emailAuth = {
+        email: "admin@example.com",
+        password: "motdepasse",
+      }
+      const response = await resolvers.Mutation.signinUser(null, { emailAuth }, context)
+      expect(jwt.decode(response.jwt)).toMatchObject({
+        roles: ["admin"],
+      })
+    })
+
 
     it("with no user, throws error", async () => {
       expect.assertions(2)

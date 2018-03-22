@@ -12,6 +12,7 @@ const signinUser = async (data, { mongo: { Users } }) => {
       const token = await jwt.sign({
         id: user.id,
         email: user.email,
+        roles: user.roles,
         version: user.version,
       }, JWT_SECRET)
       user.jwt = token
