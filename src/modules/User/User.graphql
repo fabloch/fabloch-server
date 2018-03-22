@@ -7,12 +7,6 @@ type User {
   profile: Profile
 }
 
-type Profile {
-  fullName: String
-  picUrl: Url,
-  intro: String
-}
-
 input AuthProviderNewcomerData {
     newcomer: AUTH_PROVIDER_NEWCOMER
 }
@@ -37,6 +31,7 @@ type Mutation {
   createUser(authProvider: AuthProviderNewcomerData!): User
   signinUser(emailAuth: AUTH_PROVIDER_EMAIL): User
   updateUser(userInput: UserInput!): User
+  updateProfile(profileInput: ProfileInput!): User
   # verifyUser(token: String!): User
 }
 
@@ -44,9 +39,13 @@ input UserInput {
   username: String
   email: Email
   password: String
-  profile: ProfileInput
 }
 
+type Profile {
+  fullName: String
+  picUrl: Url,
+  intro: String
+}
 input ProfileInput {
   fullName: String
   picUrl: Url

@@ -1,5 +1,5 @@
 import ValidationError from "../../../_shared/ValidationError"
-import invalidPassword from "./invalidPassword"
+import invalidPassword from "../shared/invalidPassword"
 import invalidUsername from "./invalidUsername"
 import createAuthToken from "./createAuthToken"
 import hashPassword from "./hashPassword"
