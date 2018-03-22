@@ -1,18 +1,6 @@
 import ValidationError from "../../_shared/ValidationError"
 import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
-
-const checkEmptyness = (errors, object, keys) => {
-  keys.map((key) => {
-    if (object[key] === "") {
-      errors.push({
-        key,
-        message: "Can't be empty.",
-      })
-    }
-    return true
-  })
-  return errors
-}
+import checkEmptyness from "./shared/checkEmptyness"
 
 const updateUser = async ({ profileInput }, { mongo: { Users }, user }) => {
   checkAuthenticatedUser(user)
