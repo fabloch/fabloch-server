@@ -47,6 +47,20 @@ describe("User Mutation resolvers", () => {
           version: 2,
         })
       })
+      it("updates the profile fullName", async () => {
+        await mongo.loadUsers()
+        const [user] = userData
+        const context = { mongo, user }
+        const profile = {
+          fullName: "John Doe",
+        }
+        const userInput = { profile }
+        const response = await resolvers.Mutation.updateUser(null, { userInput }, context)
+        expect(response).toMatchObject({
+          profile,
+          version: 1,
+        })
+      })
       it("updates the profile picUrl", async () => {
         await mongo.loadUsers()
         const [user] = userData

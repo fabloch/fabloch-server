@@ -2,9 +2,9 @@ import moment from "moment"
 
 require("twix")
 
-const output = (value, info, eventSession = undefined) => ({ value, info, eventSession })
+const output = (canTicket, info, overlapping = undefined) => ({ canTicket, info, overlapping })
 
-const canTicket = async (
+const userStatus = async (
   eventSession,
   { mongo: { EventModels, EventSessions, EventTickets }, user },
 ) => {
@@ -44,4 +44,4 @@ const canTicket = async (
   return output(false, "noUser")
 }
 
-export default canTicket
+export default userStatus

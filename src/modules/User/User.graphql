@@ -8,6 +8,7 @@ type User {
 }
 
 type Profile {
+  fullName: String
   picUrl: Url,
   intro: String
 }
@@ -47,6 +48,7 @@ input UserInput {
 }
 
 input ProfileInput {
+  fullName: String
   picUrl: Url
   intro: String
 }

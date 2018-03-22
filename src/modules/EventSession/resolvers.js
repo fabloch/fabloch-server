@@ -1,6 +1,6 @@
 import pubsub from "../../utils/pubsub"
 
-import canTicket from "./EventSession/canTicket"
+import userStatus from "./EventSession/userStatus"
 import intro from "./EventSession/intro"
 import description from "./EventSession/description"
 import mainMedia from "./EventSession/mainMedia"
@@ -36,7 +36,7 @@ export default {
   },
   EventSession: {
     id: eventSession => eventSession._id.toString(),
-    canTicket: async (eventSession, _, context) => canTicket(eventSession, context),
+    userStatus: async (eventSession, _, context) => userStatus(eventSession, context),
     intro: async (eventSession, _, context) => intro(eventSession, context),
     description: async (eventSession, _, context) => description(eventSession, context),
     mainMedia: async (eventSession, _, context) => mainMedia(eventSession, context),

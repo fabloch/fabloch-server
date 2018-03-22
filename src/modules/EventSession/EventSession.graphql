@@ -14,7 +14,7 @@ type EventSession {
   end: DateTime
   tickets: [EventTicket!]!
   ticketCount: Int
-  canTicket: CanTicket!
+  userStatus: UserStatus!
   seats: Int
   seatsSuper: Int
   published: Boolean
@@ -23,10 +23,10 @@ type EventSession {
   eventCats: [EventCat!]!
   eventCatsSuper: [EventCat!]
 }
-type CanTicket {
-  value: Boolean!
+type UserStatus {
+  canTicket: Boolean!
   info: String!
-  eventSession: EventSession
+  overlapping: EventSession
 }
 
 type Query {
