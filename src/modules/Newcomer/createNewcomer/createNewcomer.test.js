@@ -1,8 +1,7 @@
-import { ObjectId } from "mongodb"
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { newcomerData, userData } from "../../../testUtils/fixtures"
-import mailer from "../../../testUtils/mockMailer"
+import { newcomerData } from "../../../testUtils/fixtures"
+import mailer from "../../../mailer"
 
 let mongo
 

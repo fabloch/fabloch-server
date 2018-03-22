@@ -1,8 +1,5 @@
-import { ObjectId } from "mongodb"
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { newcomerData, userData } from "../../../testUtils/fixtures"
-import mailer from "../../../testUtils/mockMailer"
 
 let mongo
 
@@ -19,7 +16,7 @@ describe("Newcomer Mutation resolvers", () => {
   describe("checkDigits", () => {
     it("returns the newcomer", async () => {
       await mongo.loadNewcomers()
-      const context = { mongo, mailer }
+      const context = { mongo }
       const newcomer = {
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
         digits: [5, 5, 5, 5, 5, 5],
@@ -29,7 +26,7 @@ describe("Newcomer Mutation resolvers", () => {
     })
     it("raises error if token invalid", async () => {
       expect.assertions(2)
-      const context = { mongo, mailer }
+      const context = { mongo }
       const newcomer = {
         token: "WrOng_ToKeN",
         digits: [5, 5, 5, 5, 5, 5],
@@ -43,7 +40,7 @@ describe("Newcomer Mutation resolvers", () => {
     })
     it("raises error if token valid but no user", async () => {
       expect.assertions(2)
-      const context = { mongo, mailer }
+      const context = { mongo }
       const newcomer = {
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
         digits: [5, 5, 5, 5, 5, 5],
@@ -58,7 +55,7 @@ describe("Newcomer Mutation resolvers", () => {
     it("raises error if digits dont match", async () => {
       expect.assertions(2)
       await mongo.loadNewcomers()
-      const context = { mongo, mailer }
+      const context = { mongo }
       const newcomer = {
         token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
         digits: [5, 5, 5, 5, 5, 4],

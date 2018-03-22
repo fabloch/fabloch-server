@@ -23,3 +23,6 @@ server/.env
 
 # SQlite
 *.sqlite
+
+# MongoDB
+dump/*
