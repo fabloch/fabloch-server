@@ -38,16 +38,17 @@ type Mutation {
 input UserInput {
   username: String
   email: Email
-  password: String
+  password: String!
+  newPassword: String
 }
 
 type Profile {
   fullName: String
-  picUrl: Url,
   intro: String
+  picUrl: Url,
 }
 input ProfileInput {
   fullName: String
-  picUrl: Url
   intro: String
+  picUrl: Url
 }

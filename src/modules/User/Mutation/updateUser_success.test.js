@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
 import { userData } from "../../../testUtils/fixtures"
@@ -26,6 +27,7 @@ describe("User Mutation resolvers", () => {
         email: "another@email.com",
         version: 2,
       })
+      expect(jwt.decode(response.jwt)).toMatchObject({ email: "another@email.com" })
     })
     it("updates the newPassword, increments version and return a new jwt", async () => {
       await mongo.loadUsers()
