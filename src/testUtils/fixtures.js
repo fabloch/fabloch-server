@@ -322,7 +322,7 @@ export const newcomerData = [
     hint: "Newcomer1",
     _id: ObjectId("5a4b76d5fdea180e9295743c"),
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ1MzQzfQ.pJvXypuRpjdnVZoITVZzg8b85ZM-yuJWEzd8O4OBekA",
-    email: "user1@example.com",
+    email: "user3@example.com",
     digits: [5, 5, 5, 5, 5, 5],
     valid: true,
   },
@@ -330,7 +330,7 @@ export const newcomerData = [
     hint: "Newcomer3",
     _id: ObjectId("5a55db614b7ef9289ba1ad23"),
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
-    email: "user3@example.com",
+    email: "user4@example.com",
     digits: [5, 5, 5, 5, 5, 5],
   },
 ]
