@@ -1,7 +1,7 @@
 import ValidationError from "../../_shared/ValidationError"
 import invalidEmail from "../../_shared/invalidEmail"
-import createDigits from "./createDigits"
-import newcomerExists from "./newcomerExists"
+import createDigits from "../_shared/createDigits"
+import newcomerExists from "../_shared/newcomerExists"
 import { sendNewcomerDigits } from "../mailer"
 import createNewcomerToken from "../_shared/createNewcomerToken"
 

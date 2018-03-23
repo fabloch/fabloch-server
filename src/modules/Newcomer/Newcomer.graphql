@@ -1,6 +1,12 @@
 type Newcomer {
+  id: ID
+  email: Email
   token: String!
   valid: Boolean!
+}
+
+type Query {
+  newcomerList: [Newcomer!]!
 }
 
 type Mutation {

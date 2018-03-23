@@ -9,7 +9,7 @@ import expressJwt from "express-jwt"
 import jwt from "jsonwebtoken"
 import cors from "cors"
 
-import { CORS_URI, JWT_SECRET, PORT } from "./utils/config"
+import { CORS_URI, JWT_SECRET, PORT, WEBSOCKET_ENDPOINT } from "./utils/config"
 import authenticate from "./utils/authenticate"
 import formatError from "./utils/formatError"
 import connectMongo from "./connectors/mongo-connector"
@@ -53,7 +53,7 @@ const start = async () => {
   app.use("/graphiql", graphiqlExpress({
     endpointURL: "/graphql",
     passHeader: `'Authorization': 'bearer ${process.env.USER1_JWT}'`,
-    subscriptionsEndpoint: `ws://localhost:${PORT}/subscriptions`,
+    subscriptionsEndpoint: WEBSOCKET_ENDPOINT,
   }))
 
   const server = createServer(app)

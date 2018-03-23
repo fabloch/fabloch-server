@@ -10,6 +10,7 @@ export const {
   MAILGUN_KEY,
   MONGODB_URI,
   PORT,
+  WEBSOCKET_ENDPOINT,
 } = process.env
 
 const defaults = {
