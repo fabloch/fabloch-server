@@ -11,6 +11,7 @@ export default {
     checkDigits: async (_, data, context) => checkDigits(data, context),
   },
   Newcomer: {
+    id: newcomer => newcomer._id.toString(),
     valid: newcomer => newcomer.valid || false,
   },
 }

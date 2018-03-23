@@ -1,5 +1,6 @@
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
+import { newcomerData } from "../../../testUtils/fixtures"
 
 let mongo
 
@@ -22,7 +23,7 @@ describe("Newcomer Mutation resolvers", () => {
         digits: [5, 5, 5, 5, 5, 5],
       }
       const response = await resolvers.Mutation.checkDigits(null, { newcomer }, context)
-      expect(response.email).toEqual("user3@example.com")
+      expect(response.email).toEqual(newcomerData[0].email)
     })
     it("raises error if token invalid", async () => {
       expect.assertions(2)

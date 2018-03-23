@@ -1,6 +1,6 @@
-import resolvers from "./resolvers"
-import connectMongo from "../../testUtils/mongoTest"
-import { newcomerData } from "../../testUtils/fixtures"
+import resolvers from "../resolvers"
+import connectMongo from "../../../testUtils/mongoTest"
+import { newcomerData } from "../../../testUtils/fixtures"
 
 let mongo
 

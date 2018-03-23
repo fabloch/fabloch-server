@@ -28,10 +28,10 @@ describe("Newcomer Mutation resolvers", () => {
     it("updates newcomer if email already exists", async () => {
       await mongo.loadNewcomers()
       const context = { mongo, mailer }
-      const newcomer = { email: "user1@example.com" }
+      const newcomer = { email: "user3@example.com" }
       const response = await resolvers.Mutation.createNewcomer(null, { newcomer }, context)
       expect(response._id).toEqual(newcomerData[0]._id)
-      expect(response.email).toEqual("user1@example.com")
+      expect(response.email).toEqual("user3@example.com")
       expect(response.token).toMatch(/ey.+/)
       expect(response.digits).toEqual([5, 5, 5, 5, 5, 5])
       expect(response.resent).toEqual(true)
