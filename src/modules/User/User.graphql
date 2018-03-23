@@ -5,6 +5,7 @@ type User {
   memberships: [Membership!]
   isAdmin: Boolean!
   profile: Profile
+  tickets: [EventTicket!]!
 }
 
 input AuthProviderNewcomerData {
@@ -25,6 +26,7 @@ input AUTH_PROVIDER_EMAIL {
 type Query {
   # TODO: change for email
   user: User
+  userList: [User!]!
 }
 
 type Mutation {
