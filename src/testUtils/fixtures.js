@@ -24,6 +24,8 @@ export const dateUtils = {
   overlapping1end: moment("2019-12-18T17:16:00.000Z").toDate(),
   overlapping2start: moment("2019-12-18T19:14:00.000Z").toDate(),
   overlapping2end: moment("2019-12-18T20:30:00.000Z").toDate(),
+  invitationSentAt1: moment().utc().subtract(2, "d").toDate(),
+  invitationSentAt2: moment().utc().subtract(1, "d").toDate(),
 }
 
 export const admin = {
@@ -325,6 +327,8 @@ export const newcomerData = [
     email: "user3@example.com",
     digits: [5, 5, 5, 5, 5, 5],
     valid: true,
+    invitationSentAt: dateUtils.invitationSentAt1,
+    invitationSentCount: 1,
   },
   {
     hint: "Newcomer3",
