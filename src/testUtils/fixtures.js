@@ -321,21 +321,38 @@ export const membershipData = [
 
 export const newcomerData = [
   {
-    hint: "Newcomer1",
+    hint: "Newcomer3",
     _id: ObjectId("5a4b76d5fdea180e9295743c"),
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ1MzQzfQ.pJvXypuRpjdnVZoITVZzg8b85ZM-yuJWEzd8O4OBekA",
     email: "user3@example.com",
-    digits: [5, 5, 5, 5, 5, 5],
     valid: true,
-    invitationSentAt: dateUtils.invitationSentAt1,
-    invitationSentCount: 1,
+    digits: [5, 5, 5, 5, 5, 5],
   },
   {
-    hint: "Newcomer3",
+    hint: "Newcomer4",
     _id: ObjectId("5a55db614b7ef9289ba1ad23"),
     token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
     email: "user4@example.com",
     digits: [5, 5, 5, 5, 5, 5],
+  },
+  {
+    hint: "Newcomer5",
+    _id: ObjectId("5ab8f7bca42fb619e902a1c2"),
+    email: "user5@example.com",
+    fullName: "User Five",
+    guest: true,
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXI1QGV4YW1wbGUuY29tIiwiaWF0IjoxNTIyMTQ4MDA3fQ.tO61ImDbURBg04MaWb4bR1LgJCgSY01dzZIDmVU2W4M",
+    invitationSentAt: dateUtils.invitationSentAt1,
+    invitationSentCount: 1,
+  },
+  {
+    hint: "Newcomer6",
+    _id: ObjectId("5ab8f7d5a42fb619e902a1c3"),
+    email: "user6@example.com",
+    fullName: "User Six",
+    guest: true,
+    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXI2QGV4YW1wbGUuY29tIiwiaWF0IjoxNTIyMTQ4MDcxfQ.Fz54JRAhpz7C5HFwnQDITWh0qPGK7-p9dvihFHCN5nI",
+    invitationSentAt: dateUtils.invitationSentAt2,
   },
 ]
 
