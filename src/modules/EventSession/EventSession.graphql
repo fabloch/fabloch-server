@@ -30,6 +30,7 @@ type UserStatus {
 }
 
 type Query {
+  eventCatSessionList(eventCatId: ID!): [EventSession!]!
   eventModelSessionList(eventModelId: ID!): [EventSession!]!
   eventSessionList(filter: EventSessionFilter): [EventSession!]!
   eventSessionDetail(id: ID!): EventSession!
