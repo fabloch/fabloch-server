@@ -29,6 +29,23 @@ describe("User Mutation resolvers", () => {
         expect(response.version).toEqual(1)
         expect(response.jwt).toMatch(/ey.+\.ey.+\..+/)
       })
+      it("deletes the newcomer if success", async () => {
+        await mongo.loadNewcomers()
+        const context = { mongo }
+        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo"
+        const newUser = {
+          authProvider: {
+            newcomer: {
+              token,
+              username: "user4",
+              password: "Mot2pa$$e.De.Ouf",
+            },
+          },
+        }
+        await resolvers.Mutation.createUser(null, newUser, context)
+        const newcomer = await mongo.Newcomers.findOne({ token })
+        expect(newcomer).toBeNull()
+      })
     })
     it("raises error if no newcomer", async () => {
       expect.assertions(2)
