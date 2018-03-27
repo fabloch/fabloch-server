@@ -48,9 +48,19 @@ type Profile {
   fullName: String
   intro: String
   picUrl: Url,
+  facebookUrl: Url,
+  twitterUrl: Url,
+  githubUrl: Url,
+  linkedInUrl: Url,
+  otherUrl: Url,
 }
 input ProfileInput {
   fullName: String
   intro: String
   picUrl: Url
+  facebookUrl: Url,
+  twitterUrl: Url,
+  githubUrl: Url,
+  linkedInUrl: Url,
+  otherUrl: Url,
 }

@@ -12,14 +12,18 @@ import ticketCount from "./EventSession/ticketCount"
 import tickets from "./EventSession/tickets"
 import title from "./EventSession/title"
 import eventCats from "./EventSession/eventCats"
-import eventSessionList from "./Query/eventSessionList"
+
+import eventCatSessionList from "./Query/eventCatSessionList"
 import eventModelSessionList from "./Query/eventModelSessionList"
+import eventSessionList from "./Query/eventSessionList"
 import eventSessionDetail from "./Query/eventSessionDetail"
+
 import createEventSession from "./Mutation/createEventSession"
 import updateEventSession from "./Mutation/updateEventSession"
 
 export default {
   Query: {
+    eventCatSessionList: async (_, data, context) => eventCatSessionList(data, context),
     eventModelSessionList: async (_, data, context) => eventModelSessionList(data, context),
     eventSessionList: async (_, data, context) => eventSessionList(data, context),
     eventSessionDetail: async (_, data, context) => eventSessionDetail(data, context),

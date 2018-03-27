@@ -175,6 +175,13 @@ export const eventSessionData = [
     start: dateUtils.overlapping2start,
     end: dateUtils.overlapping2end,
     published: true,
+    eventCatsSuper: [
+      {
+        id: ObjectId("5a9feeac60363661402c1ce4"),
+        name: "3D Printing",
+        color: "blue",
+      },
+    ],
   },
 ]
 export const eventTicketData = [
@@ -405,6 +412,11 @@ export const userData = [
       fullName: "John Doe",
       picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_banksy.jpg",
       intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      facebookUrl: "https://www.facebook.com/facebookUrl1",
+      twitterUrl: "https://www.twitter.com/twitterUrl1",
+      githubUrl: "https://www.github.com/githubUrl1",
+      linkedInUrl: "https://www.linkedIn.com/linkedInUrl1",
+      otherUrl: "https://www.other.com/otherUrl1",
     },
   },
   {
@@ -417,6 +429,9 @@ export const userData = [
       fullName: "Monsieur Chat",
       picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_m_chat.jpg",
       intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      facebookUrl: "https://www.facebook.com/facebookUrl2",
+      twitterUrl: "https://www.twitter.com/twitterUrl2",
+      linkedInUrl: "https://www.linkedIn.com/linkedInUrl2",
     },
   },
 ]

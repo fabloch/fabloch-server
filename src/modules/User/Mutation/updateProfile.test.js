@@ -49,6 +49,22 @@ describe("User Mutation resolvers", () => {
           profile: profileInput,
         })
       })
+      it("updates facebookUrl, githubUrl, linkedInUrl, otherUrl", async () => {
+        await mongo.loadUsers()
+        const [user] = userData
+        const context = { mongo, user }
+        const profileInput = {
+          facebookUrl: "https://www.facebook.com/s.nicolaidis",
+          twitterUrl: "https://www.twitter.com/s.nicolaidis",
+          githubUrl: "https://www.github.com/sebabouche",
+          linkedInUrl: "https://www.linkedin.com/s.nicolaidis",
+          otherUrl: "https://www.google.com",
+        }
+        const response = await resolvers.Mutation.updateProfile(null, { profileInput }, context)
+        expect(response).toMatchObject({
+          profile: profileInput,
+        })
+      })
     })
     describe("errors", () => {
       it("raises with no context user", async () => {
