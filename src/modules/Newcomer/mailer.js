@@ -1,4 +1,4 @@
-import { CLIENT_URI } from "../../utils/config"
+import { CLIENT_URI, EMAIL_DEFAULT } from "../../utils/config"
 
 // eslint-disable-next-line import/prefer-default-export
 export const sendNewcomerDigits = async (newcomer, mailer) => {
@@ -29,13 +29,13 @@ export const sendNewcomerDigits = async (newcomer, mailer) => {
   await mailer(data())
 }
 
-export const sendNewcomersInvitations = async (sender, newcomers, team, mailer) => {
+export const sendInvites = async (newcomers, message, mailer) => {
   newcomers.map(async (newcomer) => {
     const data = {
-      to: newcomer.email,
-      from: sender.email,
-      subject: "Wynn: you are invited you to a new team",
-      html: `<h3>${sender.email} invited you to the team <strong>${team.name}</strong>.</h3><p><a href='${CLIENT_URI}/connect/token/${newcomer.token}'>Click here to create your account and join this team</a></p>`,
+      to: `${newcomer.fullName} <${newcomer.email}>`,
+      from: EMAIL_DEFAULT,
+      subject: "Welcome to FAB14 Ecology. Book now the events you want to attend",
+      html: `<h3>Welcome, ${newcomer.fullName}</h3><p>${message}</p><p><a href='${CLIENT_URI}/inscription/token/${newcomer.token}'>Click here to finish signup and choose the events you want to attend.</a></p>`,
     }
     await mailer(data)
   })

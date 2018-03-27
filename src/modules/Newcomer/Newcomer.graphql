@@ -1,22 +1,33 @@
 type Newcomer {
   id: ID
   email: Email
+  fullName: String
   token: String!
+  guest: Boolean!
   valid: Boolean!
+  invitationSentAt: Date
+  invitationSentCount: Int
 }
 
 type Query {
   newcomerList: [Newcomer!]!
+  newcomerFromToken(token: String): Newcomer
 }
 
 type Mutation {
   createNewcomer(newcomer: NewcomerInput): Newcomer
+  createNewcomerAdmin(newcomerInput: NewcomerAdminInput): Newcomer
   checkDigits(newcomer: CheckDigitsInput): Newcomer
-  inviteNewcomers(newcomers: InvitationInput): [Newcomer]
+  sendInvitations(invitationInput: InvitationInput!): [Newcomer!]!
 }
 
 input NewcomerInput {
   email: String!
+}
+
+input NewcomerAdminInput {
+  email: Email!
+  fullName: String!
 }
 
 input CheckDigitsInput {
@@ -25,8 +36,6 @@ input CheckDigitsInput {
 }
 
 input  InvitationInput {
-  email1: String!
-  email2: String = ""
-  email3: String = ""
-  workspaceId: ID!
+  newcomerIds: [ID!]!
+  message:String
 }

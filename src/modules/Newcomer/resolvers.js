@@ -1,4 +1,6 @@
 import newcomerList from "./Query/newcomerList"
+import newcomerFromToken from "./Query/newcomerFromToken"
+
 import createNewcomer from "./Mutation/createNewcomer"
 import createNewcomerAdmin from "./Mutation/createNewcomerAdmin"
 import checkDigits from "./Mutation/checkDigits"
@@ -7,6 +9,7 @@ import sendInvitations from "./Mutation/sendInvitations"
 export default {
   Query: {
     newcomerList: async (_, __, context) => newcomerList(context),
+    newcomerFromToken: async (_, data, context) => newcomerFromToken(data, context),
   },
   Mutation: {
     createNewcomer: async (_, data, context) => createNewcomer(data, context),
@@ -16,6 +19,7 @@ export default {
   },
   Newcomer: {
     id: newcomer => newcomer._id.toString(),
+    guest: newcomer => newcomer.guest || false,
     valid: newcomer => newcomer.valid || false,
   },
 }

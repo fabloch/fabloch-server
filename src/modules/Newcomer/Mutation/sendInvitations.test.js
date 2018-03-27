@@ -1,3 +1,4 @@
+import moment from "moment"
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
 import { admin, newcomerData, userData } from "../../../testUtils/fixtures"
@@ -21,15 +22,32 @@ describe("Newcomer Mutation resolvers", () => {
         await mongo.loadUsers()
         await mongo.loadNewcomers()
         const user = admin
-        const context = { mongo, user }
-        const newcomerIds = [newcomerData[0]._id.toString(), newcomerData[1]._id.toString()]
-        const response = await resolvers.Mutation.sendInvitations(null, { newcomerIds }, context)
-        expect(response).toMatchObject([
-          { invitationSentCount: 2 },
-          { invitationSentCount: 1 },
-        ])
+        const context = { mongo, user, mailer }
+        const invitationInput = {
+          newcomerIds: [newcomerData[2]._id.toString(), newcomerData[3]._id.toString()],
+          message: "A custom message",
+        }
+        const response = await resolvers.Mutation
+          .sendInvitations(null, { invitationInput }, context)
+        expect(response).toMatchObject([{ invitationSentCount: 2 }, { invitationSentCount: 1 }])
+        expect(moment(response[0].invitationSentAt).format("LL")).toMatch(moment().utc().format("LL"))
+        expect(moment(response[1].invitationSentAt).format("LL")).toMatch(moment().utc().format("LL"))
       })
-      it("calls mailer with")
+      it("sends email with message for each newcomer", async () => {
+        await mongo.loadUsers()
+        await mongo.loadNewcomers()
+        const user = admin
+        const context = { mongo, user, mailer }
+        const invitationInput = {
+          newcomerIds: [newcomerData[2]._id.toString(), newcomerData[3]._id.toString()],
+          message: "A custom message",
+        }
+        const response = await resolvers.Mutation
+          .sendInvitations(null, { invitationInput }, context)
+        expect(response).toMatchObject([{ invitationSentCount: 2 }, { invitationSentCount: 1 }])
+        expect(moment(response[0].invitationSentAt).format("LL")).toMatch(moment().utc().format("LL"))
+        expect(moment(response[1].invitationSentAt).format("LL")).toMatch(moment().utc().format("LL"))
+      })
     })
     describe("error", () => {
       it("raises if no user in context", async () => {
@@ -37,10 +55,13 @@ describe("Newcomer Mutation resolvers", () => {
         await mongo.loadUsers()
         await mongo.loadNewcomers()
         const user = null
-        const context = { mongo, user }
-        const newcomerIds = [newcomerData[0]._id.toString(), newcomerData[1]._id.toString()]
+        const context = { mongo, user, mailer }
+        const invitationInput = {
+          newcomerIds: [newcomerData[2]._id.toString(), newcomerData[3]._id.toString()],
+          message: "A custom message",
+        }
         try {
-          await resolvers.Mutation.sendInvitations(null, { newcomerIds }, context)
+          await resolvers.Mutation.sendInvitations(null, { invitationInput }, context)
         } catch (e) {
           expect(e.message).toEqual("The request is invalid.")
           expect(e.state).toEqual({ main: ["Unauthenticated."] })
@@ -51,10 +72,13 @@ describe("Newcomer Mutation resolvers", () => {
         await mongo.loadUsers()
         await mongo.loadNewcomers()
         const user = userData[0]
-        const context = { mongo, user }
-        const newcomerIds = [newcomerData[0]._id.toString(), newcomerData[1]._id.toString()]
+        const context = { mongo, user, mailer }
+        const invitationInput = {
+          newcomerIds: [newcomerData[2]._id.toString(), newcomerData[3]._id.toString()],
+          message: "A custom message",
+        }
         try {
-          await resolvers.Mutation.sendInvitations(null, { newcomerIds }, context)
+          await resolvers.Mutation.sendInvitations(null, { invitationInput }, context)
         } catch (e) {
           expect(e.message).toEqual("The request is invalid.")
           expect(e.state).toEqual({ main: ["Not allowed."] })

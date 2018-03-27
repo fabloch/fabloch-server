@@ -23,7 +23,7 @@ const createNewcomer = async (data, { mongo: { Newcomers, Users }, mailer }) => 
     const [_id] = response.insertedIds
     newcomer._id = _id
   }
-  await sendNewcomerDigits(newcomer, mailer)
+  sendNewcomerDigits(newcomer, mailer)
   return newcomer
 }
 

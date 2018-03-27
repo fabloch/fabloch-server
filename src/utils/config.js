@@ -5,6 +5,7 @@ dotenv.config({ silent: true })
 export const {
   CLIENT_URI,
   CORS_URI,
+  EMAIL_DEFAULT,
   JWT_SECRET,
   MAILGUN_DOMAIN,
   MAILGUN_KEY,
@@ -16,6 +17,7 @@ export const {
 const defaults = {
   CLIENT_URI: "defined in .env",
   CORS_URI: "defined in .env",
+  EMAIL_DEFAULT: "defined in .env",
   JWT_SECRET: "defined in .env",
   MAILGUN_DOMAIN: "defined in .env",
   MAILGUN_KEY: "defined in .env",
