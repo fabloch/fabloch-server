@@ -9,7 +9,7 @@ const eventCatSessionList = async ({ eventCatId }, { mongo: { EventModels, Event
       { "eventCatsSuper.id": catId, published: true },
       { eventModelId: { $in: eventModelIds }, published: true },
     ],
-  }).toArray()
+  }).sort({ start: 1 }).toArray()
   return eventSessions
 }
 

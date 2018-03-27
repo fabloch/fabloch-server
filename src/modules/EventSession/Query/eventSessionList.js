@@ -21,7 +21,7 @@ const buildFilters = ({ OR = [], title_contains, intro_contains, description_con
 
 const eventSessionList = async ({ filter }, { mongo: { EventSessions } }) => {
   const query = filter ? { $or: buildFilters(filter) } : {}
-  return EventSessions.find(query).toArray()
+  return EventSessions.find(query).sort({ start: 1 }).toArray()
 }
 
 export default eventSessionList
