@@ -1,7 +1,7 @@
-const memberships = async (user, context) => {
+const tickets = async (user, context) => {
   const { mongo: { EventTickets } } = context
-  const membershipList = await EventTickets.find({ ownerId: user._id }).toArray()
-  return membershipList
+  const ticketList = await EventTickets.find({ ownerId: user._id }).toArray()
+  return ticketList
 }
 
-export default memberships
+export default tickets

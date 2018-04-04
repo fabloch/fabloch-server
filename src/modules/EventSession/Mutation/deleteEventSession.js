@@ -8,9 +8,10 @@ const deleteEventSession = async (
   checkAuthenticatedUser(user)
   const eventSessionId = ObjectId(data.eventSessionId)
   const eventTickets = await EventTickets
-    .find({ eventSessionId: { eventSessionId } })
+    .find({ eventSessionId })
     .toArray()
   const eventTicketIds = eventTickets.map(t => t._id)
+  console.log("eventTicketIds", eventTicketIds)
 
   const esPromise = EventSessions.remove({ _id: eventSessionId })
   const etPromise = EventTickets.remove({ _id: { $in: eventTicketIds } })

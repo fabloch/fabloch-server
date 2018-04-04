@@ -31,7 +31,7 @@ describe("deleteEventSession", () => {
       const eventTickets = await mongo.EventTickets
         .find({ eventSessionId: eventSessionData[0]._id }).toArray()
       expect(eventSession).toBeNull()
-      expect(eventTickets).toHaveLength(1)
+      expect(eventTickets).toHaveLength(0)
     })
   })
 })
