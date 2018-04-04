@@ -1,8 +1,10 @@
 import createEventTicket from "./Mutation/createEventTicket"
+import deleteEventTicket from "./Mutation/deleteEventTicket"
 
 export default {
   Mutation: {
     createEventTicket: async (_, data, context) => createEventTicket(data, context),
+    deleteEventTicket: async (_, data, context) => deleteEventTicket(data, context),
   },
   EventTicket: {
     id: eventTicket => eventTicket._id.toString(),

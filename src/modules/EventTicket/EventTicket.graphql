@@ -6,7 +6,9 @@ type EventTicket {
 
 type Mutation {
   createEventTicket(eventTicketInput: EventTicketInput): EventTicket
+  deleteEventTicket(eventTicketInput: EventTicketInput): Boolean
 }
+
 input EventTicketInput {
   eventSessionId: ID!
 }
