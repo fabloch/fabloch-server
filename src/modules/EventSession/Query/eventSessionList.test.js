@@ -21,7 +21,14 @@ describe("EventSession Query resolvers", () => {
         await mongo.loadEventSessions()
         const context = { mongo }
         const response = await resolvers.Query.eventSessionList(null, {}, context)
-        expect(response).toEqual(eventSessionData)
+        expect(response).toEqual([
+          eventSessionData[4],
+          eventSessionData[0],
+          eventSessionData[5],
+          eventSessionData[1],
+          eventSessionData[2],
+          eventSessionData[3],
+        ])
       })
     })
     // describe("with filters", () => {

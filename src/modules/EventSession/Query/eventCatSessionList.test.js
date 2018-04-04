@@ -18,10 +18,10 @@ describe("EventSession Query resolvers", () => {
       const eventCatId = eventCatData[0]._id.toString()
       const response = await resolvers.Query.eventCatSessionList(null, { eventCatId }, context)
       expect(response).toEqual([
-        eventSessionData[0],
-        eventSessionData[1],
         eventSessionData[4],
+        eventSessionData[0],
         eventSessionData[5],
+        eventSessionData[1],
       ])
     })
   })

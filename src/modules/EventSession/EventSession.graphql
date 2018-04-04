@@ -45,6 +45,7 @@ input EventSessionFilter {
 
 type Mutation {
   createEventSession(eventSessionInput: CreateEventSessionInput!): EventSession
+  deleteEventSession(eventSessionId: ID!): Boolean
   updateEventSession(eventSessionInput: UpdateEventSessionInput!): EventSession
 }
 input CreateEventSessionInput {

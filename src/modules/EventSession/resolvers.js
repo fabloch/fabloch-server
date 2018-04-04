@@ -19,6 +19,7 @@ import eventSessionList from "./Query/eventSessionList"
 import eventSessionDetail from "./Query/eventSessionDetail"
 
 import createEventSession from "./Mutation/createEventSession"
+import deleteEventSession from "./Mutation/deleteEventSession"
 import updateEventSession from "./Mutation/updateEventSession"
 
 export default {
@@ -30,6 +31,7 @@ export default {
   },
   Mutation: {
     createEventSession: async (_, data, context) => createEventSession(data, context),
+    deleteEventSession: async (_, data, context) => deleteEventSession(data, context),
     updateEventSession: async (_, data, context) => updateEventSession(data, context),
   },
   Subscription: {

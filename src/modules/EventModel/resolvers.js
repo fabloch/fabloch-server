@@ -7,6 +7,7 @@ import medias from "./EventModel/medias"
 import eventModelList from "./Query/eventModelList"
 import eventModelDetail from "./Query/eventModelDetail"
 import createEventModel from "./Mutation/createEventModel"
+import deleteEventModel from "./Mutation/deleteEventModel"
 import updateEventModel from "./Mutation/updateEventModel"
 
 export default {
@@ -17,6 +18,7 @@ export default {
   },
   Mutation: {
     createEventModel: async (_, data, context) => createEventModel(data, context),
+    deleteEventModel: async (_, data, context) => deleteEventModel(data, context),
     updateEventModel: async (_, data, context) => updateEventModel(data, context),
   },
   Subscription: {

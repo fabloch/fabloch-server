@@ -24,9 +24,9 @@ input EventModelFilter {
   description_contains: String
 }
 
-
 type Mutation {
   createEventModel(eventModelInput: CreateEventModelInput!): EventModel
+  deleteEventModel(eventModelId: ID!): Boolean
   updateEventModel(eventModelInput: UpdateEventModelInput!): EventModel
 }
 input CreateEventModelInput {
