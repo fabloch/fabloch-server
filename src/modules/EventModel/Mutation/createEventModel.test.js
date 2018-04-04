@@ -68,6 +68,17 @@ describe("createEventModel", () => {
         placeId: placeData[0]._id,
       })
     })
+    it("links the speaker id", async () => {
+      const user = userData[0]
+      const context = { mongo, user }
+      const eventModelInput = {
+        speakerId: userData[1]._id.toString(),
+      }
+      const response = await resolvers.Mutation.createEventModel(null, { eventModelInput }, context)
+      expect(response).toMatchObject({
+        speakerId: userData[1]._id,
+      })
+    })
   })
   describe("invalid", async () => {
     it("raises error if no user in context", async () => {

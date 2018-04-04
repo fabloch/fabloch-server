@@ -70,6 +70,7 @@ export const eventModelData = [
     intro: "This is EventModel 0 intro",
     description: "This is EventModel 0 description.\nShould show in A not in B.",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+    speakerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     seats: 2,
     placeId: ObjectId("5a5e17f5b16e8350cd5c036d"),
     eventCats: [
@@ -86,6 +87,7 @@ export const eventModelData = [
     intro: "Intro 1 (1A published, 1B no)",
     description: "This event has two sessions: 1A and 1B\nA is published.",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
+    speakerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     eventCats: [
       {
         id: ObjectId("5a9feeb060363661402c1ce6"),

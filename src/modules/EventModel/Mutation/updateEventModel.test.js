@@ -1,6 +1,6 @@
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
-import { admin, eventModelData, userData } from "../../../testUtils/fixtures"
+import { admin, eventModelData, placeData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
@@ -64,6 +64,31 @@ describe("updateEventModel", () => {
       expect(response).toMatchObject({
         ...eventModelData[0],
         title: "Updated title",
+      })
+    })
+    it("updates the place id", async () => {
+      const user = userData[0]
+      const context = { mongo, user }
+      const eventModelInput = {
+        id: eventModelData[0]._id.toString(),
+        placeId: placeData[0]._id.toString(),
+      }
+      const response = await resolvers.Mutation.createEventModel(null, { eventModelInput }, context)
+      expect(response).toMatchObject({
+        id: eventModelData[0]._id.toString(),
+        placeId: placeData[0]._id,
+      })
+    })
+    it("updates the speaker id", async () => {
+      const user = userData[0]
+      const context = { mongo, user }
+      const eventModelInput = {
+        id: eventModelData[0]._id.toString(),
+        speakerId: userData[1]._id.toString(),
+      }
+      const response = await resolvers.Mutation.createEventModel(null, { eventModelInput }, context)
+      expect(response).toMatchObject({
+        speakerId: userData[1]._id,
       })
     })
   })
