@@ -2,6 +2,7 @@ import pubsub from "../../utils/pubsub"
 
 import eventCats from "./EventModel/eventCats"
 import place from "./EventModel/place"
+import speaker from "./EventModel/speaker"
 import mainMedia from "./EventModel/mainMedia"
 import medias from "./EventModel/medias"
 import eventModelList from "./Query/eventModelList"
@@ -35,5 +36,6 @@ export default {
     owner: async (eventModel, _, { mongo: { Users } }) =>
       Users.findOne({ _id: eventModel.ownerId }),
     place: async (eventModel, _, context) => place(eventModel, context),
+    speaker: async (eventModel, _, context) => speaker(eventModel, context),
   },
 }
