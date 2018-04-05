@@ -7,6 +7,7 @@ import mainMedia from "./EventSession/mainMedia"
 import medias from "./EventSession/medias"
 import model from "./EventSession/model"
 import place from "./EventSession/place"
+import speaker from "./EventSession/speaker"
 import seats from "./EventSession/seats"
 import ticketCount from "./EventSession/ticketCount"
 import tickets from "./EventSession/tickets"
@@ -51,6 +52,7 @@ export default {
     owner: async (eventSession, _, { mongo: { Users } }) =>
       Users.findOne({ _id: eventSession.ownerId }),
     place: async (eventSession, _, context) => place(eventSession, context),
+    speaker: async (eventSession, _, context) => speaker(eventSession, context),
     seats: async (eventSession, _, context) => seats(eventSession, context),
     ticketCount: async (eventSession, _, context) => ticketCount(eventSession, context),
     tickets: async (eventSession, _, context) => tickets(eventSession, context),

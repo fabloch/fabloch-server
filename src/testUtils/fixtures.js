@@ -87,7 +87,6 @@ export const eventModelData = [
     intro: "Intro 1 (1A published, 1B no)",
     description: "This event has two sessions: 1A and 1B\nA is published.",
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
-    speakerId: ObjectId("5a31b456c5e7b54a9aba3782"),
     eventCats: [
       {
         id: ObjectId("5a9feeb060363661402c1ce6"),
@@ -125,6 +124,7 @@ export const eventSessionData = [
     start: dateUtils.eventSession0Bstart,
     end: dateUtils.eventSession0Bend,
     placeSuperId: ObjectId("5a5e17feb16e8350cd5c0372"),
+    speakerSuperId: ObjectId("5a31b4efedc7474b9addc261"),
     seatsSuper: 1,
     published: true,
   },

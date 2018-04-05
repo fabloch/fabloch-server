@@ -30,6 +30,11 @@ const createEventSession = async (
   // placeSuperId
   if (eventSession.placeSuperId) { eventSession.placeSuperId = ObjectId(eventSession.placeSuperId) }
 
+  // speakerSuperId
+  if (eventSession.speakerSuperId) {
+    eventSession.speakerSuperId = ObjectId(eventSession.speakerSuperId)
+  }
+
   // eventCatsSuperIds
   if (eventSession.eventCatsSuperIds) {
     const ids = eventSession.eventCatsSuperIds.map(id => ObjectId(id))

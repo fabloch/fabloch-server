@@ -96,7 +96,21 @@ describe("createEventSession", () => {
         placeSuperId: placeData[0]._id,
       })
     })
-    it("links the eventCats", async () => {
+    it("links the super speaker id", async () => {
+      await mongo.loadEventModels()
+      const user = userData[0]
+      const context = { mongo, user }
+      const eventSessionInput = {
+        eventModelId: eventModelData[0]._id.toString(),
+        speakerSuperId: userData[0]._id.toString(),
+      }
+      const response = await resolvers.Mutation
+        .createEventSession(null, { eventSessionInput }, context)
+      expect(response).toMatchObject({
+        speakerSuperId: userData[0]._id,
+      })
+    })
+    it("links the super eventCats", async () => {
       await mongo.loadEventModels()
       await mongo.loadEventCats()
       const user = userData[0]

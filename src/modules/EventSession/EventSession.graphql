@@ -10,6 +10,8 @@ type EventSession {
   mainMedia: Media
   medias: [Media!]!
   owner: User!
+  speaker: User
+  speakerSuper: User
   start: DateTime
   end: DateTime
   tickets: [EventTicket!]!
@@ -57,6 +59,7 @@ input CreateEventSessionInput {
   start: DateTime
   end: DateTime
   placeSuperId: ID
+  speakerSuperId: ID
   eventCatsSuperIds: [ID!]
 }
 input UpdateEventSessionInput {
@@ -68,6 +71,7 @@ input UpdateEventSessionInput {
   start: DateTime
   end: DateTime
   placeSuperId: ID
+  speakerSuperId: ID
   eventCatsSuperIds: [ID!]
 }
 

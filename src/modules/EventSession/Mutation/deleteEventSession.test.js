@@ -33,5 +33,6 @@ describe("deleteEventSession", () => {
       expect(eventSession).toBeNull()
       expect(eventTickets).toHaveLength(0)
     })
+    it("sends email to ticket owners")
   })
 })

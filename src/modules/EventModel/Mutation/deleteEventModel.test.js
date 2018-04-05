@@ -35,5 +35,6 @@ describe("deleteEventModel", () => {
       expect(eventSessions).toHaveLength(0)
       expect(eventTickets).toHaveLength(0)
     })
+    it("sends email to ticket owners")
   })
 })
