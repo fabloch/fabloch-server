@@ -105,7 +105,7 @@ export const eventSessionData = [
     start: dateUtils.eventSession0Astart,
     end: dateUtils.eventSession0Aend,
     published: true,
-    eventCatsSuper: [
+    eventCats: [
       {
         id: ObjectId("5a9feeb560363661402c1ce8"),
         name: "Ecology",
@@ -118,14 +118,14 @@ export const eventSessionData = [
     _id: ObjectId("5a95c526c14e2a0ce4eea6f8"),
     eventModelId: ObjectId("5a4a5eb6404da6d636078beb"),
     ownerId: ObjectId("5a31b456c5e7b54a9aba3782"),
-    titleSuper: "Session B title (override)",
-    introSuper: "Session B intro (override)",
-    descriptionSuper: "Session B description (override).\nIs also overriding place and seats",
+    title: "Session B title (override)",
+    intro: "Session B intro (override)",
+    description: "Session B description (override).\nIs also overriding place and seats",
     start: dateUtils.eventSession0Bstart,
     end: dateUtils.eventSession0Bend,
-    placeSuperId: ObjectId("5a5e17feb16e8350cd5c0372"),
-    speakerSuperId: ObjectId("5a31b4efedc7474b9addc261"),
-    seatsSuper: 1,
+    placeId: ObjectId("5a5e17feb16e8350cd5c0372"),
+    speakerId: ObjectId("5a31b4efedc7474b9addc261"),
+    seats: 1,
     published: true,
   },
   {
@@ -136,7 +136,7 @@ export const eventSessionData = [
     start: dateUtils.eventSession1Astart,
     end: dateUtils.eventSession1Aend,
     published: true,
-    eventCatsSuper: [
+    eventCats: [
       {
         id: ObjectId("5a9feeb560363661402c1ce8"),
         name: "Ecology",
@@ -161,7 +161,7 @@ export const eventSessionData = [
     start: dateUtils.overlapping1start,
     end: dateUtils.overlapping1end,
     published: true,
-    eventCatsSuper: [
+    eventCats: [
       {
         id: ObjectId("5a9feeb560363661402c1ce8"),
         name: "Ecology",
@@ -177,7 +177,7 @@ export const eventSessionData = [
     start: dateUtils.overlapping2start,
     end: dateUtils.overlapping2end,
     published: true,
-    eventCatsSuper: [
+    eventCats: [
       {
         id: ObjectId("5a9feeac60363661402c1ce4"),
         name: "3D Printing",
