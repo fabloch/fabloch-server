@@ -4,7 +4,6 @@ import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
 import isOwnerOrAdmin from "../../_shared/isOwnerOrAdmin"
 import ValidationError from "../../_shared/ValidationError"
 import checkEventDates from "./checkEventDates"
-import checkForbidden from "../../_shared/checkForbidden"
 
 const updateEventSession = async (
   { eventSessionInput },
@@ -18,11 +17,6 @@ const updateEventSession = async (
   }
   let errors = []
   errors = checkEventDates(eventSessionInput, errors)
-  checkForbidden(
-    ["title", "intro", "description", "seats", "placeId", "eventCats"],
-    eventSessionInput,
-    errors,
-  )
   if (errors.length) throw new ValidationError(errors)
 
   const eventSession = eventSessionInput
@@ -32,18 +26,18 @@ const updateEventSession = async (
   if (eventSession.ownerId) {
     eventSession.ownerId = ObjectId(eventSession.ownerId)
   }
-  if (eventSession.placeSuperId) {
-    eventSession.placeSuperId = ObjectId(eventSession.placeSuperId)
+  if (eventSession.placeId) {
+    eventSession.placeId = ObjectId(eventSession.placeId)
   }
-  if (eventSession.eventCatSuperIds) {
-    const ids = eventSession.eventCatSuperIds.map(id => ObjectId(id))
+  if (eventSession.eventCatIds) {
+    const ids = eventSession.eventCatIds.map(id => ObjectId(id))
     const ecList = await EventCats.find({ _id: { $in: ids } }).toArray()
-    const eventCatsSuper = ecList.map(ec => ({
+    const eventCats = ecList.map(ec => ({
       id: ec._id,
       name: ec.name,
       color: ec.color,
     }))
-    eventSession.eventCatsSuper = eventCatsSuper
+    eventSession.eventCats = eventCats
   }
   await EventSessions.update(
     { _id: eventSessionFromDb._id },

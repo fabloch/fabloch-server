@@ -13,7 +13,7 @@ const checkEventForTicket = async (
 
   const bookedEventTickets = await EventTickets
     .find({ eventSessionId }).count()
-  let seats = eventSession.seatsSuper
+  let { seats } = eventSession
   if (!seats) {
     const eventModel = await EventModels.findOne({ _id: eventSession.eventModelId })
     if (eventModel) ({ seats } = eventModel)

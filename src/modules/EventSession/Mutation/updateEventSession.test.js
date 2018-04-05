@@ -24,19 +24,19 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        titleSuper: "Updated title",
-        introSuper: "Updated introduction",
-        descriptionSuper: "Updated description",
-        seatsSuper: "12345",
+        title: "Updated title",
+        intro: "Updated introduction",
+        description: "Updated description",
+        seats: "12345",
       }
       const response = await resolvers.Mutation
         .updateEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
         ...eventSessionData[0],
-        titleSuper: "Updated title",
-        introSuper: "Updated introduction",
-        descriptionSuper: "Updated description",
-        seatsSuper: "12345",
+        title: "Updated title",
+        intro: "Updated introduction",
+        description: "Updated description",
+        seats: "12345",
       })
     })
     it("stores updated title, description and seats", async () => {
@@ -45,19 +45,19 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        titleSuper: "Updated title",
-        introSuper: "Updated introduction",
-        descriptionSuper: "Updated description",
-        seatsSuper: "12345",
+        title: "Updated title",
+        intro: "Updated introduction",
+        description: "Updated description",
+        seats: "12345",
       }
       await resolvers.Mutation.updateEventSession(null, { eventSessionInput }, context)
       const eventSession = await mongo.EventSessions.findOne({ _id: eventSessionData[0]._id })
       expect(eventSession).toMatchObject({
         ...eventSessionData[0],
-        titleSuper: "Updated title",
-        introSuper: "Updated introduction",
-        descriptionSuper: "Updated description",
-        seatsSuper: "12345",
+        title: "Updated title",
+        intro: "Updated introduction",
+        description: "Updated description",
+        seats: "12345",
       })
     })
     it("updates any eventSession when user is admin", async () => {
@@ -66,13 +66,13 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        titleSuper: "Updated title",
+        title: "Updated title",
       }
       const response = await resolvers.Mutation
         .updateEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
         ...eventSessionData[0],
-        titleSuper: "Updated title",
+        title: "Updated title",
       })
     })
     it("updates start and end", async () => {
@@ -115,13 +115,13 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        placeSuperId: placeData[1]._id.toString(),
+        placeId: placeData[1]._id.toString(),
       }
       const response = await resolvers.Mutation
         .updateEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
         ...eventSessionData[0],
-        placeSuperId: placeData[1]._id,
+        placeId: placeData[1]._id,
       })
     })
     it("updates the eventCats", async () => {
@@ -131,14 +131,14 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        eventCatSuperIds: [
+        eventCatIds: [
           eventCatData[2]._id.toString(),
           eventCatData[3]._id.toString(),
         ],
       }
       const response = await resolvers.Mutation
         .updateEventSession(null, { eventSessionInput }, context)
-      expect(response.eventCatsSuper).toMatchObject([
+      expect(response.eventCats).toMatchObject([
         { id: eventCatData[2]._id, name: eventCatData[2].name, color: eventCatData[2].color },
         { id: eventCatData[3]._id, name: eventCatData[3].name, color: eventCatData[3].color },
       ])
@@ -179,7 +179,7 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        titleSuper: "Awesome EventSession",
+        title: "Awesome EventSession",
       }
       try {
         await resolvers.Mutation.updateEventSession(null, { eventSessionInput }, context)
@@ -194,7 +194,7 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        titleSuper: "Updated title",
+        title: "Updated title",
       }
       try {
         await resolvers.Mutation.updateEventSession(null, { eventSessionInput }, context)

@@ -2,28 +2,28 @@ type EventSession {
   id: ID!
   model: EventModel
   title: String
-  titleSuper: String
+  titlePrnt: String
   intro: String
-  introSuper: String
+  introPrnt: String
   description: String
-  descriptionSuper: String
+  descriptionPrnt: String
   mainMedia: Media
   medias: [Media!]!
   owner: User!
-  speaker: User
-  speakerSuper: User
   start: DateTime
   end: DateTime
   tickets: [EventTicket!]!
   ticketCount: Int
   userStatus: UserStatus!
   seats: Int
-  seatsSuper: Int
+  seatsPrnt: Int
   published: Boolean
   place: Place
-  placeSuper: Place
+  placePrnt: Place
+  speaker: User
+  speakerPrnt: User
   eventCats: [EventCat!]!
-  eventCatsSuper: [EventCat!]
+  eventCatsPrnt: [EventCat!]
 }
 type UserStatus {
   canTicket: Boolean!
@@ -52,27 +52,27 @@ type Mutation {
 }
 input CreateEventSessionInput {
   eventModelId: ID!
-  titleSuper: String
-  introSuper: String
-  descriptionSuper: String
-  seatsSuper: Int
+  title: String
+  intro: String
+  description: String
+  seats: Int
   start: DateTime
   end: DateTime
-  placeSuperId: ID
-  speakerSuperId: ID
-  eventCatSuperIds: [ID!]
+  placeId: ID
+  speakerId: ID
+  eventCatIds: [ID!]
 }
 input UpdateEventSessionInput {
   id: ID!
-  titleSuper: String
-  introSuper: String
-  descriptionSuper: String
-  seatsSuper: Int
+  title: String
+  intro: String
+  description: String
+  seats: Int
   start: DateTime
   end: DateTime
-  placeSuperId: ID
-  speakerSuperId: ID
-  eventCatSuperIds: [ID!]
+  placeId: ID
+  speakerId: ID
+  eventCatIds: [ID!]
 }
 
 type Subscription {

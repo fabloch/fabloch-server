@@ -31,8 +31,8 @@ const updateEventCat = async (
     { $set: { "eventCats.$.name": eventCatInput.name, "eventCats.$.color": eventCatInput.color } },
   )
   await EventSessions.updateMany(
-    { "eventCatsSuper.id": _id },
-    { $set: { "eventCatsSuper.$.name": eventCatInput.name, "eventCatsSuper.$.color": eventCatInput.color } },
+    { "eventCats.id": _id },
+    { $set: { "eventCats.$.name": eventCatInput.name, "eventCats.$.color": eventCatInput.color } },
   )
 
   return updatedEventCat

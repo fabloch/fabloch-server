@@ -33,6 +33,9 @@ export const admin = {
   email: "admin@example.com",
   password: "$2a$10$Htm2b52NAP2XE5pD8LnK2OP58PTf9kXxaEtKxMmbI28Udappwayy6",
   roles: ["admin"],
+  profile: {
+    fullName: "Administrator",
+  },
   version: 1,
 }
 

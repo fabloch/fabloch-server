@@ -11,20 +11,13 @@ describe("EventSession EventSession resolvers", () => {
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("description", () => {
-    it("returns the eventModel description (eventSession0A)", async () => {
+  describe("descriptionPrnt", () => {
+    it("returns the eventModel descriptionPrnt (eventSession0A)", async () => {
       await mongo.loadEventModels()
-      await mongo.loadPlaces()
       const context = { mongo }
-      const response = await resolvers.EventSession.description(eventSessionData[0], null, context)
+      const response = await resolvers.EventSession
+        .descriptionPrnt(eventSessionData[0], null, context)
       expect(response).toEqual(eventModelData[0].description)
-    })
-    it("returns the eventSession description (eventSession0B)", async () => {
-      await mongo.loadEventModels()
-      await mongo.loadPlaces()
-      const context = { mongo }
-      const response = await resolvers.EventSession.description(eventSessionData[1], null, context)
-      expect(response).toEqual(eventSessionData[1].descriptionSuper)
     })
   })
 })

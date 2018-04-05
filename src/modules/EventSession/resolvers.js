@@ -1,18 +1,22 @@
 import pubsub from "../../utils/pubsub"
 
+import titlePrnt from "./EventSession/titlePrnt"
+import introPrnt from "./EventSession/introPrnt"
+import descriptionPrnt from "./EventSession/descriptionPrnt"
+import seatsPrnt from "./EventSession/seatsPrnt"
+import placePrnt from "./EventSession/placePrnt"
+import speakerPrnt from "./EventSession/speakerPrnt"
+import eventCatsPrnt from "./EventSession/eventCatsPrnt"
+
+import place from "./EventSession/place"
+import speaker from "./EventSession/speaker"
+import eventCats from "./EventSession/eventCats"
 import userStatus from "./EventSession/userStatus"
-import intro from "./EventSession/intro"
-import description from "./EventSession/description"
 import mainMedia from "./EventSession/mainMedia"
 import medias from "./EventSession/medias"
 import model from "./EventSession/model"
-import place from "./EventSession/place"
-import speaker from "./EventSession/speaker"
-import seats from "./EventSession/seats"
 import ticketCount from "./EventSession/ticketCount"
 import tickets from "./EventSession/tickets"
-import title from "./EventSession/title"
-import eventCats from "./EventSession/eventCats"
 
 import eventCatSessionList from "./Query/eventCatSessionList"
 import eventModelSessionList from "./Query/eventModelSessionList"
@@ -43,20 +47,25 @@ export default {
   },
   EventSession: {
     id: eventSession => eventSession._id.toString(),
+    place: async (eventSession, _, context) => place(eventSession, context),
+    speaker: async (eventSession, _, context) => speaker(eventSession, context),
+    eventCats: async (eventSession, _, context) => eventCats(eventSession, context),
+
     userStatus: async (eventSession, _, context) => userStatus(eventSession, context),
-    intro: async (eventSession, _, context) => intro(eventSession, context),
-    description: async (eventSession, _, context) => description(eventSession, context),
     mainMedia: async (eventSession, _, context) => mainMedia(eventSession, context),
     medias: async (eventSession, _, context) => medias(eventSession, context),
     model: async (eventSession, _, context) => model(eventSession, context),
     owner: async (eventSession, _, { mongo: { Users } }) =>
       Users.findOne({ _id: eventSession.ownerId }),
-    place: async (eventSession, _, context) => place(eventSession, context),
-    speaker: async (eventSession, _, context) => speaker(eventSession, context),
-    seats: async (eventSession, _, context) => seats(eventSession, context),
     ticketCount: async (eventSession, _, context) => ticketCount(eventSession, context),
     tickets: async (eventSession, _, context) => tickets(eventSession, context),
-    title: async (eventSession, _, context) => title(eventSession, context),
-    eventCats: async (eventSession, _, context) => eventCats(eventSession, context),
+
+    titlePrnt: async (eventSession, _, context) => titlePrnt(eventSession, context),
+    introPrnt: async (eventSession, _, context) => introPrnt(eventSession, context),
+    descriptionPrnt: async (eventSession, _, context) => descriptionPrnt(eventSession, context),
+    seatsPrnt: async (eventSession, _, context) => seatsPrnt(eventSession, context),
+    placePrnt: async (eventSession, _, context) => placePrnt(eventSession, context),
+    speakerPrnt: async (eventSession, _, context) => speakerPrnt(eventSession, context),
+    eventCatsPrnt: async (eventSession, _, context) => eventCatsPrnt(eventSession, context),
   },
 }

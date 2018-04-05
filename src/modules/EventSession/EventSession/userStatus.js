@@ -34,8 +34,8 @@ const userStatus = async (
         - session limit set and condition met
         - model limit set and condition met
       */
-      if (!es.seatsSuper && !em.seats) { return output(true, "noLimit") }
-      if (es.seatsSuper && es.seatsSuper - sessionTickets.length <= 0) { return output(false, "full") }
+      if (!es.seats && !em.seats) { return output(true, "noLimit") }
+      if (es.seats && es.seats - sessionTickets.length <= 0) { return output(false, "full") }
       if (em.seats && em.seats - sessionTickets.length <= 0) { return output(false, "full") }
       return output(true, "seatsLeft")
     }

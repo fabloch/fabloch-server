@@ -6,7 +6,7 @@ const eventCatSessionList = async ({ eventCatId }, { mongo: { EventModels, Event
   const eventModelIds = eventModels.map(em => em._id)
   const eventSessions = await EventSessions.find({
     $or: [
-      { "eventCatsSuper.id": catId, published: true },
+      { "eventCats.id": catId, published: true },
       { eventModelId: { $in: eventModelIds }, published: true },
     ],
   }).sort({ start: 1 }).toArray()

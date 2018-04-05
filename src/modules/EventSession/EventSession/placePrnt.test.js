@@ -11,19 +11,19 @@ describe("EventSession EventSession resolvers", () => {
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("place", () => {
-    it("returns the eventSession place (eventSession0B)", async () => {
+  describe("placePrnt", () => {
+    it("returns the eventModel placePrnt (eventSession0A)", async () => {
       await mongo.loadEventModels()
       await mongo.loadPlaces()
       const context = { mongo }
-      const response = await resolvers.EventSession.place(eventSessionData[1], null, context)
-      expect(response).toEqual(placeData[1])
+      const response = await resolvers.EventSession.placePrnt(eventSessionData[0], null, context)
+      expect(response).toEqual(placeData[0])
     })
-    it("returns null if no eventSession place", async () => {
+    it("returns null if no evenModel placePrnt", async () => {
       await mongo.loadEventModels()
       await mongo.loadPlaces()
       const context = { mongo }
-      const response = await resolvers.EventSession.place(eventSessionData[2], null, context)
+      const response = await resolvers.EventSession.placePrnt(eventSessionData[2], null, context)
       expect(response).toEqual(null)
     })
   })

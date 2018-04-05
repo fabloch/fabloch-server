@@ -43,20 +43,20 @@ describe("createEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         eventModelId: eventModelData[0]._id.toString(),
-        titleSuper: "A title",
-        introSuper: "Introduction",
-        descriptionSuper: "A description",
-        seatsSuper: 10,
+        title: "A title",
+        intro: "Introduction",
+        description: "A description",
+        seats: 10,
       }
       const response = await resolvers.Mutation
         .createEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
         eventModelId: eventModelData[0]._id,
         ownerId: user._id,
-        titleSuper: "A title",
-        introSuper: "Introduction",
-        descriptionSuper: "A description",
-        seatsSuper: 10,
+        title: "A title",
+        intro: "Introduction",
+        description: "A description",
+        seats: 10,
       })
     })
     it("stores title, description, seats", async () => {
@@ -65,10 +65,10 @@ describe("createEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         eventModelId: eventModelData[0]._id.toString(),
-        titleSuper: "A title",
-        introSuper: "Introduction",
-        descriptionSuper: "A description",
-        seatsSuper: 10,
+        title: "A title",
+        intro: "Introduction",
+        description: "A description",
+        seats: 10,
       }
       const response = await resolvers.Mutation
         .createEventSession(null, { eventSessionInput }, context)
@@ -76,10 +76,10 @@ describe("createEventSession", () => {
       expect(eventSession).toMatchObject({
         eventModelId: eventModelData[0]._id,
         ownerId: user._id,
-        titleSuper: "A title",
-        introSuper: "Introduction",
-        descriptionSuper: "A description",
-        seatsSuper: 10,
+        title: "A title",
+        intro: "Introduction",
+        description: "A description",
+        seats: 10,
       })
     })
     it("links the super place id", async () => {
@@ -88,12 +88,12 @@ describe("createEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         eventModelId: eventModelData[0]._id.toString(),
-        placeSuperId: placeData[0]._id.toString(),
+        placeId: placeData[0]._id.toString(),
       }
       const response = await resolvers.Mutation
         .createEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
-        placeSuperId: placeData[0]._id,
+        placeId: placeData[0]._id,
       })
     })
     it("links the super speaker id", async () => {
@@ -102,12 +102,12 @@ describe("createEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         eventModelId: eventModelData[0]._id.toString(),
-        speakerSuperId: userData[0]._id.toString(),
+        speakerId: userData[0]._id.toString(),
       }
       const response = await resolvers.Mutation
         .createEventSession(null, { eventSessionInput }, context)
       expect(response).toMatchObject({
-        speakerSuperId: userData[0]._id,
+        speakerId: userData[0]._id,
       })
     })
     it("links the super eventCats", async () => {
@@ -117,14 +117,14 @@ describe("createEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         eventModelId: eventModelData[0]._id.toString(),
-        eventCatSuperIds: [
+        eventCatIds: [
           eventCatData[0]._id.toString(),
           eventCatData[1]._id.toString(),
         ],
       }
       const response = await resolvers.Mutation
         .createEventSession(null, { eventSessionInput }, context)
-      expect(response.eventCatsSuper).toMatchObject([
+      expect(response.eventCats).toMatchObject([
         { id: eventCatData[0]._id, name: eventCatData[0].name, color: eventCatData[0].color },
         { id: eventCatData[1]._id, name: eventCatData[1].name, color: eventCatData[1].color },
       ])
@@ -207,33 +207,6 @@ describe("createEventSession", () => {
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
         expect(e.state).toEqual({ main: ["Parent eventModel does not exist."] })
-      }
-    })
-    it("raises error if trying to store title, intro, description, seats, placeId, eventCats", async () => {
-      await mongo.loadEventModels()
-      const user = userData[0]
-      const context = { mongo, user }
-      const eventSessionInput = {
-        eventModelId: eventModelData[0]._id.toString(),
-        title: "A title",
-        intro: "Something",
-        description: "Something",
-        seats: "Something",
-        placeId: "Something",
-        eventCats: "Something",
-      }
-      try {
-        await resolvers.Mutation.createEventSession(null, { eventSessionInput }, context)
-      } catch (e) {
-        expect(e.message).toEqual("The request is invalid.")
-        expect(e.state).toEqual({
-          description: ["Forbidden field: description."],
-          eventCats: ["Forbidden field: event cats."],
-          intro: ["Forbidden field: intro."],
-          placeId: ["Forbidden field: place id."],
-          seats: ["Forbidden field: seats."],
-          title: ["Forbidden field: title."],
-        })
       }
     })
     it("raises error if seats is not a number")
