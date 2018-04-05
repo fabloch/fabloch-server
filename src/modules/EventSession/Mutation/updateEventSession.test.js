@@ -124,6 +124,22 @@ describe("updateEventSession", () => {
         placeId: placeData[1]._id,
       })
     })
+    it("updates speaker", async () => {
+      await mongo.loadEventSessions()
+      await mongo.loadUsers()
+      const user = userData[0]
+      const context = { mongo, user }
+      const eventSessionInput = {
+        id: eventSessionData[0]._id.toString(),
+        speakerId: userData[1]._id.toString(),
+      }
+      const response = await resolvers.Mutation
+        .updateEventSession(null, { eventSessionInput }, context)
+      expect(response).toMatchObject({
+        ...eventSessionData[0],
+        speakerId: userData[1]._id,
+      })
+    })
     it("updates the eventCats", async () => {
       await mongo.loadEventCats()
       await mongo.loadEventSessions()

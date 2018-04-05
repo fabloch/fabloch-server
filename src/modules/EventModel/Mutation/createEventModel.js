@@ -12,8 +12,8 @@ const createEventModel = async (
   eventModel.ownerId = user._id
   if (eventModel.placeId) { eventModel.placeId = ObjectId(eventModel.placeId) }
   if (eventModel.speakerId) { eventModel.speakerId = ObjectId(eventModel.speakerId) }
-  if (eventModel.eventCatsIds) {
-    const ids = eventModel.eventCatsIds.map(id => ObjectId(id))
+  if (eventModel.eventCatIds) {
+    const ids = eventModel.eventCatIds.map(id => ObjectId(id))
     const ecList = await EventCats.find({ _id: { $in: ids } }).toArray()
     const eventCats = ecList.map(ec => ({
       id: ec._id,

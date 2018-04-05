@@ -14,10 +14,6 @@ const updateEventModel = async (data, { mongo: { EventCats, EventModels }, user 
   }
   if (eventModelInput.placeId) { eventModelInput.placeId = ObjectId(eventModelInput.placeId) }
   if (eventModelInput.speakerId) { eventModelInput.speakerId = ObjectId(eventModelInput.speakerId) }
-  await EventModels.update(
-    { _id: eventModelFromDb._id },
-    { $set: { ...eventModelInput } },
-  )
   if (eventModelInput.eventCatIds) {
     const ids = eventModelInput.eventCatIds.map(id => ObjectId(id))
     const ecList = await EventCats.find({ _id: { $in: ids } }).toArray()
@@ -28,6 +24,10 @@ const updateEventModel = async (data, { mongo: { EventCats, EventModels }, user 
     }))
     eventModelInput.eventCats = eventCats
   }
+  await EventModels.update(
+    { _id: eventModelFromDb._id },
+    { $set: { ...eventModelInput } },
+  )
   return { ...eventModelFromDb, ...eventModelInput }
 }
 

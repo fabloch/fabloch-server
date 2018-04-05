@@ -1,3 +1,3 @@
-const eventCats = eventModel => eventModel.eventCats
+const eventCats = eventModel => eventModel.eventCats || []
 
 export default eventCats

@@ -29,6 +29,9 @@ const updateEventSession = async (
   if (eventSession.placeId) {
     eventSession.placeId = ObjectId(eventSession.placeId)
   }
+  if (eventSession.speakerId) {
+    eventSession.speakerId = ObjectId(eventSession.speakerId)
+  }
   if (eventSession.eventCatIds) {
     const ids = eventSession.eventCatIds.map(id => ObjectId(id))
     const ecList = await EventCats.find({ _id: { $in: ids } }).toArray()

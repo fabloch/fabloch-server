@@ -84,7 +84,7 @@ describe("createEventModel", () => {
       const user = userData[0]
       const context = { mongo, user }
       const eventModelInput = {
-        eventCatsIds: [
+        eventCatIds: [
           eventCatData[0]._id.toString(),
           eventCatData[1]._id.toString(),
         ],
