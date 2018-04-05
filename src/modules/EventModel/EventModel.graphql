@@ -37,6 +37,7 @@ input CreateEventModelInput {
   seats: Int
   placeId: ID
   speakerId: ID
+  eventCatIds: [ID]
 }
 input UpdateEventModelInput {
   id: ID!
@@ -46,6 +47,7 @@ input UpdateEventModelInput {
   seats: Int
   placeId: ID
   speakerId: ID
+  eventCatIds: [ID]
 }
 
 type Subscription {

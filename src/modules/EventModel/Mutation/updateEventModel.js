@@ -4,7 +4,7 @@ import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
 import isOwnerOrAdmin from "../../_shared/isOwnerOrAdmin"
 import ValidationError from "../../_shared/ValidationError"
 
-const updateEventModel = async (data, { mongo: { EventModels }, user }) => {
+const updateEventModel = async (data, { mongo: { EventCats, EventModels }, user }) => {
   const { eventModelInput } = data
   if (!eventModelInput.id) throw new ValidationError([{ key: "main", message: "No id provided." }])
   checkAuthenticatedUser(user)
@@ -18,6 +18,16 @@ const updateEventModel = async (data, { mongo: { EventModels }, user }) => {
     { _id: eventModelFromDb._id },
     { $set: { ...eventModelInput } },
   )
+  if (eventModelInput.eventCatIds) {
+    const ids = eventModelInput.eventCatIds.map(id => ObjectId(id))
+    const ecList = await EventCats.find({ _id: { $in: ids } }).toArray()
+    const eventCats = ecList.map(ec => ({
+      id: ec._id,
+      name: ec.name,
+      color: ec.color,
+    }))
+    eventModelInput.eventCats = eventCats
+  }
   return { ...eventModelFromDb, ...eventModelInput }
 }
 

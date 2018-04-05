@@ -131,7 +131,7 @@ describe("updateEventSession", () => {
       const context = { mongo, user }
       const eventSessionInput = {
         id: eventSessionData[0]._id.toString(),
-        eventCatsSuperIds: [
+        eventCatSuperIds: [
           eventCatData[2]._id.toString(),
           eventCatData[3]._id.toString(),
         ],

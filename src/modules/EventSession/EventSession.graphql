@@ -60,7 +60,7 @@ input CreateEventSessionInput {
   end: DateTime
   placeSuperId: ID
   speakerSuperId: ID
-  eventCatsSuperIds: [ID!]
+  eventCatSuperIds: [ID!]
 }
 input UpdateEventSessionInput {
   id: ID!
@@ -72,7 +72,7 @@ input UpdateEventSessionInput {
   end: DateTime
   placeSuperId: ID
   speakerSuperId: ID
-  eventCatsSuperIds: [ID!]
+  eventCatSuperIds: [ID!]
 }
 
 type Subscription {

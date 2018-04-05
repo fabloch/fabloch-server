@@ -35,9 +35,9 @@ const createEventSession = async (
     eventSession.speakerSuperId = ObjectId(eventSession.speakerSuperId)
   }
 
-  // eventCatsSuperIds
-  if (eventSession.eventCatsSuperIds) {
-    const ids = eventSession.eventCatsSuperIds.map(id => ObjectId(id))
+  // eventCatSuperIds
+  if (eventSession.eventCatSuperIds) {
+    const ids = eventSession.eventCatSuperIds.map(id => ObjectId(id))
     const ecList = await EventCats.find({ _id: { $in: ids } }).toArray()
     const eventCatsSuper = ecList.map(ec => ({
       id: ec._id,
