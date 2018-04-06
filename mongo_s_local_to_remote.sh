@@ -7,8 +7,12 @@ echo    # (optional) move to a new line
 
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+  echo "`tput setaf 5`Deleting previous dump...`tput op`"
+  rm -rf dump
+  echo "`tput setaf 2`    ✔︎ dump complete: on`tput op`"
+
   echo "`tput setaf 5`Dumping...`tput op`"
-  mongodump -db fabloch-server
+  mongodump --db fabloch-server
   echo "`tput setaf 2`    ✔︎ dump complete: on`tput op`"
 
   echo "`tput setaf 5`Updating heroku code with master...`tput op`"

@@ -1,7 +1,7 @@
 import { ObjectId } from "mongodb"
 import jwt from "jsonwebtoken"
-import resolvers from "../../resolvers"
-import connectMongo from "../../../../testUtils/mongoTest"
+import resolvers from "../resolvers"
+import connectMongo from "../../../testUtils/mongoTest"
 
 let mongo
 

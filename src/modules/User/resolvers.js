@@ -1,6 +1,7 @@
 import userList from "./Query/userList"
 
 import createUser from "./Mutation/createUser"
+import createUserAdmin from "./Mutation/createUserAdmin"
 import signinUser from "./Mutation/signinUser"
 import updateUser from "./Mutation/updateUser"
 import updateProfile from "./Mutation/updateProfile"
@@ -16,6 +17,7 @@ export default {
   },
   Mutation: {
     createUser: async (_, data, context) => createUser(data, context),
+    createUserAdmin: async (_, data, context) => createUserAdmin(data, context),
     signinUser: async (_, data, context) => signinUser(data, context),
     updateUser: async (_, data, context) => updateUser(data, context),
     updateProfile: async (_, data, context) => updateProfile(data, context),

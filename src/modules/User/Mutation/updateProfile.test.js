@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt"
 import resolvers from "../resolvers"
 import connectMongo from "../../../testUtils/mongoTest"
 import { userData } from "../../../testUtils/fixtures"

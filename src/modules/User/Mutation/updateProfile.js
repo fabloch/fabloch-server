@@ -1,6 +1,6 @@
 import ValidationError from "../../_shared/ValidationError"
 import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
-import checkEmptyness from "./shared/checkEmptyness"
+import checkEmptyness from "./_shared/checkEmptyness"
 
 const updateUser = async ({ profileInput }, { mongo: { Users }, user }) => {
   checkAuthenticatedUser(user)

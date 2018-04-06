@@ -3,8 +3,8 @@ import jwt from "jsonwebtoken"
 
 import ValidationError from "../../_shared/ValidationError"
 import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
-import invalidPassword from "./shared/invalidPassword"
-import checkEmptyness from "./shared/checkEmptyness"
+import invalidPassword from "./_shared/invalidPassword"
+import checkEmptyness from "./_shared/checkEmptyness"
 import invalidEmail from "../../_shared/invalidEmail"
 import { JWT_SECRET } from "../../../utils/config"
 
