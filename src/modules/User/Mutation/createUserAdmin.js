@@ -1,5 +1,6 @@
 import ValidationError from "../../_shared/ValidationError"
 import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
+import hasRole from "../../_shared/hasRole"
 import invalidPassword from "./_shared/invalidPassword"
 import invalidUsername from "./_shared/invalidUsername"
 import createAuthToken from "./_shared/createAuthToken"
@@ -7,6 +8,9 @@ import hashPassword from "./_shared/hashPassword"
 
 const createUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
   checkAuthenticatedUser(user)
+  if (!hasRole(user, "admin")) {
+    throw new ValidationError([{ key: "main", message: "Not allowed." }])
+  }
 
   const errors = []
   const previousUser = await Users.findOne({
@@ -45,6 +49,7 @@ const createUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
     username: userInput.username,
     email: userInput.email,
     password: await hashPassword(userInput.password),
+    profile: userInput.profile,
     version: 1,
   }
 

@@ -1,5 +1,6 @@
 type User {
   id: ID!
+  username: String
   email: String
   jwt: String
   memberships: [Membership!]
@@ -31,6 +32,7 @@ type Query {
 
 type Mutation {
   createUser(authProvider: AuthProviderNewcomerData!): User
+  createUserAdmin(userInput: ExtendedUserInput!): User
   signinUser(emailAuth: AUTH_PROVIDER_EMAIL): User
   updateUser(userInput: UserInput!): User
   updateProfile(profileInput: ProfileInput!): User
@@ -42,6 +44,13 @@ input UserInput {
   email: Email
   password: String!
   newPassword: String
+}
+input ExtendedUserInput {
+  username: String
+  email: Email
+  password: String!
+  newPassword: String
+  profile: ProfileInput
 }
 
 type Profile {
