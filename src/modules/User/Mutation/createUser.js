@@ -39,7 +39,7 @@ const createUser = async (
   if (invalidPassword(newcomer.password)) {
     errors.push({
       key: "password",
-      message: "Password is too weak.",
+      message: "Password too weak.",
     })
   }
   if (invalidUsername(newcomer.username)) {

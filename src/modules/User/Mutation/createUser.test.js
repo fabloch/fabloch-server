@@ -164,7 +164,7 @@ describe("User Mutation resolvers", () => {
         await resolvers.Mutation.createUser(null, newUser, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
-        expect(e.state).toEqual({ password: ["Password is too weak."] })
+        expect(e.state).toEqual({ password: ["Password too weak."] })
       }
     })
     it("deletes newcomer after sucessful user creation", async () => {

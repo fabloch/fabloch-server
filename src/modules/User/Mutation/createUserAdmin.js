@@ -34,7 +34,7 @@ const createUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
   if (invalidPassword(userInput.password)) {
     errors.push({
       key: "password",
-      message: "Password is too weak.",
+      message: "Password too weak.",
     })
   }
   if (invalidUsername(userInput.username)) {

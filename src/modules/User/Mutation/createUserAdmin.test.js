@@ -183,7 +183,7 @@ describe("User Mutation resolvers", () => {
           await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
         } catch (e) {
           expect(e.message).toEqual("The request is invalid.")
-          expect(e.state).toEqual({ password: ["Password is too weak."] })
+          expect(e.state).toEqual({ password: ["Password too weak."] })
         }
       })
     })
