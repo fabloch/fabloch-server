@@ -38,6 +38,7 @@ type Mutation {
   # verifyUser(token: String!): User
   createUserAdmin(userInput: ExtendedUserInput!): User
   updateUserAdmin(userInput: ExtendedUserInput!): User
+  deleteUserAdmin(userId: ID): Boolean
 }
 
 input UserInput {

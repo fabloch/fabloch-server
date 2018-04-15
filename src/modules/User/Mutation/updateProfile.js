@@ -2,7 +2,7 @@ import ValidationError from "../../_shared/ValidationError"
 import checkAuthenticatedUser from "../../_shared/checkAuthenticatedUser"
 import checkEmptyness from "./_shared/checkEmptyness"
 
-const updateUser = async ({ profileInput }, { mongo: { Users }, user }) => {
+const updateProfile = async ({ profileInput }, { mongo: { Users }, user }) => {
   checkAuthenticatedUser(user)
   let errors = []
   errors = checkEmptyness(errors, profileInput, ["fullName", "intro", "profilePic"])
@@ -23,4 +23,4 @@ const updateUser = async ({ profileInput }, { mongo: { Users }, user }) => {
   return ValidationError([{ key: "main", message: "There was a problem with update." }])
 }
 
-export default updateUser
+export default updateProfile
