@@ -123,6 +123,21 @@ describe("User Mutation resolvers", () => {
           expect(e.state).toEqual({ profilePic: ["Can't be empty."] })
         }
       })
+      it("raises with facebookUrl and wrong url", async () => {
+        expect.assertions(2)
+        await mongo.loadUsers()
+        const [user] = userData
+        const context = { mongo, user }
+        const profileInput = {
+          facebookUrl: "wrong url",
+        }
+        try {
+          await resolvers.Mutation.updateProfile(null, { profileInput }, context)
+        } catch (e) {
+          expect(e.message).toEqual("The request is invalid.")
+          expect(e.state).toEqual({ facebookUrl: ["Invalid url."] })
+        }
+      })
     })
   })
 })
