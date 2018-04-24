@@ -17,10 +17,7 @@ const updateProfile = async ({ profileInput }, { mongo: { Users }, user }) => {
 
   const newUser = {
     ...user,
-    profile: {
-      ...user.profile,
-      ...profileInput,
-    },
+    ...profileInput,
   }
 
   const response = await Users.update({ _id: user._id }, newUser)

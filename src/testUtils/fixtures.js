@@ -34,9 +34,7 @@ export const admin = {
   username: "admin",
   password: "$2a$10$Htm2b52NAP2XE5pD8LnK2OP58PTf9kXxaEtKxMmbI28Udappwayy6",
   roles: ["admin"],
-  profile: {
-    fullName: "Administrator",
-  },
+  fullName: "Administrator",
   version: 1,
 }
 
@@ -414,16 +412,14 @@ export const userData = [
     email: "user1@example.com",
     password: "$2a$10$Htm2b52NAP2XE5pD8LnK2OP58PTf9kXxaEtKxMmbI28Udappwayy6",
     version: 1,
-    profile: {
-      fullName: "John Doe",
-      picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_banksy.jpg",
-      intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      facebookUrl: "https://www.facebook.com/facebookUrl1",
-      twitterUrl: "https://www.twitter.com/twitterUrl1",
-      githubUrl: "https://www.github.com/githubUrl1",
-      linkedInUrl: "https://www.linkedIn.com/linkedInUrl1",
-      otherUrl: "https://www.other.com/otherUrl1",
-    },
+    fullName: "John Doe",
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_banksy.jpg",
+    intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    facebookUrl: "https://www.facebook.com/facebookUrl1",
+    twitterUrl: "https://www.twitter.com/twitterUrl1",
+    githubUrl: "https://www.github.com/githubUrl1",
+    linkedInUrl: "https://www.linkedIn.com/linkedInUrl1",
+    otherUrl: "https://www.other.com/otherUrl1",
   },
   {
     _id: ObjectId("5a31b4efedc7474b9addc261"),
@@ -431,14 +427,12 @@ export const userData = [
     email: "user2@example.com",
     password: "$2a$10$AyhLbNMCe6bIAKWOI/1PjOs6/wvQPnj6kQBRO4/PzjR8Jbb7bTHey",
     version: 1,
-    profile: {
-      fullName: "Monsieur Chat",
-      picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_m_chat.jpg",
-      intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-      facebookUrl: "https://www.facebook.com/facebookUrl2",
-      twitterUrl: "https://www.twitter.com/twitterUrl2",
-      linkedInUrl: "https://www.linkedIn.com/linkedInUrl2",
-    },
+    fullName: "Monsieur Chat",
+    picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_m_chat.jpg",
+    intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    facebookUrl: "https://www.facebook.com/facebookUrl2",
+    twitterUrl: "https://www.twitter.com/twitterUrl2",
+    linkedInUrl: "https://www.linkedIn.com/linkedInUrl2",
   },
 ]
 

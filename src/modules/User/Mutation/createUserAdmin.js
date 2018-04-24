@@ -46,10 +46,8 @@ const createUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
   if (errors.length) throw new ValidationError(errors)
 
   const newUser = {
-    username: userInput.username,
-    email: userInput.email,
+    ...userInput,
     password: await hashPassword(userInput.password),
-    profile: userInput.profile,
     version: 1,
   }
 

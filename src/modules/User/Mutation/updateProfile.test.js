@@ -20,9 +20,7 @@ describe("User Mutation resolvers", () => {
           fullName: "John Doe",
         }
         const response = await resolvers.Mutation.updateProfile(null, { profileInput }, context)
-        expect(response).toMatchObject({
-          profile: profileInput,
-        })
+        expect(response).toMatchObject(profileInput)
       })
       it("updates the picUrl", async () => {
         await mongo.loadUsers()
@@ -32,9 +30,7 @@ describe("User Mutation resolvers", () => {
           picUrl: "http://www.google.com/image.jpg",
         }
         const response = await resolvers.Mutation.updateProfile(null, { profileInput }, context)
-        expect(response).toMatchObject({
-          profile: profileInput,
-        })
+        expect(response).toMatchObject(profileInput)
       })
       it("updates the intro", async () => {
         await mongo.loadUsers()
@@ -44,9 +40,7 @@ describe("User Mutation resolvers", () => {
           intro: "Tantum autem cuique tribuendum, \nprimum quantum ipse\nefficere possis.",
         }
         const response = await resolvers.Mutation.updateProfile(null, { profileInput }, context)
-        expect(response).toMatchObject({
-          profile: profileInput,
-        })
+        expect(response).toMatchObject(profileInput)
       })
       it("updates facebookUrl, githubUrl, linkedInUrl, otherUrl", async () => {
         await mongo.loadUsers()
@@ -60,9 +54,7 @@ describe("User Mutation resolvers", () => {
           otherUrl: "https://www.google.com",
         }
         const response = await resolvers.Mutation.updateProfile(null, { profileInput }, context)
-        expect(response).toMatchObject({
-          profile: profileInput,
-        })
+        expect(response).toMatchObject(profileInput)
       })
     })
     describe("errors", () => {

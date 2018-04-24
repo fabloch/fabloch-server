@@ -3,9 +3,16 @@ type User {
   username: String
   email: String
   jwt: String
+  fullName: String
+  intro: String
+  picUrl: Url,
+  facebookUrl: String,
+  twitterUrl: String,
+  githubUrl: String,
+  linkedInUrl: String,
+  otherUrl: String,
   memberships: [Membership!]
   isAdmin: Boolean!
-  profile: Profile
   tickets: [EventTicket!]!
 }
 
@@ -47,32 +54,28 @@ input UserInput {
   password: String!
   newPassword: String
 }
-input ExtendedUserInput {
-  id: ID
-  username: String
-  email: Email
-  password: String!
-  newPassword: String
-  profile: ProfileInput
-}
-
-type Profile {
-  fullName: String
-  intro: String
-  picUrl: Url,
-  facebookUrl: Url,
-  twitterUrl: Url,
-  githubUrl: Url,
-  linkedInUrl: Url,
-  otherUrl: Url,
-}
 input ProfileInput {
   fullName: String
   intro: String
   picUrl: Url
-  facebookUrl: Url,
-  twitterUrl: Url,
-  githubUrl: Url,
-  linkedInUrl: Url,
-  otherUrl: Url,
+  facebookUrl: String,
+  twitterUrl: String,
+  githubUrl: String,
+  linkedInUrl: String,
+  otherUrl: String,
+}
+input ExtendedUserInput {
+  id: ID
+  username: String
+  email: Email
+  password: String
+  newPassword: String
+  fullName: String
+  intro: String
+  picUrl: Url
+  facebookUrl: String,
+  twitterUrl: String,
+  githubUrl: String,
+  linkedInUrl: String,
+  otherUrl: String,
 }

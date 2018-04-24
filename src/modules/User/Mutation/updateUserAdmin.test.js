@@ -22,18 +22,14 @@ describe("User Mutation updateUserAdmin", () => {
         email: "another@email.com",
         username: "another_username",
         password: "Thi$Is!UnN0uveauMot2Passe!",
-        profile: {
-          fullName: "Another Name",
-        },
+        fullName: "Another Name",
       }
       const response = await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
       expect(response).toMatchObject({
         email: "another@email.com",
         username: "another_username",
-        profile: {
-          fullName: "Another Name",
-          picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_banksy.jpg",
-        },
+        fullName: "Another Name",
+        picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_banksy.jpg",
       })
       const passwordValid = await bcrypt.compare(userInput.password, response.password)
       expect(passwordValid).toBeTruthy()
@@ -50,9 +46,7 @@ describe("User Mutation updateUserAdmin", () => {
         email: "speaker@example.com",
         username: "speaker",
         password: "Mot2pa$$e.De.Ouf",
-        profile: {
-          fullName: "Speaker Example",
-        },
+        fullName: "Speaker Example",
       }
       try {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
@@ -70,9 +64,7 @@ describe("User Mutation updateUserAdmin", () => {
         email: "speaker@example.com",
         username: "speaker",
         password: "Mot2pa$$e.De.Ouf",
-        profile: {
-          fullName: "Speaker Example",
-        },
+        fullName: "Speaker Example",
       }
       try {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
@@ -90,9 +82,7 @@ describe("User Mutation updateUserAdmin", () => {
         id: userData[0]._id.toString(),
         email: "user2@example.com",
         username: "speaker",
-        profile: {
-          fullName: "Speaker Example",
-        },
+        fullName: "Speaker Example",
       }
       try {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
@@ -110,9 +100,7 @@ describe("User Mutation updateUserAdmin", () => {
         id: userData[0]._id.toString(),
         email: "speaker@example.com",
         username: "user2",
-        profile: {
-          fullName: "Speaker Example",
-        },
+        fullName: "Speaker Example",
       }
       try {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
@@ -131,9 +119,7 @@ describe("User Mutation updateUserAdmin", () => {
         email: "speaker@example.com",
         username: "Speaker",
         password: "Mot2pa$$e.De.Ouf",
-        profile: {
-          fullName: "Speaker Example",
-        },
+        fullName: "Speaker Example",
       }
       try {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
@@ -152,9 +138,7 @@ describe("User Mutation updateUserAdmin", () => {
         email: "speaker@example.com",
         username: "speaker withspace",
         password: "Mot2pa$$e.De.Ouf",
-        profile: {
-          fullName: "Speaker Example",
-        },
+        fullName: "Speaker Example",
       }
       try {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
@@ -173,9 +157,7 @@ describe("User Mutation updateUserAdmin", () => {
         email: "speaker@example.com",
         username: "$peaker",
         password: "Mot2pa$$e.De.Ouf",
-        profile: {
-          fullName: "Speaker Example",
-        },
+        fullName: "Speaker Example",
       }
       try {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
@@ -194,9 +176,7 @@ describe("User Mutation updateUserAdmin", () => {
         email: "speaker@example.com",
         username: "speaker",
         password: "password",
-        profile: {
-          fullName: "Speaker Example",
-        },
+        fullName: "Speaker Example",
       }
       try {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)

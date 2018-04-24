@@ -19,14 +19,12 @@ describe("User Mutation resolvers", () => {
           email: "speaker@example.com",
           username: "speaker",
           password: "Mot2pa$$e.De.Ouf",
-          profile: {
-            fullName: "Speaker Example",
-          },
+          fullName: "Speaker Example",
         }
         const response = await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
         expect(response.username).toEqual("speaker")
         expect(response.email).toEqual("speaker@example.com")
-        expect(response.profile.fullName).toEqual("Speaker Example")
+        expect(response.fullName).toEqual("Speaker Example")
         expect(response.version).toEqual(1)
         expect(response.jwt).toMatch(/ey.+\.ey.+\..+/)
       })
@@ -40,9 +38,7 @@ describe("User Mutation resolvers", () => {
           email: "speaker@example.com",
           username: "speaker",
           password: "Mot2pa$$e.De.Ouf",
-          profile: {
-            fullName: "Speaker Example",
-          },
+          fullName: "Speaker Example",
         }
         try {
           await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
@@ -59,9 +55,7 @@ describe("User Mutation resolvers", () => {
           email: "speaker@example.com",
           username: "speaker",
           password: "Mot2pa$$e.De.Ouf",
-          profile: {
-            fullName: "Speaker Example",
-          },
+          fullName: "Speaker Example",
         }
         try {
           await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
@@ -79,9 +73,7 @@ describe("User Mutation resolvers", () => {
           email: "user1@example.com",
           username: "speaker",
           password: "Mot2pa$$e.De.Ouf",
-          profile: {
-            fullName: "Speaker Example",
-          },
+          fullName: "Speaker Example",
         }
         try {
           await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
@@ -99,9 +91,7 @@ describe("User Mutation resolvers", () => {
           email: "speaker@example.com",
           username: "user1",
           password: "Mot2pa$$e.De.Ouf",
-          profile: {
-            fullName: "Speaker Example",
-          },
+          fullName: "Speaker Example",
         }
         try {
           await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
@@ -118,9 +108,7 @@ describe("User Mutation resolvers", () => {
           email: "speaker@example.com",
           username: "Speaker",
           password: "Mot2pa$$e.De.Ouf",
-          profile: {
-            fullName: "Speaker Example",
-          },
+          fullName: "Speaker Example",
         }
         try {
           await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
@@ -137,9 +125,7 @@ describe("User Mutation resolvers", () => {
           email: "speaker@example.com",
           username: "speaker withspace",
           password: "Mot2pa$$e.De.Ouf",
-          profile: {
-            fullName: "Speaker Example",
-          },
+          fullName: "Speaker Example",
         }
         try {
           await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
@@ -156,9 +142,7 @@ describe("User Mutation resolvers", () => {
           email: "speaker@example.com",
           username: "$peaker",
           password: "Mot2pa$$e.De.Ouf",
-          profile: {
-            fullName: "Speaker Example",
-          },
+          fullName: "Speaker Example",
         }
         try {
           await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
@@ -175,9 +159,7 @@ describe("User Mutation resolvers", () => {
           email: "speaker@example.com",
           username: "speaker",
           password: "password",
-          profile: {
-            fullName: "Speaker Example",
-          },
+          fullName: "Speaker Example",
         }
         try {
           await resolvers.Mutation.createUserAdmin(null, { userInput }, context)
