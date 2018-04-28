@@ -1,14 +1,17 @@
 type Media {
   id: ID!
   title: String
-  picUrl: Url
-  sourceUrl: Url
+  picUrl: String
+  sourceUrl: String
   category: MediaCategory!
   parentId: ID!
   parentCollection: ParentCollection!
   rank: Int!
 }
 
+type Query {
+  mediaList: [Media!]!
+}
 type Mutation {
   saveMedia(mediaInput: SaveMediaInput): Media!
 }
@@ -16,8 +19,8 @@ type Mutation {
 input SaveMediaInput {
   id: ID
   title: String
-  picUrl: Url
-  sourceUrl: Url
+  picUrl: String
+  sourceUrl: String
   category: MediaCategory!
   parentId: ID!
   parentCollection: ParentCollection!

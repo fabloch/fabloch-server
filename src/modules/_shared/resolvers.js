@@ -6,6 +6,5 @@ export default {
   Date: GraphQLDate,
   DateTime: GraphQLDateTime,
   Email: GraphQLEmailAddress,
-  Url: GraphQLURL,
   JSON: GraphQLJSON,
 }

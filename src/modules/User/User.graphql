@@ -5,7 +5,7 @@ type User {
   jwt: String
   fullName: String
   intro: String
-  picUrl: Url,
+  picUrl: String,
   facebookUrl: String,
   twitterUrl: String,
   githubUrl: String,
@@ -57,7 +57,7 @@ input UserInput {
 input ProfileInput {
   fullName: String
   intro: String
-  picUrl: Url
+  picUrl: String
   facebookUrl: String,
   twitterUrl: String,
   githubUrl: String,
@@ -72,7 +72,7 @@ input ExtendedUserInput {
   newPassword: String
   fullName: String
   intro: String
-  picUrl: Url
+  picUrl: String
   facebookUrl: String,
   twitterUrl: String,
   githubUrl: String,
