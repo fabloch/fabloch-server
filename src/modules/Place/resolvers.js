@@ -20,5 +20,6 @@ export default {
     id: place => place._id.toString(),
     mainMedia: async (eventModel, _, context) => mainMedia(eventModel, context),
     medias: async (eventModel, _, context) => medias(eventModel, context),
+    titleAny: eventModel => eventModel.title,
   },
 }

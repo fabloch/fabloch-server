@@ -1,6 +1,7 @@
 import pubsub from "../../utils/pubsub"
 
 import titlePrnt from "./EventSession/titlePrnt"
+import titleAny from "./EventSession/titleAny"
 import introPrnt from "./EventSession/introPrnt"
 import descriptionPrnt from "./EventSession/descriptionPrnt"
 import seatsPrnt from "./EventSession/seatsPrnt"
@@ -61,6 +62,7 @@ export default {
     tickets: async (eventSession, _, context) => tickets(eventSession, context),
 
     titlePrnt: async (eventSession, _, context) => titlePrnt(eventSession, context),
+    titleAny: async (eventSession, _, context) => titleAny(eventSession, context),
     introPrnt: async (eventSession, _, context) => introPrnt(eventSession, context),
     descriptionPrnt: async (eventSession, _, context) => descriptionPrnt(eventSession, context),
     seatsPrnt: async (eventSession, _, context) => seatsPrnt(eventSession, context),

@@ -6,8 +6,12 @@ type Media {
   category: MediaCategory!
   parentId: ID!
   parentCollection: ParentCollection!
+  parent: Parent
   rank: Int!
 }
+
+union Parent = EventModel | EventSession | Place
+
 
 type Query {
   mediaList: [Media!]!

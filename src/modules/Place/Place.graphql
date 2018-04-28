@@ -2,6 +2,7 @@ type Place {
   id: ID!
   mainMedia: Media
   title: String!
+  titleAny: String!
   medias: [Media!]!
   street1: String
   street2: String

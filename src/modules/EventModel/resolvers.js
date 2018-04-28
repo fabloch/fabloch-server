@@ -37,5 +37,6 @@ export default {
     place: async (eventModel, _, context) => place(eventModel, context),
     speaker: async (eventModel, _, context) => speaker(eventModel, context),
     eventCats: eventModel => eventCats(eventModel),
+    titleAny: eventModel => eventModel.title,
   },
 }

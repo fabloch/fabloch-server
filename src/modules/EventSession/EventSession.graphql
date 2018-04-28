@@ -3,6 +3,7 @@ type EventSession {
   model: EventModel
   title: String
   titlePrnt: String
+  titleAny: String!
   intro: String
   introPrnt: String
   description: String

@@ -1,5 +1,6 @@
 import mediaList from "./Query/mediaList"
 import saveMedia from "./Mutation/saveMedia"
+import parent from "./Media/parent"
 
 export default {
   Query: {
@@ -10,5 +11,6 @@ export default {
   },
   Media: {
     id: media => media._id.toString(),
+    parent: (media, __, context) => parent(media, context),
   },
 }

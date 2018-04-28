@@ -1,6 +1,7 @@
 type EventModel {
   id: ID!
   title: String
+  titleAny: String!
   intro: String
   description: String
   mainMedia: Media
