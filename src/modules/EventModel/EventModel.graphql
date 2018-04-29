@@ -1,7 +1,6 @@
 type EventModel {
   id: ID!
   title: String
-  titleAny: String!
   intro: String
   description: String
   mainMedia: Media
@@ -12,6 +11,14 @@ type EventModel {
   place: Place
   sessions: [EventSession!]!
   eventCats: [EventCat!]!
+
+  introAny: String
+  titleAny: String
+  descriptionAny: String
+  speakerAny: User
+  seatsAny: Int
+  placeAny: Place
+  eventCatsAny: [EventCat!]!
 }
 
 
