@@ -11,12 +11,18 @@ describe("EventSession EventSession resolvers", () => {
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("speakerPrnt", () => {
-    it("returns the eventModel speaker (eventSession0A)", async () => {
+  describe("speakerAny", () => {
+    it("returns the eventSession speaker", async () => {
+      await mongo.loadUsers()
+      const context = { mongo }
+      const response = await resolvers.EventSession.speakerAny(eventSessionData[1], null, context)
+      expect(response).toEqual(userData[1])
+    })
+    it("returns the eventModel speaker", async () => {
       await mongo.loadEventModels()
       await mongo.loadUsers()
       const context = { mongo }
-      const response = await resolvers.EventSession.speakerPrnt(eventSessionData[0], null, context)
+      const response = await resolvers.EventSession.speakerAny(eventSessionData[0], null, context)
       expect(response).toEqual(userData[0])
     })
   })

@@ -7,4 +7,11 @@ export default {
   DateTime: GraphQLDateTime,
   Email: GraphQLEmailAddress,
   JSON: GraphQLJSON,
+  Parent: {
+    __resolveType: (parent) => {
+      if (parent.start) { return "EventSession" }
+      if (parent.city) { return "Place" }
+      return "EventModel"
+    },
+  },
 }
