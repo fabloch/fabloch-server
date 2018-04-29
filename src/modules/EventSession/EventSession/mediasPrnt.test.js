@@ -10,23 +10,13 @@ describe("EventSession EventSession resolvers", () => {
   afterEach(async () => { await mongo.afterEach() })
   afterAll(async () => { await mongo.afterAll() })
 
-  describe("medias", () => {
-    it("returns null if no direct Medias linked", async () => {
+  describe("mediasPrnt", () => {
+    it("returns the parent medias", async () => {
       await mongo.loadMedias()
       const user = userData[0]
       const context = { mongo, user }
-      const response = await resolvers.EventSession.medias(eventSessionData[0], null, context)
-      expect(response).toEqual([])
-    })
-    it("returns the linked medias if Medias linked", async () => {
-      await mongo.loadMedias()
-      const user = userData[0]
-      const context = { mongo, user }
-      const response = await resolvers.EventSession.medias(eventSessionData[1], null, context)
-      expect(response).toEqual([
-        mediaData[4],
-        mediaData[5],
-      ])
+      const response = await resolvers.EventSession.mediasPrnt(eventSessionData[0], null, context)
+      expect(response).toEqual([mediaData[0], mediaData[1], mediaData[2], mediaData[3]])
     })
   })
 })

@@ -23,6 +23,7 @@ type EventSession {
   introPrnt: String
   descriptionPrnt: String
   seatsPrnt: Int
+  mediasPrnt: [Media!]!
   placePrnt: Place
   speakerPrnt: User
   eventCatsPrnt: [EventCat!]
@@ -31,6 +32,7 @@ type EventSession {
   titleAny: String
   descriptionAny: String
   seatsAny: Int
+  mediasAny: [Media!]!
   speakerAny: User
   placeAny: Place
   eventCatsAny: [EventCat!]!
