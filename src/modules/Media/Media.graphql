@@ -18,6 +18,7 @@ type Query {
 }
 type Mutation {
   saveMedia(mediaInput: SaveMediaInput): Media!
+  deleteMedia(mediaId: ID!): Boolean!
 }
 
 input SaveMediaInput {

@@ -1,5 +1,6 @@
 import mediaList from "./Query/mediaList"
 import saveMedia from "./Mutation/saveMedia"
+import deleteMedia from "./Mutation/deleteMedia"
 import parent from "./Media/parent"
 
 export default {
@@ -8,6 +9,7 @@ export default {
   },
   Mutation: {
     saveMedia: async (_, data, context) => saveMedia(data, context),
+    deleteMedia: async (_, data, context) => deleteMedia(data, context),
   },
   Media: {
     id: media => media._id.toString(),
