@@ -56,6 +56,16 @@ describe("User Mutation resolvers", () => {
         const response = await resolvers.Mutation.updateProfile(null, { profileInput }, context)
         expect(response).toMatchObject(profileInput)
       })
+      it("updates handicaps", async () => {
+        await mongo.loadUsers()
+        const [user] = userData
+        const context = { mongo, user }
+        const profileInput = {
+          handicaps: "visual,physical",
+        }
+        const response = await resolvers.Mutation.updateProfile(null, { profileInput }, context)
+        expect(response).toMatchObject(profileInput)
+      })
     })
     describe("errors", () => {
       it("raises with no context user", async () => {

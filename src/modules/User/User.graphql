@@ -5,12 +5,13 @@ type User {
   jwt: String
   fullName: String
   intro: String
-  picUrl: String,
-  facebookUrl: String,
-  twitterUrl: String,
-  githubUrl: String,
-  linkedInUrl: String,
-  otherUrl: String,
+  handicaps: String
+  picUrl: String
+  facebookUrl: String
+  twitterUrl: String
+  githubUrl: String
+  linkedInUrl: String
+  otherUrl: String
   memberships: [Membership!]
   isAdmin: Boolean!
   tickets: [EventTicket!]!
@@ -57,6 +58,7 @@ input UserInput {
 input ProfileInput {
   fullName: String
   intro: String
+  handicaps: String
   picUrl: String
   facebookUrl: String,
   twitterUrl: String,
@@ -72,6 +74,7 @@ input ExtendedUserInput {
   newPassword: String
   fullName: String
   intro: String
+  handicaps: String
   picUrl: String
   facebookUrl: String,
   twitterUrl: String,
