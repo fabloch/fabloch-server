@@ -15,6 +15,7 @@ type User {
   memberships: [Membership!]
   isAdmin: Boolean!
   tickets: [EventTicket!]!
+  trainArrival: DateTime
 }
 
 input AuthProviderNewcomerData {
@@ -60,11 +61,12 @@ input ProfileInput {
   intro: String
   handicaps: String
   picUrl: String
-  facebookUrl: String,
-  twitterUrl: String,
-  githubUrl: String,
-  linkedInUrl: String,
-  otherUrl: String,
+  facebookUrl: String
+  twitterUrl: String
+  githubUrl: String
+  linkedInUrl: String
+  otherUrl: String
+  trainArrival: DateTime
 }
 input ExtendedUserInput {
   id: ID
@@ -76,9 +78,10 @@ input ExtendedUserInput {
   intro: String
   handicaps: String
   picUrl: String
-  facebookUrl: String,
-  twitterUrl: String,
-  githubUrl: String,
-  linkedInUrl: String,
-  otherUrl: String,
+  facebookUrl: String
+  twitterUrl: String
+  githubUrl: String
+  linkedInUrl: String
+  otherUrl: String
+  trainArrival: DateTime
 }
