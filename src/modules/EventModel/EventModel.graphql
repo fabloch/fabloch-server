@@ -1,5 +1,6 @@
 type EventModel {
   id: ID!
+  isSession: Boolean!
   title: String
   intro: String
   description: String

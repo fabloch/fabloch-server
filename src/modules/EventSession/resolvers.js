@@ -57,6 +57,7 @@ export default {
   },
   EventSession: {
     id: eventSession => eventSession._id.toString(),
+    isSession: () => true,
     place: async (eventSession, _, context) => place(eventSession, context),
     speaker: async (eventSession, _, context) => speaker(eventSession, context),
     eventCats: async (eventSession, _, context) => eventCats(eventSession, context),

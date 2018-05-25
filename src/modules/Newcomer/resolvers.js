@@ -3,6 +3,7 @@ import newcomerFromToken from "./Query/newcomerFromToken"
 
 import createNewcomer from "./Mutation/createNewcomer"
 import createNewcomerAdmin from "./Mutation/createNewcomerAdmin"
+import updateNewcomerAdmin from "./Mutation/updateNewcomerAdmin"
 import checkDigits from "./Mutation/checkDigits"
 import sendInvitations from "./Mutation/sendInvitations"
 
@@ -14,6 +15,7 @@ export default {
   Mutation: {
     createNewcomer: async (_, data, context) => createNewcomer(data, context),
     createNewcomerAdmin: async (_, data, context) => createNewcomerAdmin(data, context),
+    updateNewcomerAdmin: async (_, data, context) => updateNewcomerAdmin(data, context),
     checkDigits: async (_, data, context) => checkDigits(data, context),
     sendInvitations: async (_, data, context) => sendInvitations(data, context),
   },

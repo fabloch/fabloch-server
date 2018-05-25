@@ -30,6 +30,7 @@ export default {
   },
   EventModel: {
     id: eventModel => eventModel._id.toString(),
+    isSession: () => false,
     mainMedia: async (eventModel, _, context) => mainMedia(eventModel, context),
     medias: async (eventModel, _, context) => medias(eventModel, context),
     owner: async (eventModel, _, { mongo: { Users } }) =>
