@@ -17,6 +17,8 @@ type Query {
 type Mutation {
   createNewcomer(newcomer: NewcomerInput): Newcomer
   createNewcomerAdmin(newcomerInput: NewcomerAdminInput): Newcomer
+  updateNewcomerAdmin(newcomerInput: NewcomerAdminInput): Newcomer
+  deleteNewcomerAdmin(newcomerId: ID!): Boolean
   checkDigits(newcomer: CheckDigitsInput): Newcomer
   sendInvitations(invitationInput: InvitationInput!): [Newcomer!]!
 }
@@ -26,6 +28,7 @@ input NewcomerInput {
 }
 
 input NewcomerAdminInput {
+  id: ID
   email: Email!
   fullName: String!
 }
