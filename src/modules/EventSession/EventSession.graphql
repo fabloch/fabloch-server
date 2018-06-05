@@ -3,7 +3,6 @@ type EventSession {
   isSession: Boolean!
   model: EventModel
   title: String
-  titleAny: String!
   intro: String
   description: String
   mainMedia: Media
@@ -51,6 +50,7 @@ type Query {
   eventSessionList(filter: EventSessionFilter): [EventSession!]!
   eventSessionDetail(id: ID!): EventSession!
 }
+
 input EventSessionFilter {
   OR: [EventSessionFilter!]
   title_contains: String
@@ -58,12 +58,12 @@ input EventSessionFilter {
   description_contains: String
 }
 
-
 type Mutation {
   createEventSession(eventSessionInput: CreateEventSessionInput!): EventSession
   deleteEventSession(eventSessionId: ID!): Boolean
   updateEventSession(eventSessionInput: UpdateEventSessionInput!): EventSession
 }
+
 input CreateEventSessionInput {
   eventModelId: ID!
   title: String
@@ -76,6 +76,7 @@ input CreateEventSessionInput {
   speakerId: ID
   eventCatIds: [ID!]
 }
+
 input UpdateEventSessionInput {
   id: ID!
   title: String
@@ -92,9 +93,11 @@ input UpdateEventSessionInput {
 type Subscription {
   EventSession(filter: EventSessionSubscriptionFilter): EventSessionSubscriptionPayload
 }
+
 input EventSessionSubscriptionFilter {
   mutation_in: [_ModelMutationType!]
 }
+
 type EventSessionSubscriptionPayload {
   mutation: _ModelMutationType!
   node: EventSession

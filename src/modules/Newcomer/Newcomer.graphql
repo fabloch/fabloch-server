@@ -5,7 +5,7 @@ type Newcomer {
   token: String!
   guest: Boolean!
   valid: Boolean!
-  invitationSentAt: Date
+  invitationSentAt: DateTime
   invitationSentCount: Int
 }
 
@@ -38,7 +38,7 @@ input CheckDigitsInput {
   digits: [Int!]!
 }
 
-input  InvitationInput {
+input InvitationInput {
   newcomerIds: [ID!]!
-  message:String
+  message: String
 }
