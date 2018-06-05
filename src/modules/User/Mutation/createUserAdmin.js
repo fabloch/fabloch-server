@@ -14,10 +14,7 @@ const createUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
 
   const errors = []
   const previousUser = await Users.findOne({
-    $or: [
-      { email: userInput.email },
-      { username: userInput.username },
-    ],
+    $or: [{ email: userInput.email }, { username: userInput.username }],
   })
   if (previousUser && userInput.email === previousUser.email) {
     errors.push({
@@ -31,7 +28,8 @@ const createUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
       message: "This username is not available.",
     })
   }
-  if (invalidPassword(userInput.password)) {
+  if (userInput.password === "" || invalidPassword(userInput.password)) {
+    console.log("invalidPassword", invalidPassword(userInput.password))
     errors.push({
       key: "password",
       message: "Password too weak.",

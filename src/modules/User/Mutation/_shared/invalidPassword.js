@@ -1,11 +1,5 @@
-import zxcvbn from "zxcvbn"
+import { isLength } from "validator"
 
-const checkPasswordStrength = (password) => {
-  const result = zxcvbn(password)
-  if (result.score < 2) {
-    return true
-  }
-  return false
-}
+const invalidPassword = password => isLength(password, { min: 6, max: 20 }) === false
 
-export default checkPasswordStrength
+export default invalidPassword

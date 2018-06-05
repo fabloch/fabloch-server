@@ -27,7 +27,8 @@ const updateUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
     if (invalidUsername(userInput.username)) {
       errors.push({
         key: "username",
-        message: "Username should only container lowercase letters, numbers, dashes or underscores.",
+        message:
+          "Username should only container lowercase letters, numbers, dashes or underscores.",
       })
     }
     const otherUser = await Users.findOne({ username: userInput.username })
@@ -46,9 +47,12 @@ const updateUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
   }
 
   const newUser = { ...prevUser, ...userInput }
-  if (userInput.profile) { newUser.profile = { ...prevUser.profile, ...userInput.profile } }
+  if (userInput.profile) {
+    newUser.profile = { ...prevUser.profile, ...userInput.profile }
+  }
   if (userInput.password) {
     if (userInput.password === "" || invalidPassword(userInput.password)) {
+      console.log("invalidPassword", invalidPassword(userInput.password))
       errors.push({ key: "password", message: "Password too weak." })
     }
     newUser.password = await bcrypt.hash(userInput.password, 10)
@@ -56,15 +60,20 @@ const updateUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
     newUser.password = prevUser.password
   }
 
-  if (errors.length) { throw new ValidationError(errors) }
+  if (errors.length) {
+    throw new ValidationError(errors)
+  }
 
   const response = await Users.update({ _id: prevUser._id }, newUser)
   if (response.result.ok) {
-    const token = await jwt.sign({
-      id: newUser._id,
-      email: newUser.email,
-      version: newUser.version,
-    }, JWT_SECRET)
+    const token = await jwt.sign(
+      {
+        id: newUser._id,
+        email: newUser.email,
+        version: newUser.version,
+      },
+      JWT_SECRET,
+    )
     newUser.jwt = token
     return newUser
   }
