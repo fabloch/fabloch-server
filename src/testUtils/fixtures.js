@@ -3,15 +3,49 @@ import moment from "moment"
 
 export const dateUtils = {
   today: moment.utc().toDate(),
-  inAYear: moment.utc().add(1, "y").subtract(1, "d").toDate(),
-  user1membership1Start: moment.utc().subtract(2, "y").subtract(9, "d").toDate(),
-  user1membership1End: moment.utc().subtract(1, "y").subtract(10, "d").toDate(),
-  user1membership2Start: moment.utc().subtract(1, "y").subtract(9, "d").toDate(),
-  user1membership2End: moment.utc().subtract(10, "d").toDate(),
-  user2membership1Start: moment.utc().subtract(2, "y").add(10, "d").toDate(),
-  user2membership1End: moment.utc().subtract(1, "y").add(9, "d").toDate(),
-  user2membership2Start: moment.utc().subtract(1, "y").add(10, "d").toDate(),
-  user2membership2End: moment.utc().add(9, "d").toDate(),
+  inAYear: moment
+    .utc()
+    .add(1, "y")
+    .subtract(1, "d")
+    .toDate(),
+  user1membership1Start: moment
+    .utc()
+    .subtract(2, "y")
+    .subtract(9, "d")
+    .toDate(),
+  user1membership1End: moment
+    .utc()
+    .subtract(1, "y")
+    .subtract(10, "d")
+    .toDate(),
+  user1membership2Start: moment
+    .utc()
+    .subtract(1, "y")
+    .subtract(9, "d")
+    .toDate(),
+  user1membership2End: moment
+    .utc()
+    .subtract(10, "d")
+    .toDate(),
+  user2membership1Start: moment
+    .utc()
+    .subtract(2, "y")
+    .add(10, "d")
+    .toDate(),
+  user2membership1End: moment
+    .utc()
+    .subtract(1, "y")
+    .add(9, "d")
+    .toDate(),
+  user2membership2Start: moment
+    .utc()
+    .subtract(1, "y")
+    .add(10, "d")
+    .toDate(),
+  user2membership2End: moment
+    .utc()
+    .add(9, "d")
+    .toDate(),
   eventSession0Astart: moment("2018-07-13T17:30:00.000Z").toDate(),
   eventSession0Aend: moment("2018-07-13T19:00:00.000Z").toDate(),
   eventSession0Bstart: moment("2018-07-14T10:30:00.000Z").toDate(),
@@ -24,8 +58,16 @@ export const dateUtils = {
   overlapping1end: moment("2018-07-13T17:16:00.000Z").toDate(),
   overlapping2start: moment("2018-07-13T19:14:00.000Z").toDate(),
   overlapping2end: moment("2018-07-13T20:30:00.000Z").toDate(),
-  invitationSentAt1: moment().utc().subtract(2, "d").toDate(),
-  invitationSentAt2: moment().utc().subtract(1, "d").toDate(),
+  invitationSentAt1: moment()
+    .utc()
+    .subtract(2, "d")
+    .toDate(),
+  invitationSentAt2: moment()
+    .utc()
+    .subtract(1, "d")
+    .toDate(),
+  trainArrival1: moment("2018-07-13T18:30:00.000Z").toDate(),
+  trainArrival2: moment("2018-07-13T15:14:00.000Z").toDate(),
 }
 
 export const admin = {
@@ -296,7 +338,6 @@ export const mediaData = [
     parentCollection: "Places",
     rank: 2,
   },
-
 ]
 
 export const membershipData = [
@@ -334,7 +375,8 @@ export const newcomerData = [
   {
     hint: "Newcomer3",
     _id: ObjectId("5a4b76d5fdea180e9295743c"),
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ1MzQzfQ.pJvXypuRpjdnVZoITVZzg8b85ZM-yuJWEzd8O4OBekA",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIxQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ1MzQzfQ.pJvXypuRpjdnVZoITVZzg8b85ZM-yuJWEzd8O4OBekA",
     email: "user3@example.com",
     valid: true,
     digits: [5, 5, 5, 5, 5, 5],
@@ -342,7 +384,8 @@ export const newcomerData = [
   {
     hint: "Newcomer4",
     _id: ObjectId("5a55db614b7ef9289ba1ad23"),
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
     email: "user4@example.com",
     digits: [5, 5, 5, 5, 5, 5],
   },
@@ -352,7 +395,8 @@ export const newcomerData = [
     email: "user5@example.com",
     fullName: "User Five",
     guest: true,
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXI1QGV4YW1wbGUuY29tIiwiaWF0IjoxNTIyMTQ4MDA3fQ.tO61ImDbURBg04MaWb4bR1LgJCgSY01dzZIDmVU2W4M",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXI1QGV4YW1wbGUuY29tIiwiaWF0IjoxNTIyMTQ4MDA3fQ.tO61ImDbURBg04MaWb4bR1LgJCgSY01dzZIDmVU2W4M",
     invitationSentAt: dateUtils.invitationSentAt1,
     invitationSentCount: 1,
   },
@@ -362,7 +406,8 @@ export const newcomerData = [
     email: "user6@example.com",
     fullName: "User Six",
     guest: true,
-    token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXI2QGV4YW1wbGUuY29tIiwiaWF0IjoxNTIyMTQ4MDcxfQ.Fz54JRAhpz7C5HFwnQDITWh0qPGK7-p9dvihFHCN5nI",
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXI2QGV4YW1wbGUuY29tIiwiaWF0IjoxNTIyMTQ4MDcxfQ.Fz54JRAhpz7C5HFwnQDITWh0qPGK7-p9dvihFHCN5nI",
     invitationSentAt: dateUtils.invitationSentAt2,
   },
 ]
@@ -401,7 +446,7 @@ export const placeData = [
     country: "France",
     stateProvince: "Morbihan",
     lat: 47.669791,
-    lng: -2.986930,
+    lng: -2.98693,
   },
 ]
 
@@ -414,12 +459,14 @@ export const userData = [
     version: 1,
     fullName: "John Doe",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_banksy.jpg",
-    intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    intro:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     facebookUrl: "https://www.facebook.com/facebookUrl1",
     twitterUrl: "https://www.twitter.com/twitterUrl1",
     githubUrl: "https://www.github.com/githubUrl1",
     linkedInUrl: "https://www.linkedIn.com/linkedInUrl1",
     otherUrl: "https://www.other.com/otherUrl1",
+    trainArrival: dateUtils.trainArrival1,
   },
   {
     _id: ObjectId("5a31b4efedc7474b9addc261"),
@@ -429,10 +476,13 @@ export const userData = [
     version: 1,
     fullName: "Monsieur Chat",
     picUrl: "https://s3-eu-west-1.amazonaws.com/fabloch-dev/sample/profile_m_chat.jpg",
-    intro: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    intro:
+      "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
     facebookUrl: "https://www.facebook.com/facebookUrl2",
     twitterUrl: "https://www.twitter.com/twitterUrl2",
     linkedInUrl: "https://www.linkedIn.com/linkedInUrl2",
+    trainArrival: dateUtils.trainArrival2,
+    handicaps: "visual,physical",
   },
 ]
 

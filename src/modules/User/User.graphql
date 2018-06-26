@@ -19,24 +19,24 @@ type User {
 }
 
 input AuthProviderNewcomerData {
-    newcomer: AUTH_PROVIDER_NEWCOMER
+  newcomer: AUTH_PROVIDER_NEWCOMER
 }
 
 input AUTH_PROVIDER_NEWCOMER {
-    token: String!
-    username: String!
-    password: String!
+  token: String!
+  username: String!
+  password: String!
 }
 
 input AUTH_PROVIDER_EMAIL {
-    email: String!
-    password: String!
+  email: String!
+  password: String!
 }
 
 type Query {
   # TODO: change for email
   user: User
-  userList: [User!]!
+  userList(byArrival: Boolean): [User!]!
 }
 
 type Mutation {
@@ -56,6 +56,7 @@ input UserInput {
   password: String!
   newPassword: String
 }
+
 input ProfileInput {
   fullName: String
   intro: String
@@ -68,6 +69,7 @@ input ProfileInput {
   otherUrl: String
   trainArrival: DateTime
 }
+
 input ExtendedUserInput {
   id: ID
   username: String
