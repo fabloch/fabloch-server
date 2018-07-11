@@ -7,10 +7,18 @@ import { admin, userData } from "../../../testUtils/fixtures"
 let mongo
 
 describe("User Mutation updateUserAdmin", () => {
-  beforeAll(async () => { mongo = await connectMongo() })
-  beforeEach(async () => { await mongo.beforeEach() })
-  afterEach(async () => { await mongo.afterEach() })
-  afterAll(async () => { await mongo.afterAll() })
+  beforeAll(async () => {
+    mongo = await connectMongo()
+  })
+  beforeEach(async () => {
+    await mongo.beforeEach()
+  })
+  afterEach(async () => {
+    await mongo.afterEach()
+  })
+  afterAll(async () => {
+    await mongo.afterAll()
+  })
 
   describe("success", () => {
     it("updates email, username, fullName", async () => {
@@ -125,7 +133,11 @@ describe("User Mutation updateUserAdmin", () => {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
-        expect(e.state).toEqual({ username: ["Username should only container lowercase letters, numbers, dashes or underscores."] })
+        expect(e.state).toEqual({
+          username: [
+            "Username should only container lowercase letters, numbers, dashes or underscores.",
+          ],
+        })
       }
     })
     it("raises error if username has a space", async () => {
@@ -144,7 +156,11 @@ describe("User Mutation updateUserAdmin", () => {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
-        expect(e.state).toEqual({ username: ["Username should only container lowercase letters, numbers, dashes or underscores."] })
+        expect(e.state).toEqual({
+          username: [
+            "Username should only container lowercase letters, numbers, dashes or underscores.",
+          ],
+        })
       }
     })
     it("raises error if username has special char", async () => {
@@ -163,7 +179,11 @@ describe("User Mutation updateUserAdmin", () => {
         await resolvers.Mutation.updateUserAdmin(null, { userInput }, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
-        expect(e.state).toEqual({ username: ["Username should only container lowercase letters, numbers, dashes or underscores."] })
+        expect(e.state).toEqual({
+          username: [
+            "Username should only container lowercase letters, numbers, dashes or underscores.",
+          ],
+        })
       }
     })
     it("raises an error if password too weak", async () => {
@@ -175,7 +195,7 @@ describe("User Mutation updateUserAdmin", () => {
         id: userData[0]._id.toString(),
         email: "speaker@example.com",
         username: "speaker",
-        password: "password",
+        password: "pass",
         fullName: "Speaker Example",
       }
       try {

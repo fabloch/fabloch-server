@@ -5,10 +5,18 @@ import { userData } from "../../../testUtils/fixtures"
 let mongo
 
 describe("User Mutation resolvers", () => {
-  beforeAll(async () => { mongo = await connectMongo() })
-  beforeEach(async () => { await mongo.beforeEach() })
-  afterEach(async () => { await mongo.afterEach() })
-  afterAll(async () => { await mongo.afterAll() })
+  beforeAll(async () => {
+    mongo = await connectMongo()
+  })
+  beforeEach(async () => {
+    await mongo.beforeEach()
+  })
+  afterEach(async () => {
+    await mongo.afterEach()
+  })
+  afterAll(async () => {
+    await mongo.afterAll()
+  })
 
   describe("updateUser errors", () => {
     it("with no user from jwt, throws error", async () => {
@@ -125,7 +133,7 @@ describe("User Mutation resolvers", () => {
       const [user] = userData
       const context = { mongo, user }
       const userInput = {
-        password: "motdepasse",
+        password: "password",
         newPassword: "12345",
       }
       try {

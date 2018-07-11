@@ -4,12 +4,19 @@ import { eventSessionData, userData } from "../../../testUtils/fixtures"
 
 let mongo
 
-
 describe("EventSession EventSession resolvers", () => {
-  beforeAll(async () => { mongo = await connectMongo() })
-  beforeEach(async () => { await mongo.beforeEach() })
-  afterEach(async () => { await mongo.afterEach() })
-  afterAll(async () => { await mongo.afterAll() })
+  beforeAll(async () => {
+    mongo = await connectMongo()
+  })
+  beforeEach(async () => {
+    await mongo.beforeEach()
+  })
+  afterEach(async () => {
+    await mongo.afterEach()
+  })
+  afterAll(async () => {
+    await mongo.afterAll()
+  })
 
   describe("userStatus", () => {
     it("returns false if user has ticket", async () => {
@@ -58,28 +65,26 @@ describe("EventSession EventSession resolvers", () => {
       expect(response).toEqual({ canTicket: false, info: "noUser" })
     })
     describe("overlapping", () => {
-      it("returns false if overlapping event (start - 15)", async () => {
+      it("returns false if overlapping event (start - 0)", async () => {
         await mongo.loadEventModels()
         await mongo.loadEventSessions()
         await mongo.loadEventTickets()
         const user = userData[0]
         const context = { mongo, user }
-        const response = await resolvers.EventSession
-          .userStatus(eventSessionData[4], null, context)
+        const response = await resolvers.EventSession.userStatus(eventSessionData[4], null, context)
         expect(response).toEqual({
           canTicket: false,
           info: "overlap",
           overlapping: eventSessionData[0],
         })
       })
-      it("returns false if overlapping event (end + 15)", async () => {
+      it("returns false if overlapping event (end + 0)", async () => {
         await mongo.loadEventModels()
         await mongo.loadEventSessions()
         await mongo.loadEventTickets()
         const user = userData[0]
         const context = { mongo, user }
-        const response = await resolvers.EventSession
-          .userStatus(eventSessionData[5], null, context)
+        const response = await resolvers.EventSession.userStatus(eventSessionData[5], null, context)
         expect(response).toEqual({
           canTicket: false,
           info: "overlap",

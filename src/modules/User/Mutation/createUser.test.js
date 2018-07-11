@@ -4,10 +4,18 @@ import connectMongo from "../../../testUtils/mongoTest"
 let mongo
 
 describe("User Mutation resolvers", () => {
-  beforeAll(async () => { mongo = await connectMongo() })
-  beforeEach(async () => { await mongo.beforeEach() })
-  afterEach(async () => { await mongo.afterEach() })
-  afterAll(async () => { await mongo.afterAll() })
+  beforeAll(async () => {
+    mongo = await connectMongo()
+  })
+  beforeEach(async () => {
+    await mongo.beforeEach()
+  })
+  afterEach(async () => {
+    await mongo.afterEach()
+  })
+  afterAll(async () => {
+    await mongo.afterAll()
+  })
 
   describe("createUser", () => {
     describe("normal newcomer", () => {
@@ -17,7 +25,8 @@ describe("User Mutation resolvers", () => {
         const newUser = {
           authProvider: {
             newcomer: {
-              token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
+              token:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
               username: "user4",
               password: "Mot2pa$$e.De.Ouf",
             },
@@ -32,7 +41,8 @@ describe("User Mutation resolvers", () => {
       it("deletes the newcomer if success", async () => {
         await mongo.loadNewcomers()
         const context = { mongo }
-        const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo"
+        const token =
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo"
         const newUser = {
           authProvider: {
             newcomer: {
@@ -74,7 +84,8 @@ describe("User Mutation resolvers", () => {
       const newUser = {
         authProvider: {
           newcomer: {
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
             username: "user1",
             password: "Mot2pa$$e.De.Ouf",
           },
@@ -94,7 +105,8 @@ describe("User Mutation resolvers", () => {
       const newUser = {
         authProvider: {
           newcomer: {
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
             username: "USER",
             password: "Mot2pa$$e.De.Ouf",
           },
@@ -104,7 +116,11 @@ describe("User Mutation resolvers", () => {
         await resolvers.Mutation.createUser(null, newUser, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
-        expect(e.state).toEqual({ username: ["Username should only container lowercase letters, numbers, dashes or underscores."] })
+        expect(e.state).toEqual({
+          username: [
+            "Username should only container lowercase letters, numbers, dashes or underscores.",
+          ],
+        })
       }
     })
     it("raises error if username has a space", async () => {
@@ -114,7 +130,8 @@ describe("User Mutation resolvers", () => {
       const newUser = {
         authProvider: {
           newcomer: {
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
             username: "user 3",
             password: "Mot2pa$$e.De.Ouf",
           },
@@ -124,7 +141,11 @@ describe("User Mutation resolvers", () => {
         await resolvers.Mutation.createUser(null, newUser, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
-        expect(e.state).toEqual({ username: ["Username should only container lowercase letters, numbers, dashes or underscores."] })
+        expect(e.state).toEqual({
+          username: [
+            "Username should only container lowercase letters, numbers, dashes or underscores.",
+          ],
+        })
       }
     })
     it("raises error if username has special char", async () => {
@@ -134,7 +155,8 @@ describe("User Mutation resolvers", () => {
       const newUser = {
         authProvider: {
           newcomer: {
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
             username: "u$er3",
             password: "Mot2pa$$e.De.Ouf",
           },
@@ -144,7 +166,11 @@ describe("User Mutation resolvers", () => {
         await resolvers.Mutation.createUser(null, newUser, context)
       } catch (e) {
         expect(e.message).toEqual("The request is invalid.")
-        expect(e.state).toEqual({ username: ["Username should only container lowercase letters, numbers, dashes or underscores."] })
+        expect(e.state).toEqual({
+          username: [
+            "Username should only container lowercase letters, numbers, dashes or underscores.",
+          ],
+        })
       }
     })
     it("raises an error if password too weak", async () => {
@@ -154,9 +180,10 @@ describe("User Mutation resolvers", () => {
       const newUser = {
         authProvider: {
           newcomer: {
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
             username: "user1",
-            password: "password",
+            password: "pass",
           },
         },
       }
@@ -173,7 +200,8 @@ describe("User Mutation resolvers", () => {
       const newUser = {
         authProvider: {
           newcomer: {
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
             username: "user4",
             password: "Mot2pa$$e.De.Ouf",
           },
@@ -181,7 +209,10 @@ describe("User Mutation resolvers", () => {
       }
       const response = await resolvers.Mutation.createUser(null, newUser, context)
       expect(response.email).toEqual("user4@example.com")
-      const newcomer = await mongo.Newcomers.findOne({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo" })
+      const newcomer = await mongo.Newcomers.findOne({
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InVzZXIzQGV4YW1wbGUuY29tIiwiaWF0IjoxNTE1ODQ0OTI1fQ.mNeqSHD4dT1FTfieci5fZGxktUWoiKXt2F4zGCTsYQo",
+      })
       expect(newcomer).toEqual(null)
     })
   })

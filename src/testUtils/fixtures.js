@@ -55,8 +55,8 @@ export const dateUtils = {
   eventSession1Bstart: moment("2018-07-15T10:30:00.000Z").toDate(),
   eventSession1Bend: moment("2018-07-15T12:00:00.000Z").toDate(),
   overlapping1start: moment("2018-07-13T15:30:00.000Z").toDate(),
-  overlapping1end: moment("2018-07-13T17:16:00.000Z").toDate(),
-  overlapping2start: moment("2018-07-13T19:14:00.000Z").toDate(),
+  overlapping1end: moment("2018-07-13T17:45:00.000Z").toDate(),
+  overlapping2start: moment("2018-07-13T18:30:00.000Z").toDate(),
   overlapping2end: moment("2018-07-13T20:30:00.000Z").toDate(),
   invitationSentAt1: moment()
     .utc()

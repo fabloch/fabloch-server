@@ -52,7 +52,7 @@ const updateUserAdmin = async ({ userInput }, { mongo: { Users }, user }) => {
   }
   if (userInput.password) {
     if (userInput.password === "" || invalidPassword(userInput.password)) {
-      console.log("invalidPassword", invalidPassword(userInput.password))
+      // console.log("invalidPassword", invalidPassword(userInput.password))
       errors.push({ key: "password", message: "Password too weak." })
     }
     newUser.password = await bcrypt.hash(userInput.password, 10)
