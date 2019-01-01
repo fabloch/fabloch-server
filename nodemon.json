@@ -1,10 +1,5 @@
 {
-  "watch": [
-    "src/**/*.js",
-    "src/**/*.graphql"
-  ],
-  "ignore": [
-    "src/**/*.test.js"
-  ],
-  "ext": "js json graphql"
+  "watch": ["src/**/*.js", "src/**/*.graphql"],
+  "ignore": ["src/**/*.test.js"],
+  "ext": "js json"
 }

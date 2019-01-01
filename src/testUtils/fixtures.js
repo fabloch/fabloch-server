@@ -500,11 +500,16 @@ const idGenerator = [
 ]
 
 const loadFixtures = async () => {
-  const db = await MongoClient.connect("mongodb://localhost:27017/fabloch-server")
+  const client = await MongoClient.connect(
+    "mongodb://localhost:27017",
+    { useNewUrlParser: true },
+  )
+
+  const db = client.db("fabloch-server")
 
   db.dropDatabase()
 
-  await db.collection("users").insert(admin)
+  await db.collection("users").insertOne(admin)
   await db.collection("eventCats").insertMany(eventCatData)
   await db.collection("eventModels").insertMany(eventModelData)
   await db.collection("eventSessions").insertMany(eventSessionData)
@@ -516,7 +521,7 @@ const loadFixtures = async () => {
   await db.collection("users").insertMany(userData)
   await db.collection("randomIds").insertMany(idGenerator)
 
-  db.close()
+  client.close()
 }
 
 if (process.env.NODE_ENV !== "test") {

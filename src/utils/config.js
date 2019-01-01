@@ -9,24 +9,33 @@ export const {
   JWT_SECRET,
   MAILGUN_DOMAIN,
   MAILGUN_KEY,
-  MONGODB_URI,
+  MONGO_URL,
+  MONGO_DB_NAME,
   PORT,
   WEBSOCKET_ENDPOINT,
+  TEST_MONGO_URL,
+  TEST_MONGO_DB_NAME,
 } = process.env
 
+const defaultString = "defined in .env"
 const defaults = {
-  CLIENT_URI: "defined in .env",
-  CORS_URI: "defined in .env",
-  EMAIL_DEFAULT: "defined in .env",
-  JWT_SECRET: "defined in .env",
-  MAILGUN_DOMAIN: "defined in .env",
-  MAILGUN_KEY: "defined in .env",
-  MONGODB_URI: "defined in .env",
-  PORT: "defined in .env",
+  CLIENT_URI: defaultString,
+  CORS_URI: defaultString,
+  EMAIL_DEFAULT: defaultString,
+  JWT_SECRET: defaultString,
+  MAILGUN_DOMAIN: defaultString,
+  MAILGUN_KEY: defaultString,
+  MONGO_URL: defaultString,
+  MONGO_DB_NAME: defaultString,
+  PORT: defaultString,
+  TEST_MONGO_URL: defaultString,
+  TEST_MONGO_DB_NAME: defaultString,
 }
 
-Object.keys(defaults).forEach((key) => {
+Object.keys(defaults).forEach(key => {
   if (!process.env[key] || process.env[key] === defaults[key]) {
-    throw new Error(`Environment variable missing: ${key} (if running on your local environment, add it into a .env file at the root of your project).`)
+    throw new Error(
+      `Environment variable missing: ${key} (if running on your local environment, add it into a .env file at the root of your project).`,
+    )
   }
 })

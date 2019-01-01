@@ -1,82 +1,75 @@
-import "babel-polyfill"
-import express from "express"
-import bodyParser from "body-parser"
-import { graphqlExpress, graphiqlExpress } from "apollo-server-express"
-import { execute, subscribe } from "graphql"
 import { createServer } from "http"
-import { SubscriptionServer } from "subscriptions-transport-ws"
+import express from "express"
+import { ApolloServer, AuthenticationError } from "apollo-server-express"
 import expressJwt from "express-jwt"
-import jwt from "jsonwebtoken"
+// import jwt from "jsonwebtoken"
 import cors from "cors"
+// import DataLoader from "dataloader"
 
-import { CORS_URI, JWT_SECRET, PORT, WEBSOCKET_ENDPOINT } from "./utils/config"
-import authenticate from "./utils/authenticate"
-import formatError from "./utils/formatError"
+import {
+  CORS_URI,
+  MONGO_URL,
+  MONGO_DB_NAME,
+  JWT_SECRET,
+  PORT,
+  TEST_MONGO_URL,
+  TEST_MONGO_DB_NAME,
+  TEST_PORT,
+} from "./utils/config"
+
+import getMe from "./utils/getMe"
 import connectMongo from "./connectors/mongo-connector"
-import mailer from "./mailer"
-import buildDataLoaders from "./dataloaders"
 import schema from "./schema"
+import resolvers from "./resolvers"
+// import loaders from "./loaders"
+// import mailer from "./mailer"
 
-const start = async () => {
-  const mongo = await connectMongo()
-  const app = express()
+const [port, uri, dbName, serverType] = process.env.TEST
+  ? [TEST_PORT, TEST_MONGO_URL, TEST_MONGO_DB_NAME, "test"]
+  : [PORT, MONGO_URL, MONGO_DB_NAME, "dev"]
 
-  app.use(cors({ origin: CORS_URI }))
+const app = express()
 
-  // latency simultation middleware
-  app.use((req, res, next) => setTimeout(next, 300))
+app.use(cors({ origin: CORS_URI }))
 
-  const buildOptions = async (req) => {
-    const user = await authenticate(req, mongo.Users)
-    return {
-      context: {
-        dataloaders: buildDataLoaders(mongo),
-        mongo,
-        mailer,
-        user,
-      },
-      formatError,
-      schema,
+// latency simultation middleware
+app.use((req, res, next) => setTimeout(next, 300))
+
+app.use(
+  expressJwt({
+    secret: JWT_SECRET,
+    credentialsRequired: false,
+  }),
+)
+
+const server = new ApolloServer({
+  typeDefs: schema,
+  resolvers,
+  context: async ({ req, connection }) => {
+    if (connection) {
+      return {
+        mongo: await connectMongo(uri, dbName),
+        loaders: {},
+      }
     }
-  }
-  app.use(
-    "/graphql",
-    bodyParser.json(),
-    expressJwt({
-      secret: JWT_SECRET,
-      credentialsRequired: false,
-    }),
-    graphqlExpress(buildOptions),
-  )
 
-  // TODO Remove from production!!!
-  app.use("/graphiql", graphiqlExpress({
-    endpointURL: "/graphql",
-    passHeader: `'Authorization': 'bearer ${process.env.USER1_JWT}'`,
-    subscriptionsEndpoint: WEBSOCKET_ENDPOINT,
-  }))
+    if (req) {
+      return {
+        mongo: await connectMongo(uri, dbName),
+        user: req.user,
+        secret: JWT_SECRET,
+        loaders: {},
+      }
+    }
+  },
+})
 
-  const server = createServer(app)
-  server.listen(PORT, () => {
-    SubscriptionServer.create(
-      {
-        execute,
-        subscribe,
-        schema,
-        onOperation: (message, params) => ({ ...params, context: { mongo } }),
-        onConnect: async (connectionParams) => {
-          if (connectionParams.authToken) {
-            const payload = jwt.verify(connectionParams.authToken, JWT_SECRET)
-            const wsUser = await mongo.Users.findOne({ email: payload.email })
-            return ({ wsUser })
-          }
-          return true
-        },
-      },
-      { server, path: "/subscriptions" },
-    )
-    console.log(`La Fabrique du Loch's GraphQL server running on port ${PORT}.`) // eslint-disable-line no-console
-  })
-}
+server.applyMiddleware({ app, path: "/graphql" })
 
-start()
+const httpServer = createServer(app)
+server.installSubscriptionHandlers(httpServer)
+
+// eslint-disable-next-line
+app.listen({ port }, () =>
+  console.log(`🚀 Apollo ${serverType} Server ready at http://localhost:${port}`),
+)
